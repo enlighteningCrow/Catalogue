@@ -1,0 +1,18 @@
+
+J
+java:S1604U"(Make this anonymous inner class a lambda(¨í¡§úÿÿÿÿ8»¿ª¼0
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(İšµøÿÿÿÿ
+r
+java:S1450]"URemove the "jMenu1" field and declare it as a local variable in the relevant methods.(şÚÖ˜8¹»¿ª¼0
+r
+java:S1450^"URemove the "jMenu2" field and declare it as a local variable in the relevant methods.(€˜ÇÛ8º»¿ª¼0
+z
+java:S1450_"XRemove the "jMenuBar1" field and declare it as a local variable in the relevant methods.(úıÁ›ÿÿÿÿÿ8¼»¿ª¼0
+L
+java:S1197<"*Move the array designators [] to the type.(¡şÏÖøÿÿÿÿ8Í»¿ª¼0
+a
+java:S2147K"DCombine this catch with the one at line 73, which has the same body.(¨¦Š½8Ï»¿ª¼0
+a
+java:S2147M"DCombine this catch with the one at line 73, which has the same body.(ã€ 8Ï»¿ª¼0
+`
+java:S2147O"DCombine this catch with the one at line 73, which has the same body.(ñÎ¯%8Ï»¿ª¼0
