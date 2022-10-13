@@ -336,6 +336,10 @@
           <Properties>
             <Property name="name" type="java.lang.String" value="fileContentsDisplayer1" noResource="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.AOOPProject.FileContentsDisplayer(DELETE_THIS_LATER_searchPaths)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="// TODO: remove this displayer and change to use an array/List of them instead.&#xa;String[] DELETE_THIS_LATER_searchPaths = {&quot;~/*&quot;, &quot;/*&quot;};"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab1">

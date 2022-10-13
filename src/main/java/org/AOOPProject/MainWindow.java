@@ -43,7 +43,9 @@ public class MainWindow extends javax.swing.JFrame {
                 jButton5 = new javax.swing.JButton();
                 jButton6 = new javax.swing.JButton();
                 jTabbedPane1 = new javax.swing.JTabbedPane();
-                fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer();
+                // TODO: remove this displayer and change to use an array/List of them instead.
+                String[] DELETE_THIS_LATER_searchPaths = {"~/*", "/*"};
+                fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer(DELETE_THIS_LATER_searchPaths);
                 menuBar = new javax.swing.JMenuBar();
                 menuFile = new javax.swing.JMenu();
                 jMenu1 = new javax.swing.JMenu();
