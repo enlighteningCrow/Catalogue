@@ -40,3 +40,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Generic ###
+*_copy*.*
+*_bck*.*

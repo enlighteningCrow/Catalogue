@@ -7,28 +7,72 @@ package org.AOOPProject;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
+import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
-import javax.swing.AbstractListModel;
+// import javax.swing.AbstractListModel;
+// import javax.swing.JList;
+// import javax.swing.JScrollPane;
+import javax.swing.*;
+
+import java.awt.*;
 
 /**
  *
  * @author twistingcamel
  */
 public class FileContentsDisplayer extends javax.swing.JPanel {
+        static Class[] strParam = { String.class };
 
         /**
          * Creates new form FileContentsDisplayer
          */
-        public FileContentsDisplayer(String[] fileSearchPaths) {
-                initComponents();
-                populator = new FileSystemPopulator(fileSearchPaths);
+        public FileContentsDisplayer(String[] fileSearchPathsRegex, String[] fileSearchPathsGlob) {
+                populator = new FileSystemPopulator(fileSearchPathsRegex, fileSearchPathsGlob);
                 currentFilePath = new File[0];
+                initComponents();
+        }
+
+        public FileContentsDisplayer(String[] fileSearchPathsGlob) {
+                populator = new FileSystemPopulator(new String[0], fileSearchPathsGlob);
+                currentFilePath = new File[0];
+                initComponents();
+        }
+
+        enum Mode {
+                GLOB, REGEX
+        }
+
+        public FileContentsDisplayer(String[] fileSearchPathsUnspecified, Mode mode) {
+                switch (mode) {
+                        case GLOB:
+                                populator = new FileSystemPopulator(new String[0], fileSearchPathsUnspecified);
+                                break;
+                        case REGEX:
+                                populator = new FileSystemPopulator(fileSearchPathsUnspecified, new String[0]);
+                                break;
+                        default:
+                                populator = new FileSystemPopulator(new String[0], new String[0]);
+                                break;
+                }
+                currentFilePath = new File[0];
+                initComponents();
+        }
+
+        public FileContentsDisplayer() {
+                populator = new FileSystemPopulator(new String[0], new String[0]);
+                currentFilePath = new File[0];
+                initComponents();
         }
 
         /**
@@ -38,78 +82,11 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
          */
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
-                java.awt.GridBagConstraints gridBagConstraints;
-
-                jScrollPane1 = new javax.swing.JScrollPane();
-                jList1 = new javax.swing.JList<>();
-                jScrollPane2 = new javax.swing.JScrollPane();
-                jList2 = new javax.swing.JList<>();
-                jScrollPane3 = new javax.swing.JScrollPane();
-                jList3 = new javax.swing.JList<>();
 
                 setLayout(new java.awt.GridBagLayout());
-
-                jList1.setModel(new javax.swing.AbstractListModel<String>() {
-                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-                        public int getSize() {
-                                return strings.length;
-                        }
-
-                        public String getElementAt(int i) {
-                                return strings[i];
-                        }
-                });
-                jScrollPane1.setViewportView(jList1);
-
-                gridBagConstraints = new java.awt.GridBagConstraints();
-                gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-                gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-                gridBagConstraints.weightx = 1.0;
-                gridBagConstraints.weighty = 1.0;
-                add(jScrollPane1, gridBagConstraints);
-
-                jList2.setModel(new javax.swing.AbstractListModel<String>() {
-                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-                        public int getSize() {
-                                return strings.length;
-                        }
-
-                        public String getElementAt(int i) {
-                                return strings[i];
-                        }
-                });
-                jScrollPane2.setViewportView(jList2);
-
-                gridBagConstraints = new java.awt.GridBagConstraints();
-                gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-                gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-                gridBagConstraints.weightx = 1.0;
-                gridBagConstraints.weighty = 1.0;
-                add(jScrollPane2, gridBagConstraints);
-
-                jList3.setModel(new javax.swing.AbstractListModel<String>() {
-                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-                        public int getSize() {
-                                return strings.length;
-                        }
-
-                        public String getElementAt(int i) {
-                                return strings[i];
-                        }
-                });
-                jScrollPane3.setViewportView(jList3);
-
-                gridBagConstraints = new java.awt.GridBagConstraints();
-                gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-                gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-                gridBagConstraints.weightx = 1.0;
-                gridBagConstraints.weighty = 1.0;
-                add(jScrollPane3, gridBagConstraints);
         }// </editor-fold>//GEN-END:initComponents
 
         // Additional variables
@@ -151,26 +128,91 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         // TODO: Make a variable (setting) to store the maximum number of columns up the
         // directory that should be shown
         // TODO: manage the cursor position with shortcuts from the keyboard.
-        private File[] getLeftCol() {
-                // if (currentFilePath.length == 0) {
-                // return currentFilePath[currentFilePath.length -1 ]
+        private int maxColumnNumber;
+
+        private class ListColumnsHandler {
+
+                GridBagConstraints constraints;
+
+                // public class ListColumn {
                 // }
-                return new File[0];
+                public ArrayList<FileSystemModel> models;
+
+                public class ListPane {
+                        JList<File> list;
+                        JScrollPane pane;
+
+                        public ListPane(JList<File> list, JScrollPane pane) {
+                                this.list = list;
+                                this.pane = pane;
+                        }
+                }
+
+                public ArrayList<ListPane> lists;
+
+                private int modelsSize;
+
+                // private ArrayList<ListColumn> li;
+
+                public int getColumnNumber() {
+                        return maxColumnNumber;
+                }
+
+                public void setColumnNumber(int num) {
+                        if (maxColumnNumber == num)
+                                return;
+                        maxColumnNumber = num;
+                        update();
+                }
+
+                public ListColumnsHandler(int num) {
+                        maxColumnNumber = num;
+                        update();
+                }
+
+                void update() {
+                        modelsSize = Math.min(models.size(), maxColumnNumber);
+                        while (lists.size() < modelsSize) {
+                                ListPane item;
+                                lists.add(item = new ListPane(new JList<File>(), new JScrollPane()));
+                                item.pane.setViewportView(item.list);
+                                constraints = new java.awt.GridBagConstraints();
+                                constraints.fill = java.awt.GridBagConstraints.BOTH;
+                                constraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+                                constraints.weightx = 1.0;
+                                constraints.weighty = 1.0;
+                                add(item.pane, constraints);
+                        }
+                        while (lists.size() > models.size()) {
+                                remove(lists.get(lists.size() - 1).pane);
+                                lists.remove(lists.size() - 1);
+                        }
+                        for (int i = 0; i < lists.size(); ++i) {
+                                lists.get(i).list.setModel(models.get(i + models.size() - lists.size()));
+                        }
+                }
         }
 
-        private File[] getMiddleCol() {
-                // return currentPath.getParentFile().listFiles();
-                return new File[0];
-        }
+        // private File[] getLeftCol() {
+        // // if (currentFilePath.length == 0) {
+        // // return currentFilePath[currentFilePath.length -1 ]
+        // // }
+        // return new File[0];
+        // }
 
-        private File[] getRightCol() {
-                // return currentPath.listFiles();
-                return new File[0];
-        }
+        // private File[] getMiddleCol() {
+        // // return currentPath.getParentFile().listFiles();
+        // return new File[0];
+        // }
 
-        private FileSystemModel leftModel = new FileSystemModel(getLeftCol()),
-                        middleModel = new FileSystemModel(getMiddleCol()),
-                        righModel = new FileSystemModel(getRightCol());
+        // private File[] getRightCol() {
+        // // return currentPath.listFiles();
+        // return new File[0];
+        // }
+
+        // private FileSystemModel leftModel = new FileSystemModel(getLeftCol()),
+        // middleModel = new FileSystemModel(getMiddleCol()),
+        // righModel = new FileSystemModel(getRightCol());
 
         // private void updateMiddleModel() {
         // middleModel.setFiles(currentPath.getParentFile().listFiles());
@@ -178,24 +220,42 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 
         private class FileSystemPopulator {
                 // Note: path strings with '/' separator
-                String[] searchPaths;
-                File[] rootContents;
+                String[] searchPathsRegex;
+                String[] searchPathsGlob;
+                ArrayList<File> contents;
 
-                public FileSystemPopulator(String[] searchPaths) {
-                        this.searchPaths = searchPaths;
+                public FileSystemPopulator(String[] searchPathsRegex, String[] searchPathsGlob) {
+                        this.searchPathsRegex = searchPathsRegex;
+                        this.searchPathsGlob = searchPathsGlob;
                         update();
                 }
 
-                public File[] getRootContents() {
-                        return rootContents;
+                public ArrayList<File> getContents() {
+                        return contents;
                 }
 
-                private class RegexFileFilter implements FileFilter {
-                        Pattern pattern;
+                static public class RegexFileFilter implements FileFilter {
+                        protected Pattern pattern;
+
+                        public Pattern getPattern() {
+                                return pattern;
+                        }
+
+                        public void setPattern(Pattern pattern) {
+                                this.pattern = pattern;
+                        }
+
+                        public void setPattern(String pattern) {
+                                this.pattern = Pattern.compile(pattern);
+                        }
 
                         // TODO: check the regex part, something wrong
                         public RegexFileFilter(String pattern) {
-                                this.pattern = Pattern.compile(pattern);
+                                try {
+                                        this.pattern = Pattern.compile(pattern);
+                                } catch (PatternSyntaxException e) {
+                                        System.err.println(e);
+                                }
                         }
 
                         @Override
@@ -205,33 +265,82 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 
                 }
 
-                private void populate(int depth, String[] searchPath, File currentFile) {
-                        if (depth == searchPath.length - 1)
-                                currentFile.listFiles(new RegexFileFilter(searchPath[depth]));
-                        else if (depth >= searchPath.length)
-                                for (File file : currentFile.listFiles(new RegexFileFilter(searchPath[depth]))) {
-                                        populate(depth + 1, searchPath, file);
-                                }
-                        else
-                                throw new RuntimeException("Depth could not exceed the length of searchPath");
+                static public class GlobFileFilter implements FileFilter {
+                        PathMatcher matcher;
 
+                        public void setGlob(String glob) {
+                                this.matcher = FileSystems.getDefault().getPathMatcher(glob);
+                        }
+
+                        public GlobFileFilter(PathMatcher matcher) {
+                                this.matcher = matcher;
+                        }
+
+                        public GlobFileFilter(String glob) {
+                                // TODO: Fix this
+                                matcher = FileSystems.getDefault().getPathMatcher(glob);
+                        }
+
+                        @Override
+                        public boolean accept(File pathname) {
+                                return matcher.matches(pathname.toPath().getFileName());
+                        }
                 }
 
-                public void update() {
-                        for (String searchPath : searchPaths) {
+                public <T extends FileFilter> void populate(int depth, String[] searchPath, File currentFile,
+                                Class<T> filterType) {
+                        try {
+                                filterType.getConstructor(String.class);
+                        } catch (Exception e) {
+                                System.out.println(e);
+                        }
+                        if (depth == searchPath.length - 1) {
+                                try {
+                                        for (File i : currentFile.listFiles(
+                                                        filterType.getConstructor(String.class)
+                                                                        .newInstance(searchPath[depth])))
+                                                contents.add(i);
+                                } catch (Exception e) {
+                                        System.err.println(e);
+                                }
+                        }
+
+                        else if (depth < searchPath.length) {
+                                try {
+                                        for (File file : currentFile.listFiles(
+                                                        filterType.getConstructor(String.class)
+                                                                        .newInstance(searchPath[depth])))
+                                                populate(depth + 1, searchPath, file, filterType);
+                                } catch (Exception e) {
+                                        // System.err.println(e);
+                                        e.printStackTrace();
+                                        System.err.println(e.getCause());
+                                }
+                        } else
+                                throw new RuntimeException("Depth could not exceed the length of searchPath");
+                }
+
+                private <T extends FileFilter> void updateS(String[] paths, Class<T> filterType) {
+                        for (String searchPath : paths) {
                                 String[] pathComps = searchPath.split("/");
                                 if (pathComps.length == 0)
                                         throw new InvalidPathException(searchPath, "search path is empty");
-                                if (pathComps[0] == "*") {
+                                if (pathComps[0].equals("~")) {
                                         // TODO: Check if this is right
-                                        populate(0, pathComps, new File(System.getProperty("user.home")));
+                                        populate(1, pathComps, new File(System.getProperty("user.home")),
+                                                        filterType);
                                 } else {
-                                        if (pathComps[0].length() == 0) {
+                                        if (pathComps[0].length() == 0)
+                                                // TODO: Check if this works in Windows OS
                                                 pathComps[0] = "/";
-                                                populate(1, pathComps, new File(pathComps[0]));
-                                        }
+                                        populate(0, pathComps, new File(pathComps[0]), filterType);
                                 }
                         }
+                }
+
+                public void update() {
+                        updateS(searchPathsRegex, RegexFileFilter.class);
+                        updateS(searchPathsGlob, GlobFileFilter.class);
                 }
         }
 
@@ -241,11 +350,5 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         // there can be a variable number for columns
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JList<String> jList1;
-        private javax.swing.JList<String> jList2;
-        private javax.swing.JList<String> jList3;
-        private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JScrollPane jScrollPane2;
-        private javax.swing.JScrollPane jScrollPane3;
         // End of variables declaration//GEN-END:variables
 }
