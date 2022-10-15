@@ -278,7 +278,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 
                         public GlobFileFilter(String glob) {
                                 // TODO: Fix this
-                                matcher = FileSystems.getDefault().getPathMatcher(glob);
+                                matcher = FileSystems.getDefault().getPathMatcher("glob:" + glob);
                         }
 
                         @Override
