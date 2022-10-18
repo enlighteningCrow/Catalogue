@@ -36,6 +36,7 @@ public class Main {
         System.out.println(matcher.matches(file2.toPath()));
         String[] paths = { "~/*", "/*" };
         FileContentsDisplayer i = new FileContentsDisplayer(paths);
+        // System.out.println(i.populator.contents);
         i.setVisible(true);
         // JFrame frame = new JFrame();
         // frame.add(i);

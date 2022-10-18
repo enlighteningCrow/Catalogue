@@ -32,12 +32,46 @@ import java.awt.*;
  *
  * @author twistingcamel
  */
-public class FileContentsDisplayer extends javax.swing.JPanel {
+public class FileContentsDisplayer_rep extends javax.swing.JPanel {
         /**
          * Creates new form FileContentsDisplayer
          */
 
-        public FileContentsDisplayer() {
+        public FileContentsDisplayer_rep() {
+                populator = new FileSystemPopulator(new String[0], new String[0]);
+                currentFilePath = new File[0];
+                initComponents();
+        }
+
+        public FileContentsDisplayer_rep(String[] fileSearchPathsRegex, String[] fileSearchPathsGlob) {
+                populator = new FileSystemPopulator(fileSearchPathsRegex, fileSearchPathsGlob);
+                currentFilePath = new File[0];
+                initComponents();
+        }
+
+        public FileContentsDisplayer_rep(String[] fileSearchPathsGlob) {
+                populator = new FileSystemPopulator(new String[0], fileSearchPathsGlob);
+                currentFilePath = new File[0];
+                initComponents();
+        }
+
+        enum Mode {
+                GLOB, REGEX
+        }
+
+        public FileContentsDisplayer_rep(String[] fileSearchPathsUnspecified, Mode mode) {
+                switch (mode) {
+                        case GLOB:
+                                populator = new FileSystemPopulator(new String[0], fileSearchPathsUnspecified);
+                                break;
+                        case REGEX:
+                                populator = new FileSystemPopulator(fileSearchPathsUnspecified, new String[0]);
+                                break;
+                        default:
+                                populator = new FileSystemPopulator(new String[0], new String[0]);
+                                break;
+                }
+                currentFilePath = new File[0];
                 initComponents();
         }
 
@@ -86,7 +120,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 
         File[] currentFilePath;
 
-        // -TODO: Make a class to handle a an array of JList that stores the files and
+        // TODO: Make a class to handle a an array of JList that stores the files and
         // update them and their models
         // Note: Only one layer deeper than the currently selected file
         // (currentFilePath[currentFilePath.length - 1]) should be shown in the jLists.
@@ -215,7 +249,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                                 this.pattern = Pattern.compile(pattern);
                         }
 
-                        // -TODO: check the regex part, something wrong
+                        // TODO: check the regex part, something wrong
                         public RegexFileFilter(String pattern) {
                                 try {
                                         this.pattern = Pattern.compile(pattern);
@@ -315,57 +349,10 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         // TODO: Change this to private/protected when done debugging
         public FileSystemPopulator populator;
         public Comparator<File> fileSortComparator = new FileComparators.NameAscendingComparator();
-        // -TODO: Change the below jLists; use a resizable array of them instead, such
+        // TODO: Change the below jLists; use a resizable array of them instead, such
         // that
         // there can be a variable number for columns
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         // End of variables declaration//GEN-END:variables
-
-        public FileContentsDisplayer(String[] fileSearchPathsRegex, String[] fileSearchPathsGlob) {
-                populator = new FileSystemPopulator(fileSearchPathsRegex, fileSearchPathsGlob);
-                currentFilePath = new File[0];
-                initComponents();
-        }
-
-        public FileContentsDisplayer(String[] fileSearchPathsGlob) {
-                populator = new FileSystemPopulator(new String[0], fileSearchPathsGlob);
-                currentFilePath = new File[0];
-                initComponents();
-        }
-
-        enum Mode {
-                GLOB, REGEX
-        }
-
-        public FileContentsDisplayer(String[] fileSearchPathsUnspecified, Mode mode) {
-                switch (mode) {
-                        case GLOB:
-                                populator = new FileSystemPopulator(new String[0], fileSearchPathsUnspecified);
-                                break;
-                        case REGEX:
-                                populator = new FileSystemPopulator(fileSearchPathsUnspecified, new String[0]);
-                                break;
-                        default:
-                                populator = new FileSystemPopulator(new String[0], new String[0]);
-                                break;
-                }
-                currentFilePath = new File[0];
-                initComponents();
-        }
-
-        public FileContentsDisplayer copy() {
-                // TODO: create a method to deep copy the members of this class into a new
-                // object.
-                // Purpose: for splits
-                // TODO: create a class inheriting JPanel that helps handle splitting in a grid
-                // (like in vim's ctrl+w s/v/c) and implement a way to move between splits (like
-                // in vim's ctrl+w h/j/k/l)
-                return new FileContentsDisplayer();
-        }
-        // TODO: Make methods to navigate the tree (eg. go to parent directory, go to
-        // first child directory, etc.)
-        // TODO: Make methods to navigate the lists themselves (maybe add them as
-        // shortcut keys, where h, j, k, l and left, down, up, right move the cursor
-        // around the interface)
 }
