@@ -368,4 +368,14 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         // TODO: Make methods to navigate the lists themselves (maybe add them as
         // shortcut keys, where h, j, k, l and left, down, up, right move the cursor
         // around the interface)
+        // TODO: GUI: settings: paths to search: make a GUI (like vscode settings ui) to
+        // edit them
+        // TODO: Make a class to read the JSON
+        // TODO: (Maybe) Use the File Dialog in the vscode ui to select for paths to add
+        // TODO: (Continued) (Maybe) GUI: add button to insert wildcard (regex or glob)
+        // TODO: Connect the leftmost buttons to the searchPathsRegex,Glob
+        // TODO: Connect the upper textedit to represent the current path (pwd)
+        // TODO: Make a way to edit the outer folders while making the inner folders
+        // remain (in the alternative data structre (not tree, but descriptions based
+        // structure))
 }

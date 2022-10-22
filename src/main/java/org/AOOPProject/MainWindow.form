@@ -132,12 +132,6 @@
             <Property name="name" type="java.lang.String" value="menuSettings" noResource="true"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuPlugins">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Plugins"/>
-            <Property name="name" type="java.lang.String" value="menuPlugins" noResource="true"/>
-          </Properties>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="menuHelp">
           <Properties>
             <Property name="text" type="java.lang.String" value="Help"/>
@@ -279,7 +273,7 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="Downloads">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton4"/>
+                <Property name="text" type="java.lang.String" value="Downloads"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[10000, 31]"/>
@@ -292,7 +286,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Pictures"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[10000, 31]"/>

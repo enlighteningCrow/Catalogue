@@ -25,7 +25,7 @@ public class MainWindow extends javax.swing.JFrame {
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
+        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
                 java.awt.GridBagConstraints gridBagConstraints;
 
@@ -59,21 +59,14 @@ public class MainWindow extends javax.swing.JFrame {
                 menuNavigate = new javax.swing.JMenu();
                 jMenu2 = new javax.swing.JMenu();
                 menuSettings = new javax.swing.JMenu();
-                menuPlugins = new javax.swing.JMenu();
                 menuHelp = new javax.swing.JMenu();
 
                 jScrollPane1.setName("jScrollPane1"); // NOI18N
 
                 jList1.setModel(new javax.swing.AbstractListModel<String>() {
                         String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-                        public int getSize() {
-                                return strings.length;
-                        }
-
-                        public String getElementAt(int i) {
-                                return strings[i];
-                        }
+                        public int getSize() { return strings.length; }
+                        public String getElementAt(int i) { return strings[i]; }
                 });
                 jList1.setName("jList1"); // NOI18N
                 jScrollPane1.setViewportView(jList1);
@@ -135,14 +128,14 @@ public class MainWindow extends javax.swing.JFrame {
                 typesPanel.setName("typesPanel"); // NOI18N
                 typesPanel.setLayout(new javax.swing.BoxLayout(typesPanel, javax.swing.BoxLayout.Y_AXIS));
 
-                Downloads.setText("jButton4");
+                Downloads.setText("Downloads");
                 Downloads.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
                 Downloads.setMaximumSize(new java.awt.Dimension(10000, 31));
                 Downloads.setMinimumSize(new java.awt.Dimension(10000, 31));
                 Downloads.setName("Downloads"); // NOI18N
                 typesPanel.add(Downloads);
 
-                jButton5.setText("jButton5");
+                jButton5.setText("Pictures");
                 jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
                 jButton5.setMaximumSize(new java.awt.Dimension(10000, 31));
                 jButton5.setMinimumSize(new java.awt.Dimension(10000, 31));
@@ -234,10 +227,6 @@ public class MainWindow extends javax.swing.JFrame {
                 menuSettings.setName("menuSettings"); // NOI18N
                 menuBar.add(menuSettings);
 
-                menuPlugins.setText("Plugins");
-                menuPlugins.setName("menuPlugins"); // NOI18N
-                menuBar.add(menuPlugins);
-
                 menuHelp.setText("Help");
                 menuHelp.setName("menuHelp"); // NOI18N
                 menuBar.add(menuHelp);
@@ -316,7 +305,6 @@ public class MainWindow extends javax.swing.JFrame {
         private javax.swing.JMenu menuFile;
         private javax.swing.JMenu menuHelp;
         private javax.swing.JMenu menuNavigate;
-        private javax.swing.JMenu menuPlugins;
         private javax.swing.JMenu menuSettings;
         private javax.swing.JMenu menuView;
         private javax.swing.JTextField pathString;

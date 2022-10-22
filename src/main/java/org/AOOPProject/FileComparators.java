@@ -10,6 +10,6 @@ public class FileComparators {
         public int compare(File o1, File o2) {
             return o1.toPath().getFileName().compareTo(o2.toPath().getFileName());
         }
-
     }
+    // TODO: Maybe add more comparators, and insert them into the
 }
