@@ -378,4 +378,5 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         // TODO: Make a way to edit the outer folders while making the inner folders
         // remain (in the alternative data structre (not tree, but descriptions based
         // structure))
+        // TODO: Hi
 }
