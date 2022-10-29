@@ -57,6 +57,11 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         // Additional variables
         // private File currentPath;
 
+        /**
+         * This class is used to provide a model for the file system; used as
+         * 
+         * Backend for the lists in ListColumnHandler
+         */
         private class FileSystemModel extends AbstractListModel<File> {
                 File[] files;
 
@@ -84,6 +89,9 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 
         }
 
+        /**
+         * The current path: eg. {home, Downloads, downloadedFile1.txt}
+         */
         File[] currentFilePath;
 
         // -TODO: Make a class to handle a an array of JList that stores the files and
@@ -93,16 +101,30 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         // TODO: Make a variable (setting) to store the maximum number of columns up the
         // directory that should be shown
         // TODO: manage the cursor position with shortcuts from the keyboard.
+        /**
+         * the maximum number of columns to show on the screen at any moment (drop down
+         * lists / jLists)
+         */
         private int maxColumnNumber;
 
+        // Note: Class to handle communication between the lists in the interface and
+        // the models (FileSystemModel)
         private class ListColumnsHandler {
 
                 GridBagConstraints constraints;
 
                 // public class ListColumn {
                 // }
+                /**
+                 * The models for each of the columsn of ListPanes; The models[0] is for the
+                 * first column (leftmost), and the models[models.size() - 1] is for the
+                 * rightmost column
+                 */
                 public ArrayList<FileSystemModel> models;
 
+                /**
+                 * Group up the list and the pane it belongs to
+                 */
                 public class ListPane {
                         JList<File> list;
                         JScrollPane pane;
@@ -115,14 +137,27 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 
                 public ArrayList<ListPane> lists;
 
+                /**
+                 * Number of columns currently being shown
+                 */
                 private int modelsSize;
 
                 // private ArrayList<ListColumn> li;
 
+                /**
+                 * getter for maxColumnNumber
+                 * 
+                 * @return max number of columns
+                 */
                 public int getColumnNumber() {
                         return maxColumnNumber;
                 }
 
+                /**
+                 * setter for maxColumnNumber; also updates if the maxColumnNumber is changed
+                 * 
+                 * @param num the new maxColumnNumber
+                 */
                 public void setColumnNumber(int num) {
                         if (maxColumnNumber == num)
                                 return;
@@ -130,11 +165,20 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                         update();
                 }
 
+                /**
+                 * Constructo from max number of columns
+                 * 
+                 * @param num max number of columns
+                 */
                 public ListColumnsHandler(int num) {
                         maxColumnNumber = num;
                         update();
                 }
 
+                /**
+                 * Use this function after changing the model or current path; used to update
+                 * the GUI
+                 */
                 void update() {
                         modelsSize = Math.min(models.size(), maxColumnNumber);
                         while (lists.size() < modelsSize) {
@@ -184,22 +228,39 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         // }
 
         // TODO: (Maybe?) Change this to private/public
+        /**
+         * Class used to create an array of Files found from the specified paths
+         */
         public class FileSystemPopulator {
                 // Note: path strings with '/' separator
                 String[] searchPathsRegex;
                 String[] searchPathsGlob;
                 ArrayList<File> contents = new ArrayList<File>();
 
+                /**
+                 * Consturctor from regex and glob patterns
+                 * 
+                 * @param searchPathsRegex The array of regex patterns
+                 * @param searchPathsGlob  The array of glob patterns
+                 */
                 public FileSystemPopulator(String[] searchPathsRegex, String[] searchPathsGlob) {
                         this.searchPathsRegex = searchPathsRegex;
                         this.searchPathsGlob = searchPathsGlob;
                         update();
                 }
 
+                /**
+                 * Just a getter
+                 * 
+                 * @return contents
+                 */
                 public ArrayList<File> getContents() {
                         return contents;
                 }
 
+                /**
+                 * Used for filtering files with regex patterns
+                 */
                 static public class RegexFileFilter implements FileFilter {
                         protected Pattern pattern;
 
@@ -231,6 +292,9 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 
                 }
 
+                /**
+                 * Used for filtering files with glob patterns
+                 */
                 static public class GlobFileFilter implements FileFilter {
                         PathMatcher matcher;
 
@@ -253,6 +317,20 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                         }
                 }
 
+                /**
+                 * Update the variable ${contents} using the populate function with the paths
+                 * found from the search
+                 * 
+                 * @param <T>         The type to use (Eg. RegexFileFilter, GlobFileFilter)
+                 * @param depth       The current depth of the search (recursive depth)
+                 * @param searchPath  The path that is currently being searched; split into an
+                 *                    array. (Eg. "/home/pi/asm" into {"/", "home", "pi", *
+                 *                    "asm"})
+                 * @param currentFile The current file that is currently being searched (The
+                 *                    deepest file reached so far in the recursive search)
+                 * @param filterType  The class of the filefilter (Eg. GlobFileFilter.class,
+                 *                    RegexFileFilter.class)
+                 */
                 public <T extends FileFilter> void populate(int depth, String[] searchPath, File currentFile,
                                 Class<T> filterType) {
                         try {
@@ -286,11 +364,22 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                                 throw new RuntimeException("Depth could not exceed the length of searchPath");
                 }
 
+                /**
+                 * Modifies the paths strings before sending it to the populate function
+                 * 
+                 * @param <T>        The type to use (Eg. RegexFileFilter, GlobFileFilter)
+                 * @param paths      The array of search patterns to search for corresponding to
+                 *                   the filefilter provided
+                 * @param filterType The class of the filefilter (Eg. GlobFileFilter.class,
+                 *                   RegexFileFilter.class)
+                 */
                 private <T extends FileFilter> void updateS(String[] paths, Class<T> filterType) {
                         for (String searchPath : paths) {
                                 String[] pathComps = searchPath.split("/");
                                 if (pathComps.length == 0)
                                         throw new InvalidPathException(searchPath, "search path is empty");
+                                // TODO: Check if there needs to be more hardcoded path expansions (like ~ into
+                                // the home directory)
                                 if (pathComps[0].equals("~")) {
                                         // TODO: Check if this is right
                                         populate(1, pathComps, new File(System.getProperty("user.home")),
@@ -304,6 +393,10 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                         }
                 }
 
+                /**
+                 * Use this function after modifying the attributes to update the contents
+                 * variable
+                 */
                 public void update() {
                         contents.clear();
                         updateS(searchPathsRegex, RegexFileFilter.class);
@@ -313,7 +406,15 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         }
 
         // TODO: Change this to private/protected when done debugging
+        /**
+         * The file populator for the class
+         */
         public FileSystemPopulator populator;
+        // TODO: Make a setter function for the below variable; make it also update the
+        // GUI when called.
+        /**
+         * The comparator used to sort the files;
+         */
         public Comparator<File> fileSortComparator = new FileComparators.NameAscendingComparator();
         // -TODO: Change the below jLists; use a resizable array of them instead, such
         // that
@@ -322,22 +423,44 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
         // Variables declaration - do not modify//GEN-BEGIN:variables
         // End of variables declaration//GEN-END:variables
 
+        /**
+         * Constructor from a an array of regex and glob strings
+         * 
+         * @param fileSearchPathsRegex the regex strings array
+         * @param fileSearchPathsGlob  the glob strings array
+         */
         public FileContentsDisplayer(String[] fileSearchPathsRegex, String[] fileSearchPathsGlob) {
                 populator = new FileSystemPopulator(fileSearchPathsRegex, fileSearchPathsGlob);
                 currentFilePath = new File[0];
                 initComponents();
         }
 
+        /**
+         * Constructor from a an array of glob strings
+         * 
+         * @param fileSearchPathsGlob the glob strings array
+         */
         public FileContentsDisplayer(String[] fileSearchPathsGlob) {
                 populator = new FileSystemPopulator(new String[0], fileSearchPathsGlob);
                 currentFilePath = new File[0];
                 initComponents();
         }
 
+        /**
+         * enum to pass to the function below; used to identify whehter aray of strings
+         * passed should be interpreted as glob or regex
+         */
         enum Mode {
                 GLOB, REGEX
         }
 
+        /**
+         * Constructor used when only one of glob or regex is used (not both)
+         * 
+         * @param fileSearchPathsUnspecified An array of the glob/regex search strings
+         * @param mode                       Specify whether the provided array should
+         *                                   be interpreted as glob or regex
+         */
         public FileContentsDisplayer(String[] fileSearchPathsUnspecified, Mode mode) {
                 switch (mode) {
                         case GLOB:
@@ -354,6 +477,11 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                 initComponents();
         }
 
+        /**
+         * Creates a deep copy of this object
+         * 
+         * @return a deep copy of this object
+         */
         public FileContentsDisplayer copy() {
                 // TODO: create a method to deep copy the members of this class into a new
                 // object.
