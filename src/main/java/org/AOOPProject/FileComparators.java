@@ -11,5 +11,5 @@ public class FileComparators {
             return o1.toPath().getFileName().compareTo(o2.toPath().getFileName());
         }
     }
-    // TODO: Maybe add more comparators, and insert them into the
+    // -TODO: Maybe add more comparators, and insert them into the
 }
