@@ -259,6 +259,12 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                         pwd.clear();
                         pwd.add(populator.contents.get(index));
                         // jasiodajsdlfjasldkfjawdsfjoaisdjfoasjdifjaosidfjo ajdfoi ajdf dasf ioajdof ij
+                        // jasiodfjHiihihi hjdsajfja. sdajfiaj 5555555555555 oaisdjfoasjdif
+                        // kadsfjiajsidfjaihfijasdfaw gggggggggggg
+
+                        // jasiodajsdlfjasldkfjawdsfjoaisdjfoasjdifjaosidfjo ajdfoi ajdf dasf ioajdof ij
+                        // jasiodfjHiihihi hjdsajfja. sdajfiaj 5555555555555 oaisdjfoasjdif
+                        // kadsfjiajsidfjaihfijasdfaw gggggggggggg
                         update();
                 }
 
