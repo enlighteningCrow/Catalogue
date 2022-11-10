@@ -134,6 +134,11 @@ public class MainWindow extends javax.swing.JFrame {
                 Downloads.setMaximumSize(new java.awt.Dimension(10000, 31));
                 Downloads.setMinimumSize(new java.awt.Dimension(10000, 31));
                 Downloads.setName("Downloads"); // NOI18N
+                Downloads.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                DownloadsActionPerformed(evt);
+                        }
+                });
                 typesPanel.add(Downloads);
 
                 jButton5.setText("Pictures");
@@ -240,6 +245,10 @@ public class MainWindow extends javax.swing.JFrame {
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
+
+        private void DownloadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadsActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_DownloadsActionPerformed
 
         /**
          * @param args the command line arguments

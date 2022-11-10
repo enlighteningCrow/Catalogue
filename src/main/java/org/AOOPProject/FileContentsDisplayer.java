@@ -257,6 +257,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                 void changeRoot(int index) {
                         pwd.clear();
                         pwd.add(populator.contents.get(index));
+                        // jasiodfjoaisdjfoasjdif
                         update();
                 }
 
