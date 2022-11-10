@@ -120,6 +120,8 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                  * first column (leftmost), and the models[models.size() - 1] is for the
                  * rightmost column
                  */
+                // TODO: Change this class to contain the variable "populator" as the root of
+                // the models
                 public ArrayList<FileSystemModel> models;
 
                 /**
@@ -261,7 +263,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                 /**
                  * Used for filtering files with regex patterns
                  */
-                static public class RegexFileFilter implements FileFilter {
+                public class RegexFileFilter implements FileFilter {
                         protected Pattern pattern;
 
                         public Pattern getPattern() {
@@ -295,7 +297,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                 /**
                  * Used for filtering files with glob patterns
                  */
-                static public class GlobFileFilter implements FileFilter {
+                public class GlobFileFilter implements FileFilter {
                         PathMatcher matcher;
 
                         public void setGlob(String glob) {
@@ -475,6 +477,13 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
                 }
                 currentFilePath = new File[0];
                 initComponents();
+        }
+
+        ListColumnsHandler handler = new ListColumnsHandler(3);
+
+        void update() {
+                populator.update();
+                handler.update();
         }
 
         /**

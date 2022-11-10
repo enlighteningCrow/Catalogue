@@ -45,6 +45,7 @@ public class MainWindow extends javax.swing.JFrame {
                 jButton5 = new javax.swing.JButton();
                 jButton6 = new javax.swing.JButton();
                 jTabbedPane1 = new javax.swing.JTabbedPane();
+                fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer();
                 menuBar = new javax.swing.JMenuBar();
                 menuFile = new javax.swing.JMenu();
                 jMenu1 = new javax.swing.JMenu();
@@ -160,6 +161,10 @@ public class MainWindow extends javax.swing.JFrame {
                 getContentPane().add(typesScrollPanel, gridBagConstraints);
 
                 jTabbedPane1.setName("jTabbedPane1"); // NOI18N
+
+                fileContentsDisplayer1.setName("fileContentsDisplayer1"); // NOI18N
+                jTabbedPane1.addTab("tab1", fileContentsDisplayer1);
+
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 1;
                 gridBagConstraints.gridy = 1;
@@ -287,6 +292,7 @@ public class MainWindow extends javax.swing.JFrame {
         private javax.swing.JButton dirBackButton;
         private javax.swing.JButton dirForwardButton1;
         private javax.swing.JButton dirUpButton2;
+        private org.AOOPProject.FileContentsDisplayer fileContentsDisplayer1;
         private javax.swing.JButton jButton3;
         private javax.swing.JButton jButton5;
         private javax.swing.JButton jButton6;
