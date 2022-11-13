@@ -4,6 +4,8 @@
  */
 package org.AOOPProject;
 
+import java.io.File;
+
 /**
  *
  * @author twistingcamel
@@ -45,7 +47,7 @@ public class MainWindow extends javax.swing.JFrame {
                 jButton5 = new javax.swing.JButton();
                 jButton6 = new javax.swing.JButton();
                 jTabbedPane1 = new javax.swing.JTabbedPane();
-                fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer();
+                fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer(new File("/usr/sbin"));
                 menuBar = new javax.swing.JMenuBar();
                 menuFile = new javax.swing.JMenu();
                 jMenu1 = new javax.swing.JMenu();
