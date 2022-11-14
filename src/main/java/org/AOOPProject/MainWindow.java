@@ -45,6 +45,9 @@ public class MainWindow extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonsNavigationPanel = new javax.swing.JPanel();
+        dirBackButton = new javax.swing.JButton();
+        dirForwardButton1 = new javax.swing.JButton();
+        dirUpButton1 = new javax.swing.JButton();
         dirUpButton2 = new javax.swing.JButton();
         labelsNavigationPanel = new javax.swing.JPanel();
         pathString = new javax.swing.JTextField();
@@ -54,6 +57,7 @@ public class MainWindow extends javax.swing.JFrame {
         Pictures = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         displayersTab = new javax.swing.JTabbedPane();
+        fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer(new File("~"));
         menuBar = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
@@ -89,6 +93,27 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         buttonsNavigationPanel.setName("buttonsNavigationPanel"); // NOI18N
+
+        dirBackButton.setText("jButton1");
+        dirBackButton.setMaximumSize(new java.awt.Dimension(30, 30));
+        dirBackButton.setMinimumSize(new java.awt.Dimension(30, 30));
+        dirBackButton.setName("dirBackButton"); // NOI18N
+        dirBackButton.setPreferredSize(new java.awt.Dimension(30, 30));
+        buttonsNavigationPanel.add(dirBackButton);
+
+        dirForwardButton1.setText("jButton1");
+        dirForwardButton1.setMaximumSize(new java.awt.Dimension(30, 30));
+        dirForwardButton1.setMinimumSize(new java.awt.Dimension(30, 30));
+        dirForwardButton1.setName("dirForwardButton1"); // NOI18N
+        dirForwardButton1.setPreferredSize(new java.awt.Dimension(30, 30));
+        buttonsNavigationPanel.add(dirForwardButton1);
+
+        dirUpButton1.setText("jButton1");
+        dirUpButton1.setMaximumSize(new java.awt.Dimension(30, 30));
+        dirUpButton1.setMinimumSize(new java.awt.Dimension(30, 30));
+        dirUpButton1.setName("dirUpButton1"); // NOI18N
+        dirUpButton1.setPreferredSize(new java.awt.Dimension(30, 30));
+        buttonsNavigationPanel.add(dirUpButton1);
 
         dirUpButton2.setText("+");
         dirUpButton2.setMaximumSize(new java.awt.Dimension(30, 30));
@@ -174,6 +199,10 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().add(typesScrollPanel, gridBagConstraints);
 
         displayersTab.setName("displayersTab"); // NOI18N
+
+        fileContentsDisplayer1.setName("fileContentsDisplayer1"); // NOI18N
+        displayersTab.addTab("tab1", fileContentsDisplayer1);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -363,8 +392,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Pictures;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buttonsNavigationPanel;
+    private javax.swing.JButton dirBackButton;
+    private javax.swing.JButton dirForwardButton1;
+    private javax.swing.JButton dirUpButton1;
     private javax.swing.JButton dirUpButton2;
     private javax.swing.JTabbedPane displayersTab;
+    private org.AOOPProject.FileContentsDisplayer fileContentsDisplayer1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JList<String> jList1;
