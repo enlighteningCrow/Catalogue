@@ -71,7 +71,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 */
 	File[] currentFilePath;
 
-	// -TODO: Make a class to handle a an array of JList that stores the files and
+	// return;: Make a class to handle a an array of JList that stores the files and
 	// update them and their models
 	// Note: Only one layer deeper than the currently selected file
 	// (currentFilePath[currentFilePath.length - 1]) should be shown in the jLists.
@@ -109,19 +109,19 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	// middleModel.setFiles(currentPath.getParentFile().listFiles());
 	// }
 
-	// -TODO: Change this to private/protected when done debugging
+	// return;: Change this to private/protected when done debugging
 	/**
 	 * The file populator for the class
 	 */
 	// TODO: Remove this from the class, together with all the methods involved
-	public FileSystemPopulator populator = new FileSystemPopulator(this, "<Uncategorized>", "/usr/sbin");
+	public VirtualFileSystemPopulator populator = new VirtualFileSystemPopulator(this, "<Uncategorized>", "/usr/sbin");
 	// TODO: Make a setter function for the below variable; make it also update the
 	// GUI when called.
 	/**
 	 * The comparator used to sort the files;
 	 */
 	public Comparator<File> fileSortComparator = new FileComparators.NameAscendingComparator();
-	// -TODO: Change the below jLists; use a resizable array of them instead, such
+	// return;: Change the below jLists; use a resizable array of them instead, such
 	// that
 	// there can be a variable number for columns
 
@@ -144,7 +144,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 * @param fileSearchPathsGlob  the glob strings array
 	 */
 	public FileContentsDisplayer(String categoryName, String[] fileSearchPathsRegex, String[] fileSearchPathsGlob) {
-		populator = new FileSystemPopulator(this, categoryName, fileSearchPathsRegex, fileSearchPathsGlob);
+		populator = new VirtualFileSystemPopulator(this, categoryName, fileSearchPathsRegex, fileSearchPathsGlob);
 		currentFilePath = new File[0];
 		initComponents();
 		update();
@@ -156,7 +156,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 * @param fileSearchPathsGlob the glob strings array
 	 */
 	public FileContentsDisplayer(String categoryName, String[] fileSearchPathsGlob) {
-		populator = new FileSystemPopulator(this, categoryName, GlobFileFilter.class,
+		populator = new VirtualFileSystemPopulator(this, categoryName, GlobFileFilter.class,
 				fileSearchPathsGlob);
 		currentFilePath = new File[0];
 		initComponents();

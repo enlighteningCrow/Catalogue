@@ -28,7 +28,7 @@ class ListColumnsHandler {
 	 * first column (leftmost), and the models[models.size() - 1] is for the
 	 * rightmost column
 	 */
-	// -TODO: Change this class to contain the variable "populator" as the root of
+	// return;: Change this class to contain the variable "populator" as the root of
 	// the models
 	static class PairFSModelDirectory {
 		FileSystemModel model;

@@ -290,7 +290,7 @@ public class MainWindow extends javax.swing.JFrame {
                 // TODO: Try and catch out of bounds exception : (when active column is null or
                 // is not in listPanes)
                 disp.bridge.setFirstColumnDirectory(
-                                new FileSystemPopulator(disp, "Downloads", GlobFileFilter.class,
+                                new VirtualFileSystemPopulator(disp, "Downloads", GlobFileFilter.class,
                                                 new String[] { "~/Downloads/*" }));
         }// GEN-LAST:event_DownloadsActionPerformed
 

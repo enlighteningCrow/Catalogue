@@ -43,9 +43,9 @@ class PopulatorColumnsBridge {
 
 	static class DirectoryShownFiles {
 		ArrayList<String> pwd;
-		FileSystemPopulator populator;
+		VirtualFileSystemPopulator populator;
 
-		DirectoryShownFiles(Collection<String> pwd, FileSystemPopulator populator) {
+		DirectoryShownFiles(Collection<String> pwd, VirtualFileSystemPopulator populator) {
 			this.pwd = new ArrayList<>(pwd);
 			this.populator = populator;
 		}
@@ -70,26 +70,26 @@ class PopulatorColumnsBridge {
 
 	void addNewShownDirectory(File file) {
 		currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(),
-				new FileSystemPopulator(this.fileContentsDisplayer, file.getName(),
+				new VirtualFileSystemPopulator(this.fileContentsDisplayer, file.getName(),
 						file.toString())));
 		update();
 	}
 
-	void addNewShownDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
+	void addNewShownDirectory(Collection<String> pathFromCategory, VirtualFileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator and pathFromCategory instead of themselves
 		currentlyShownDirs.add(new DirectoryShownFiles(pathFromCategory, populator));
 		update();
 	}
 
-	void addNewShownDirectory(FileSystemPopulator populator) {
+	void addNewShownDirectory(VirtualFileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator instead of itself
 		currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(), populator));
 		update();
 	}
 
-	void setActiveColumnDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
+	void setActiveColumnDirectory(Collection<String> pathFromCategory, VirtualFileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator and pathFromCategory instead of themselves
 		int currentActiveListIndex;
@@ -101,7 +101,7 @@ class PopulatorColumnsBridge {
 		update();
 	}
 
-	void setActiveColumnDirectory(FileSystemPopulator populator) {
+	void setActiveColumnDirectory(VirtualFileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator instead of itself
 		int currentActiveListIndex;
@@ -113,7 +113,7 @@ class PopulatorColumnsBridge {
 		update();
 	}
 
-	void setFirstColumnDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
+	void setFirstColumnDirectory(Collection<String> pathFromCategory, VirtualFileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator and pathFromCategory instead of themselves
 		if (currentlyShownDirs.size() == 0)
@@ -123,7 +123,7 @@ class PopulatorColumnsBridge {
 		update();
 	}
 
-	void setFirstColumnDirectory(FileSystemPopulator populator) {
+	void setFirstColumnDirectory(VirtualFileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator instead of itself
 		if (currentlyShownDirs.size() == 0)
@@ -133,7 +133,7 @@ class PopulatorColumnsBridge {
 		update();
 	}
 
-	void setLastColumnDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
+	void setLastColumnDirectory(Collection<String> pathFromCategory, VirtualFileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator and pathFromCategory instead of themselves
 		if (currentlyShownDirs.size() == 0)
@@ -143,7 +143,7 @@ class PopulatorColumnsBridge {
 		update();
 	}
 
-	void setLastColumnDirectory(FileSystemPopulator populator) {
+	void setLastColumnDirectory(VirtualFileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator instead of itself
 		if (currentlyShownDirs.size() == 0)
@@ -172,7 +172,7 @@ class PopulatorColumnsBridge {
 			// handler.models.addAll();
 			// var j = handler.models.add();
 			// new FileSystemPopulator(this, , null)
-			// -TODO: Make a populator for each of the things in the currentlyShownDirs
+			// return;: Make a populator for each of the things in the currentlyShownDirs
 			if (i.pwd.size() != 0)
 				handler.models
 						.add(new PairFSModelDirectory(
@@ -204,7 +204,7 @@ class PopulatorColumnsBridge {
 				model), categoryName);
 	}
 
-	PairFSModelDirectory newPairFSModelDirectory(FileSystemPopulator populator, String categoryName) {
+	PairFSModelDirectory newPairFSModelDirectory(VirtualFileSystemPopulator populator, String categoryName) {
 		return new PairFSModelDirectory(new FileSystemModel(
 				populator.contents.toArray(new File[populator.contents.size()])), categoryName);
 	}
