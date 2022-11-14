@@ -47,6 +47,7 @@ class ListColumnsHandler {
 	 * Group up the list and the pane it belongs to
 	 */
 	public class ListPane {
+		// TODO: Change this list to something else,
 		JList<File> list;
 		JScrollPane pane;
 
