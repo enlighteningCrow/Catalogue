@@ -56,7 +56,7 @@ class ListColumnsHandler {
 		}
 	}
 
-	public ArrayList<ListPane> lists = new ArrayList<>();
+	public ArrayList<ListPane> listPanes = new ArrayList<>();
 
 	/**
 	 * Number of columns currently being shown
@@ -64,6 +64,21 @@ class ListColumnsHandler {
 	private int modelsSize;
 
 	// private ArrayList<ListColumn> li;
+
+	ListPane currentActiveList;
+
+	public ListPane getCurrentActiveList() {
+		return currentActiveList;
+	}
+
+	public int getCurrentActiveListIndex() {
+		for (int i = listPanes.size() - 1; i >= 0; --i) {
+			if (currentActiveList == listPanes.get(i))
+				// Note: Use this by <whatever>.size() - <retval>
+				return listPanes.size() - i;
+		}
+		return -1;
+	}
 
 	/**
 	 * getter for maxColumnNumber
@@ -103,12 +118,15 @@ class ListColumnsHandler {
 	 * the GUI
 	 */
 	void update() {
-		modelsSize = Math.min(models.size(), this.fileContentsDisplayer.maxColumnNumber);
-		while (lists.size() < modelsSize) {
+		// modelsSize = Math.min(models.size(),
+		// this.fileContentsDisplayer.maxColumnNumber);
+		// TODO: Decide whether to remove the max column number
+		modelsSize = this.fileContentsDisplayer.maxColumnNumber;
+		while (listPanes.size() < modelsSize) {
 			ListPane item;
 			// lists.add(item = this.fileContentsDisplayer.new ListPane(new JList<File>(),
 			// new JScrollPane()));
-			lists.add(item = new ListPane(new JList<File>(), new JScrollPane()));
+			listPanes.add(item = new ListPane(new JList<File>(), new JScrollPane()));
 			item.pane.setViewportView(item.list);
 			constraints = new java.awt.GridBagConstraints();
 			constraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -116,13 +134,24 @@ class ListColumnsHandler {
 			constraints.weightx = 1.0;
 			constraints.weighty = 1.0;
 			this.fileContentsDisplayer.add(item.pane, constraints);
+
+			item.list.addFocusListener(new java.awt.event.FocusAdapter() {
+				final ListPane lp = item;
+
+				public void focusGained(java.awt.event.FocusEvent evt) {
+					currentActiveList = lp;
+				}
+			});
 		}
-		while (lists.size() > models.size()) {
-			this.fileContentsDisplayer.remove(lists.get(lists.size() - 1).pane);
-			lists.remove(lists.size() - 1);
+		while (listPanes.size() > models.size()) {
+			this.fileContentsDisplayer.remove(listPanes.get(listPanes.size() - 1).pane);
+			listPanes.remove(listPanes.size() - 1);
 		}
-		for (int i = 0; i < lists.size(); ++i) {
-			lists.get(i).list.setModel(models.get(i + models.size() - lists.size()).model);
+		for (int i = 0; i < listPanes.size(); ++i) {
+			listPanes.get(i).list.setModel(models.get(i + models.size() - listPanes.size()).model);
+			// listPanes.get(i).pane.revalidate();
+			// listPanes.get(i).list.revalidate();
+			// lists.get(i).
 		}
 	}
 }

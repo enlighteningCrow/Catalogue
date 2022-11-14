@@ -4,6 +4,7 @@
  */
 package org.AOOPProject;
 
+import java.awt.Component;
 import java.io.File;
 
 /**
@@ -27,7 +28,9 @@ public class MainWindow extends javax.swing.JFrame {
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
                 java.awt.GridBagConstraints gridBagConstraints;
 
@@ -44,10 +47,10 @@ public class MainWindow extends javax.swing.JFrame {
                 typesScrollPanel = new javax.swing.JScrollPane();
                 typesPanel = new javax.swing.JPanel();
                 Downloads = new javax.swing.JButton();
-                jButton5 = new javax.swing.JButton();
+                Pictures = new javax.swing.JButton();
                 jButton6 = new javax.swing.JButton();
-                jTabbedPane1 = new javax.swing.JTabbedPane();
-                fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer(new File("/usr/sbin"));
+                displayersTab = new javax.swing.JTabbedPane();
+                fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer(new File("~"));
                 menuBar = new javax.swing.JMenuBar();
                 menuFile = new javax.swing.JMenu();
                 jMenu1 = new javax.swing.JMenu();
@@ -68,8 +71,14 @@ public class MainWindow extends javax.swing.JFrame {
 
                 jList1.setModel(new javax.swing.AbstractListModel<String>() {
                         String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-                        public int getSize() { return strings.length; }
-                        public String getElementAt(int i) { return strings[i]; }
+
+                        public int getSize() {
+                                return strings.length;
+                        }
+
+                        public String getElementAt(int i) {
+                                return strings[i];
+                        }
                 });
                 jList1.setName("jList1"); // NOI18N
                 jScrollPane1.setViewportView(jList1);
@@ -136,6 +145,17 @@ public class MainWindow extends javax.swing.JFrame {
                 Downloads.setMaximumSize(new java.awt.Dimension(10000, 31));
                 Downloads.setMinimumSize(new java.awt.Dimension(10000, 31));
                 Downloads.setName("Downloads"); // NOI18N
+                Downloads.addAncestorListener(new javax.swing.event.AncestorListener() {
+                        public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                                DownloadsAncestorAdded(evt);
+                        }
+
+                        public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                        }
+
+                        public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                        }
+                });
                 Downloads.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 DownloadsActionPerformed(evt);
@@ -143,12 +163,12 @@ public class MainWindow extends javax.swing.JFrame {
                 });
                 typesPanel.add(Downloads);
 
-                jButton5.setText("Pictures");
-                jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                jButton5.setMaximumSize(new java.awt.Dimension(10000, 31));
-                jButton5.setMinimumSize(new java.awt.Dimension(10000, 31));
-                jButton5.setName("jButton5"); // NOI18N
-                typesPanel.add(jButton5);
+                Pictures.setText("Pictures");
+                Pictures.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                Pictures.setMaximumSize(new java.awt.Dimension(10000, 31));
+                Pictures.setMinimumSize(new java.awt.Dimension(10000, 31));
+                Pictures.setName("Pictures"); // NOI18N
+                typesPanel.add(Pictures);
 
                 jButton6.setText("jButton6");
                 jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -167,10 +187,10 @@ public class MainWindow extends javax.swing.JFrame {
                 gridBagConstraints.weighty = 1.0;
                 getContentPane().add(typesScrollPanel, gridBagConstraints);
 
-                jTabbedPane1.setName("jTabbedPane1"); // NOI18N
+                displayersTab.setName("displayersTab"); // NOI18N
 
                 fileContentsDisplayer1.setName("fileContentsDisplayer1"); // NOI18N
-                jTabbedPane1.addTab("tab1", fileContentsDisplayer1);
+                displayersTab.addTab("tab1", fileContentsDisplayer1);
 
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 1;
@@ -178,7 +198,7 @@ public class MainWindow extends javax.swing.JFrame {
                 gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
                 gridBagConstraints.weightx = 1.0;
                 gridBagConstraints.weighty = 1.0;
-                getContentPane().add(jTabbedPane1, gridBagConstraints);
+                getContentPane().add(displayersTab, gridBagConstraints);
 
                 menuBar.setName("menuBar"); // NOI18N
 
@@ -248,9 +268,31 @@ public class MainWindow extends javax.swing.JFrame {
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-        private void DownloadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadsActionPerformed
+        private void DownloadsAncestorAdded(javax.swing.event.AncestorEvent evt) {// GEN-FIRST:event_DownloadsAncestorAdded
                 // TODO add your handling code here:
-        }//GEN-LAST:event_DownloadsActionPerformed
+        }// GEN-LAST:event_DownloadsAncestorAdded
+
+        /**
+         * TODO: Use this as an example to implement the rest of the buttons, hard coded
+         * AND
+         * autogenerated (from roots (on unix/linux/mac -> "/", on windows -> "C:",
+         * "D:", "E:", "<whatever is detected>"))
+         * AND written in the JSON by the user (Edit->Edit Paths JSON in the menubar)
+         */
+        private void DownloadsActionPerformed(java.awt.event.ActionEvent evt) {
+                Component selectedComponent = displayersTab.getSelectedComponent();
+                if (!(selectedComponent instanceof FileContentsDisplayer)) {
+                        throw new RuntimeException("This tab does not contain an instance of FileContentsDisplayer");
+                }
+                FileContentsDisplayer disp = (FileContentsDisplayer) selectedComponent;
+                // TODO: Continue this
+                // disp.handler.notify();
+                // TODO: Try and catch out of bounds exception : (when active column is null or
+                // is not in listPanes)
+                disp.bridge.setFirstColumnDirectory(
+                                new FileSystemPopulator(disp, "Downloads", RegexFileFilter.class,
+                                                new String[] { "~/[Dd]ownloads" }));
+        }// GEN-LAST:event_DownloadsActionPerformed
 
         /**
          * @param args the command line arguments
@@ -298,14 +340,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton Downloads;
+        private javax.swing.JButton Pictures;
         private javax.swing.ButtonGroup buttonGroup1;
         private javax.swing.JPanel buttonsNavigationPanel;
         private javax.swing.JButton dirBackButton;
         private javax.swing.JButton dirForwardButton1;
         private javax.swing.JButton dirUpButton2;
+        private javax.swing.JTabbedPane displayersTab;
         private org.AOOPProject.FileContentsDisplayer fileContentsDisplayer1;
         private javax.swing.JButton jButton3;
-        private javax.swing.JButton jButton5;
         private javax.swing.JButton jButton6;
         private javax.swing.JList<String> jList1;
         private javax.swing.JMenu jMenu1;
@@ -315,7 +358,6 @@ public class MainWindow extends javax.swing.JFrame {
         private javax.swing.JMenuItem jMenuItem3;
         private javax.swing.JMenuItem jMenuItem4;
         private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JTabbedPane jTabbedPane1;
         private javax.swing.JPanel labelsNavigationPanel;
         private javax.swing.JMenuBar menuBar;
         private javax.swing.JMenu menuEdit;
@@ -348,4 +390,7 @@ public class MainWindow extends javax.swing.JFrame {
         // pressed, the cursor moves to the left list
         // TODO: The top text field (should probably be changed to a couple buttons in a
         // horizontal GridLayout) shows the current directory the cursor is on
+        // TODO: The left column (typesPanel) should contain all the root drives (on
+        // unix/linux/mac -> "/", on windows -> "C:", "D:", "E:", "<whatever is
+        // detected>")
 }

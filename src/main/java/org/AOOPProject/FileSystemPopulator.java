@@ -121,6 +121,7 @@ public class FileSystemPopulator {
 	public <T extends FileFilter> void populate(int depth, String[] searchPath, File currentFile,
 			Class<T> filterType) {
 		Constructor<T> constructor;
+		File[] files;
 		try {
 			// filterType.getConstructor();
 			// Class<T>.getConstructor();
@@ -134,6 +135,10 @@ public class FileSystemPopulator {
 			// System.out.println(cnstrctr);
 			constructor = filterType.getConstructor(new Class[] { String.class });
 			// System.out.println(constructor);
+			T inst = constructor.newInstance(searchPath[depth]);
+			files = currentFile.listFiles(inst);
+			// for (File file : files)
+			// System.out.println(file);
 		} catch (Exception e) {
 			System.out.println(e);
 			return;
@@ -141,7 +146,7 @@ public class FileSystemPopulator {
 		if (depth == searchPath.length - 1) {
 			try {
 				// Class[] classes = new Class[] { String.class };
-				for (File i : currentFile.listFiles(constructor.newInstance(searchPath[depth])))
+				for (File i : files)
 					contents.add(i);
 			} catch (Exception e) {
 				System.err.println(e);
@@ -150,8 +155,8 @@ public class FileSystemPopulator {
 
 		else if (depth < searchPath.length) {
 			try {
-				// TODO: (URGENT) Debug what is wrong with the line below
-				for (File file : currentFile.listFiles(constructor.newInstance(searchPath[depth])))
+				// -TODO: (URGENT) Debug what is wrong with the line below
+				for (File file : files)
 					populate(depth + 1, searchPath, file, filterType);
 			} catch (Exception e) {
 				// System.err.println(e);
@@ -173,6 +178,7 @@ public class FileSystemPopulator {
 	 */
 	private <T extends FileFilter> void updateS(String[] paths, Class<T> filterType) {
 		for (String searchPath : paths) {
+			searchPath.replace('\\', '/');
 			String[] pathComps = searchPath.split("/");
 			if (pathComps.length == 0)
 				throw new InvalidPathException(searchPath, "search path is empty");
@@ -185,8 +191,10 @@ public class FileSystemPopulator {
 			} else {
 				if (pathComps[0].length() == 0)
 					// TODO: Check if this works in Windows OS
-					pathComps[0] = "/";
-				populate(0, pathComps, new File(pathComps[0]), filterType);
+					// pathComps[0] = "/";
+					populate(1, pathComps, new File("/"), filterType);
+				else
+					populate(0, pathComps, new File(System.getProperty("user.dir")), filterType);
 			}
 		}
 	}

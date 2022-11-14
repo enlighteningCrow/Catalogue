@@ -46,10 +46,22 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
+
+		addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusGained(java.awt.event.FocusEvent evt) {
+				formFocusGained(evt);
+			}
+		});
 		setLayout(new java.awt.GridBagLayout());
 	}// </editor-fold>//GEN-END:initComponents
+
+	private void formFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_formFocusGained
+		// TODO Remove focus-related stuff from this class only from the netbeans
+		// designer
+	}// GEN-LAST:event_formFocusGained
 
 	// Additional variables
 	// private File currentPath;
@@ -191,6 +203,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 		bridge.update();
 		populator.update();
 		handler.update();
+		// currentActiveDisplayer = this;
 	}
 
 	/**
@@ -236,6 +249,10 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 		bridge.addNewShownDirectory(file);
 		update();
 	}
+
+	// public void set
+
+	// static FileContentsDisplayer currentActiveDisplayer;
 }
 
 // TODO: Watcher for the watched paths

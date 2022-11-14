@@ -62,32 +62,36 @@ import java.util.*;
 
 class Main {
 
-    public Object obj;
+        public Object obj;
 
-    private Main() {
+        private Main() {
 
-        class Arr {
+                class Arr {
+                }
+                ;
+
+                obj = new Arr();
         }
-        ;
 
-        obj = new Arr();
-    }
+        public static void main(String[] args)
+                        throws ClassNotFoundException {
+                // returns the Class object for this class
+                // Class myClass = Class.forName("Main");
 
-    public static void main(String[] args)
-            throws ClassNotFoundException {
-        // returns the Class object for this class
-        Class myClass = Class.forName("Main");
+                // System.out.println("Class represented by myClass: "
+                // + myClass.toString());
 
-        System.out.println("Class represented by myClass: "
-                + myClass.toString());
-
-        // Get the constructors of myClass
-        // using getConstructors() method
-        System.out.println(
-                "Constructors of myClass: "
-                        + Arrays.toString(
-                                myClass.getConstructors()));
-    }
+                // // Get the constructors of myClass
+                // // using getConstructors() method
+                // System.out.println(
+                // "Constructors of myClass: "
+                // + Arrays.toString(
+                // myClass.getConstructors()));
+                File file = new File("/");
+                System.out.println(file);
+                for (File f : file.listFiles())
+                        System.out.println(f);
+        }
 }
 
 // public class Main {

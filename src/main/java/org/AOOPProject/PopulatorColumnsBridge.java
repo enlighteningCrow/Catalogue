@@ -31,12 +31,14 @@ class PopulatorColumnsBridge {
 	 *
 	 */
 	private final FileContentsDisplayer fileContentsDisplayer;
+	ListColumnsHandler handler;
 
 	/**
 	 * @param fileContentsDisplayer
 	 */
 	PopulatorColumnsBridge(FileContentsDisplayer fileContentsDisplayer) {
 		this.fileContentsDisplayer = fileContentsDisplayer;
+		handler = this.fileContentsDisplayer.handler;
 	}
 
 	static class DirectoryShownFiles {
@@ -70,18 +72,86 @@ class PopulatorColumnsBridge {
 		currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(),
 				new FileSystemPopulator(this.fileContentsDisplayer, file.getName(),
 						file.toString())));
+		update();
 	}
 
 	void addNewShownDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
-		// of populator instead of itself
+		// of populator and pathFromCategory instead of themselves
 		currentlyShownDirs.add(new DirectoryShownFiles(pathFromCategory, populator));
+		update();
 	}
 
 	void addNewShownDirectory(FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator instead of itself
 		currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(), populator));
+		update();
+	}
+
+	void setActiveColumnDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
+		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
+		// of populator and pathFromCategory instead of themselves
+		int currentActiveListIndex;
+		if ((currentActiveListIndex = handler.getCurrentActiveListIndex()) == -1)
+			currentlyShownDirs.add(new DirectoryShownFiles(pathFromCategory, populator));
+		else
+			currentlyShownDirs.set(currentlyShownDirs.size() - handler.getCurrentActiveListIndex(),
+					new DirectoryShownFiles(pathFromCategory, populator));
+		update();
+	}
+
+	void setActiveColumnDirectory(FileSystemPopulator populator) {
+		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
+		// of populator instead of itself
+		int currentActiveListIndex;
+		if ((currentActiveListIndex = handler.getCurrentActiveListIndex()) == -1)
+			currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(), populator));
+		else
+			currentlyShownDirs.set(currentlyShownDirs.size() - currentActiveListIndex,
+					new DirectoryShownFiles(new ArrayList<String>(), populator));
+		update();
+	}
+
+	void setFirstColumnDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
+		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
+		// of populator and pathFromCategory instead of themselves
+		if (currentlyShownDirs.size() == 0)
+			currentlyShownDirs.add(new DirectoryShownFiles(pathFromCategory, populator));
+		else
+			currentlyShownDirs.set(0, new DirectoryShownFiles(pathFromCategory, populator));
+		update();
+	}
+
+	void setFirstColumnDirectory(FileSystemPopulator populator) {
+		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
+		// of populator instead of itself
+		if (currentlyShownDirs.size() == 0)
+			currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(), populator));
+		else
+			currentlyShownDirs.set(0, new DirectoryShownFiles(new ArrayList<String>(), populator));
+		update();
+	}
+
+	void setLastColumnDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
+		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
+		// of populator and pathFromCategory instead of themselves
+		if (currentlyShownDirs.size() == 0)
+			currentlyShownDirs.add(new DirectoryShownFiles(pathFromCategory, populator));
+		else
+			currentlyShownDirs.set(currentlyShownDirs.size() - 1, new DirectoryShownFiles(pathFromCategory, populator));
+		update();
+	}
+
+	void setLastColumnDirectory(FileSystemPopulator populator) {
+		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
+		// of populator instead of itself
+		if (currentlyShownDirs.size() == 0)
+			currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(), populator));
+		else
+			currentlyShownDirs.set(currentlyShownDirs.size() - 1,
+					new DirectoryShownFiles(new ArrayList<String>(), populator));
+		update();
 	}
 
 	void updatePopulators() {
@@ -92,7 +162,7 @@ class PopulatorColumnsBridge {
 
 	void update() {
 		updatePopulators();
-		this.fileContentsDisplayer.handler.models.clear();
+		handler.models.clear();
 		// handler.models.subList(1, handler.models.size()).clear();
 		// this.fileContentsDisplayer.handler.models.add(new PairFSModelDirectory(
 		// new FileSystemModel(
@@ -102,19 +172,22 @@ class PopulatorColumnsBridge {
 			// handler.models.addAll();
 			// var j = handler.models.add();
 			// new FileSystemPopulator(this, , null)
-			// TODO: Make a populator for each of the things in the currentlyShownDirs
+			// -TODO: Make a populator for each of the things in the currentlyShownDirs
 			if (i.pwd.size() != 0)
-				this.fileContentsDisplayer.handler.models
+				handler.models
 						.add(new PairFSModelDirectory(
 								new FileSystemModel(
 										i.populator.contents),
 								i.pwd.get(i.pwd.size() - 1)));
 			else
-				this.fileContentsDisplayer.handler.models
+				handler.models
 						.add(newPairFSModelDirectory(i.populator, i.populator.categoryName));
 			// handler.models.add();
 			// handler.models;
 		}
+		handler.update();
+		fileContentsDisplayer.revalidate();
+		fileContentsDisplayer.repaint();
 	}
 
 	PairFSModelDirectory newPairFSModelDirectory(FileSystemModel model, String categoryName) {
