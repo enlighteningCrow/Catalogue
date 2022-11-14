@@ -5,7 +5,13 @@
 package org.AOOPProject;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.io.File;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -30,243 +36,257 @@ public class MainWindow extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
-        private void initComponents() {
-                java.awt.GridBagConstraints gridBagConstraints;
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-                jScrollPane1 = new javax.swing.JScrollPane();
-                jList1 = new javax.swing.JList<>();
-                jButton3 = new javax.swing.JButton();
-                buttonGroup1 = new javax.swing.ButtonGroup();
-                buttonsNavigationPanel = new javax.swing.JPanel();
-                dirBackButton = new javax.swing.JButton();
-                dirForwardButton1 = new javax.swing.JButton();
-                dirUpButton2 = new javax.swing.JButton();
-                labelsNavigationPanel = new javax.swing.JPanel();
-                pathString = new javax.swing.JTextField();
-                typesScrollPanel = new javax.swing.JScrollPane();
-                typesPanel = new javax.swing.JPanel();
-                Downloads = new javax.swing.JButton();
-                Pictures = new javax.swing.JButton();
-                jButton6 = new javax.swing.JButton();
-                displayersTab = new javax.swing.JTabbedPane();
-                fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer(new File("~"));
-                menuBar = new javax.swing.JMenuBar();
-                menuFile = new javax.swing.JMenu();
-                jMenu1 = new javax.swing.JMenu();
-                menuEdit = new javax.swing.JMenu();
-                settingsJsonMenuItem = new javax.swing.JMenuItem();
-                menuView = new javax.swing.JMenu();
-                viewModeMenu = new javax.swing.JMenu();
-                jMenuItem1 = new javax.swing.JMenuItem();
-                jMenuItem2 = new javax.swing.JMenuItem();
-                jMenuItem3 = new javax.swing.JMenuItem();
-                jMenuItem4 = new javax.swing.JMenuItem();
-                menuNavigate = new javax.swing.JMenu();
-                jMenu2 = new javax.swing.JMenu();
-                menuSettings = new javax.swing.JMenu();
-                menuHelp = new javax.swing.JMenu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton3 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonsNavigationPanel = new javax.swing.JPanel();
+        dirUpButton2 = new javax.swing.JButton();
+        labelsNavigationPanel = new javax.swing.JPanel();
+        pathString = new javax.swing.JTextField();
+        typesScrollPanel = new javax.swing.JScrollPane();
+        typesPanel = new javax.swing.JPanel();
+        Downloads = new javax.swing.JButton();
+        Pictures = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        displayersTab = new javax.swing.JTabbedPane();
+        menuBar = new javax.swing.JMenuBar();
+        menuFile = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        menuEdit = new javax.swing.JMenu();
+        settingsJsonMenuItem = new javax.swing.JMenuItem();
+        menuView = new javax.swing.JMenu();
+        viewModeMenu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        menuNavigate = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        menuSettings = new javax.swing.JMenu();
+        menuHelp = new javax.swing.JMenu();
 
-                jScrollPane1.setName("jScrollPane1"); // NOI18N
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-                jList1.setModel(new javax.swing.AbstractListModel<String>() {
-                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setName("jList1"); // NOI18N
+        jScrollPane1.setViewportView(jList1);
 
-                        public int getSize() {
-                                return strings.length;
-                        }
+        jButton3.setText("jButton3");
+        jButton3.setName("jButton3"); // NOI18N
 
-                        public String getElementAt(int i) {
-                                return strings[i];
-                        }
-                });
-                jList1.setName("jList1"); // NOI18N
-                jScrollPane1.setViewportView(jList1);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName("Form"); // NOI18N
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-                jButton3.setText("jButton3");
-                jButton3.setName("jButton3"); // NOI18N
+        buttonsNavigationPanel.setName("buttonsNavigationPanel"); // NOI18N
 
-                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-                setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-                setName("Form"); // NOI18N
-                getContentPane().setLayout(new java.awt.GridBagLayout());
+        dirUpButton2.setText("+");
+        dirUpButton2.setMaximumSize(new java.awt.Dimension(30, 30));
+        dirUpButton2.setMinimumSize(new java.awt.Dimension(30, 30));
+        dirUpButton2.setName("dirUpButton2"); // NOI18N
+        dirUpButton2.setPreferredSize(new java.awt.Dimension(30, 30));
+        dirUpButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dirUpButton2ActionPerformed(evt);
+            }
+        });
+        buttonsNavigationPanel.add(dirUpButton2);
 
-                buttonsNavigationPanel.setName("buttonsNavigationPanel"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        getContentPane().add(buttonsNavigationPanel, gridBagConstraints);
 
-                dirBackButton.setText("jButton1");
-                dirBackButton.setMaximumSize(new java.awt.Dimension(30, 30));
-                dirBackButton.setMinimumSize(new java.awt.Dimension(30, 30));
-                dirBackButton.setName("dirBackButton"); // NOI18N
-                dirBackButton.setPreferredSize(new java.awt.Dimension(30, 30));
-                buttonsNavigationPanel.add(dirBackButton);
+        labelsNavigationPanel.setName("labelsNavigationPanel"); // NOI18N
+        labelsNavigationPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-                dirForwardButton1.setText("jButton1");
-                dirForwardButton1.setMaximumSize(new java.awt.Dimension(30, 30));
-                dirForwardButton1.setMinimumSize(new java.awt.Dimension(30, 30));
-                dirForwardButton1.setName("dirForwardButton1"); // NOI18N
-                dirForwardButton1.setPreferredSize(new java.awt.Dimension(30, 30));
-                buttonsNavigationPanel.add(dirForwardButton1);
+        pathString.setText("jTextField1");
+        pathString.setName("pathString"); // NOI18N
+        labelsNavigationPanel.add(pathString);
 
-                dirUpButton2.setText("jButton1");
-                dirUpButton2.setMaximumSize(new java.awt.Dimension(30, 30));
-                dirUpButton2.setMinimumSize(new java.awt.Dimension(30, 30));
-                dirUpButton2.setName("dirUpButton2"); // NOI18N
-                dirUpButton2.setPreferredSize(new java.awt.Dimension(30, 30));
-                buttonsNavigationPanel.add(dirUpButton2);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+        gridBagConstraints.weightx = 1.0;
+        getContentPane().add(labelsNavigationPanel, gridBagConstraints);
 
-                gridBagConstraints = new java.awt.GridBagConstraints();
-                gridBagConstraints.gridx = 0;
-                gridBagConstraints.gridy = 0;
-                gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-                getContentPane().add(buttonsNavigationPanel, gridBagConstraints);
+        typesScrollPanel.setName("typesScrollPanel"); // NOI18N
 
-                labelsNavigationPanel.setName("labelsNavigationPanel"); // NOI18N
-                labelsNavigationPanel.setLayout(new java.awt.GridLayout(1, 0));
+        typesPanel.setName("typesPanel"); // NOI18N
+        typesPanel.setLayout(new javax.swing.BoxLayout(typesPanel, javax.swing.BoxLayout.Y_AXIS));
 
-                pathString.setText("jTextField1");
-                pathString.setName("pathString"); // NOI18N
-                labelsNavigationPanel.add(pathString);
+        Downloads.setText("Downloads");
+        Downloads.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Downloads.setMaximumSize(new java.awt.Dimension(10000, 31));
+        Downloads.setMinimumSize(new java.awt.Dimension(10000, 31));
+        Downloads.setName("Downloads"); // NOI18N
+        Downloads.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                DownloadsAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        Downloads.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DownloadsActionPerformed(evt);
+            }
+        });
+        typesPanel.add(Downloads);
 
-                gridBagConstraints = new java.awt.GridBagConstraints();
-                gridBagConstraints.gridx = 1;
-                gridBagConstraints.gridy = 0;
-                gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-                gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
-                gridBagConstraints.weightx = 1.0;
-                getContentPane().add(labelsNavigationPanel, gridBagConstraints);
+        Pictures.setText("Pictures");
+        Pictures.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Pictures.setMaximumSize(new java.awt.Dimension(10000, 31));
+        Pictures.setMinimumSize(new java.awt.Dimension(10000, 31));
+        Pictures.setName("Pictures"); // NOI18N
+        typesPanel.add(Pictures);
 
-                typesScrollPanel.setName("typesScrollPanel"); // NOI18N
+        jButton6.setText("jButton6");
+        jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton6.setMaximumSize(new java.awt.Dimension(10000, 31));
+        jButton6.setMinimumSize(new java.awt.Dimension(10000, 31));
+        jButton6.setName("jButton6"); // NOI18N
+        typesPanel.add(jButton6);
 
-                typesPanel.setName("typesPanel"); // NOI18N
-                typesPanel.setLayout(new javax.swing.BoxLayout(typesPanel, javax.swing.BoxLayout.Y_AXIS));
+        typesScrollPanel.setViewportView(typesPanel);
 
-                Downloads.setText("Downloads");
-                Downloads.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                Downloads.setMaximumSize(new java.awt.Dimension(10000, 31));
-                Downloads.setMinimumSize(new java.awt.Dimension(10000, 31));
-                Downloads.setName("Downloads"); // NOI18N
-                Downloads.addAncestorListener(new javax.swing.event.AncestorListener() {
-                        public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                                DownloadsAncestorAdded(evt);
-                        }
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.weighty = 1.0;
+        getContentPane().add(typesScrollPanel, gridBagConstraints);
 
-                        public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                        }
+        displayersTab.setName("displayersTab"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        getContentPane().add(displayersTab, gridBagConstraints);
 
-                        public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                        }
-                });
-                Downloads.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                DownloadsActionPerformed(evt);
-                        }
-                });
-                typesPanel.add(Downloads);
+        menuBar.setName("menuBar"); // NOI18N
 
-                Pictures.setText("Pictures");
-                Pictures.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                Pictures.setMaximumSize(new java.awt.Dimension(10000, 31));
-                Pictures.setMinimumSize(new java.awt.Dimension(10000, 31));
-                Pictures.setName("Pictures"); // NOI18N
-                typesPanel.add(Pictures);
+        menuFile.setText("File");
+        menuFile.setName("menuFile"); // NOI18N
 
-                jButton6.setText("jButton6");
-                jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                jButton6.setMaximumSize(new java.awt.Dimension(10000, 31));
-                jButton6.setMinimumSize(new java.awt.Dimension(10000, 31));
-                jButton6.setName("jButton6"); // NOI18N
-                typesPanel.add(jButton6);
+        jMenu1.setText("Insert whatever menus needed here");
+        jMenu1.setName("jMenu1"); // NOI18N
+        menuFile.add(jMenu1);
 
-                typesScrollPanel.setViewportView(typesPanel);
+        menuBar.add(menuFile);
 
-                gridBagConstraints = new java.awt.GridBagConstraints();
-                gridBagConstraints.gridx = 0;
-                gridBagConstraints.gridy = 1;
-                gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-                gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-                gridBagConstraints.weighty = 1.0;
-                getContentPane().add(typesScrollPanel, gridBagConstraints);
+        menuEdit.setText("Edit");
+        menuEdit.setName("menuEdit"); // NOI18N
 
-                displayersTab.setName("displayersTab"); // NOI18N
+        settingsJsonMenuItem.setText("Edit Paths JSON");
+        settingsJsonMenuItem.setName("settingsJsonMenuItem"); // NOI18N
+        menuEdit.add(settingsJsonMenuItem);
 
-                fileContentsDisplayer1.setName("fileContentsDisplayer1"); // NOI18N
-                displayersTab.addTab("tab1", fileContentsDisplayer1);
+        menuBar.add(menuEdit);
 
-                gridBagConstraints = new java.awt.GridBagConstraints();
-                gridBagConstraints.gridx = 1;
-                gridBagConstraints.gridy = 1;
-                gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-                gridBagConstraints.weightx = 1.0;
-                gridBagConstraints.weighty = 1.0;
-                getContentPane().add(displayersTab, gridBagConstraints);
+        menuView.setText("View");
+        menuView.setName("menuView"); // NOI18N
 
-                menuBar.setName("menuBar"); // NOI18N
+        viewModeMenu.setText("View mode");
+        viewModeMenu.setName("viewModeMenu"); // NOI18N
 
-                menuFile.setText("File");
-                menuFile.setName("menuFile"); // NOI18N
+        jMenuItem1.setText("Icons only");
+        jMenuItem1.setName("jMenuItem1"); // NOI18N
+        viewModeMenu.add(jMenuItem1);
 
-                jMenu1.setText("Insert whatever menus needed here");
-                jMenu1.setName("jMenu1"); // NOI18N
-                menuFile.add(jMenu1);
+        jMenuItem2.setText("Compact");
+        jMenuItem2.setName("jMenuItem2"); // NOI18N
+        viewModeMenu.add(jMenuItem2);
 
-                menuBar.add(menuFile);
+        jMenuItem3.setText("Details");
+        jMenuItem3.setName("jMenuItem3"); // NOI18N
+        viewModeMenu.add(jMenuItem3);
 
-                menuEdit.setText("Edit");
-                menuEdit.setName("menuEdit"); // NOI18N
+        jMenuItem4.setText("Etc.");
+        jMenuItem4.setName("jMenuItem4"); // NOI18N
+        viewModeMenu.add(jMenuItem4);
 
-                settingsJsonMenuItem.setText("Edit Paths JSON");
-                settingsJsonMenuItem.setName("settingsJsonMenuItem"); // NOI18N
-                menuEdit.add(settingsJsonMenuItem);
+        menuView.add(viewModeMenu);
 
-                menuBar.add(menuEdit);
+        menuBar.add(menuView);
 
-                menuView.setText("View");
-                menuView.setName("menuView"); // NOI18N
+        menuNavigate.setText("Navigate");
+        menuNavigate.setName("menuNavigate"); // NOI18N
 
-                viewModeMenu.setText("View mode");
-                viewModeMenu.setName("viewModeMenu"); // NOI18N
+        jMenu2.setText("Same as the navigation buttons to the left");
+        jMenu2.setName("jMenu2"); // NOI18N
+        menuNavigate.add(jMenu2);
 
-                jMenuItem1.setText("Icons only");
-                jMenuItem1.setName("jMenuItem1"); // NOI18N
-                viewModeMenu.add(jMenuItem1);
+        menuBar.add(menuNavigate);
 
-                jMenuItem2.setText("Compact");
-                jMenuItem2.setName("jMenuItem2"); // NOI18N
-                viewModeMenu.add(jMenuItem2);
+        menuSettings.setText("Settings");
+        menuSettings.setName("menuSettings"); // NOI18N
+        menuBar.add(menuSettings);
 
-                jMenuItem3.setText("Details");
-                jMenuItem3.setName("jMenuItem3"); // NOI18N
-                viewModeMenu.add(jMenuItem3);
+        menuHelp.setText("Help");
+        menuHelp.setName("menuHelp"); // NOI18N
+        menuBar.add(menuHelp);
 
-                jMenuItem4.setText("Etc.");
-                jMenuItem4.setName("jMenuItem4"); // NOI18N
-                viewModeMenu.add(jMenuItem4);
+        setJMenuBar(menuBar);
 
-                menuView.add(viewModeMenu);
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
-                menuBar.add(menuView);
+    private void dirUpButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirUpButton2ActionPerformed
+        // TODO add your handling code here:
+        //add a directory to typesPanel
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setMultiSelectionEnabled(true);
+        int returnVal = chooser.showOpenDialog(this);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            File[] files = chooser.getSelectedFiles();
+            for(File file : files) {
+                addType(file);
+            }
+        }
 
-                menuNavigate.setText("Navigate");
-                menuNavigate.setName("menuNavigate"); // NOI18N
+    }//GEN-LAST:event_dirUpButton2ActionPerformed
 
-                jMenu2.setText("Same as the navigation buttons to the left");
-                jMenu2.setName("jMenu2"); // NOI18N
-                menuNavigate.add(jMenu2);
+        private void addType(File file) {
+        //add a directory to typesPanel
+        String name = file.getName();
+        JButton button = new JButton(name);
+        button.setHorizontalAlignment(SwingConstants.LEFT);
+        button.setMaximumSize(new Dimension(10000, 31));
+        button.setMinimumSize(new Dimension(10000, 31));
+        button.setName(name);
+        button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typeButtonActionPerformed(evt);
+            }
+        });
+        typesPanel.add(button);
+        typesPanel.revalidate();
+        typesPanel.repaint();
+        
+}
 
-                menuBar.add(menuNavigate);
-
-                menuSettings.setText("Settings");
-                menuSettings.setName("menuSettings"); // NOI18N
-                menuBar.add(menuSettings);
-
-                menuHelp.setText("Help");
-                menuHelp.setName("menuHelp"); // NOI18N
-                menuBar.add(menuHelp);
-
-                setJMenuBar(menuBar);
-
-                pack();
-        }// </editor-fold>//GEN-END:initComponents
+        protected void typeButtonActionPerformed(ActionEvent evt) {
+        }
 
         private void DownloadsAncestorAdded(javax.swing.event.AncestorEvent evt) {// GEN-FIRST:event_DownloadsAncestorAdded
                 // TODO add your handling code here:
@@ -338,40 +358,37 @@ public class MainWindow extends javax.swing.JFrame {
                 });
         }
 
-        // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton Downloads;
-        private javax.swing.JButton Pictures;
-        private javax.swing.ButtonGroup buttonGroup1;
-        private javax.swing.JPanel buttonsNavigationPanel;
-        private javax.swing.JButton dirBackButton;
-        private javax.swing.JButton dirForwardButton1;
-        private javax.swing.JButton dirUpButton2;
-        private javax.swing.JTabbedPane displayersTab;
-        private org.AOOPProject.FileContentsDisplayer fileContentsDisplayer1;
-        private javax.swing.JButton jButton3;
-        private javax.swing.JButton jButton6;
-        private javax.swing.JList<String> jList1;
-        private javax.swing.JMenu jMenu1;
-        private javax.swing.JMenu jMenu2;
-        private javax.swing.JMenuItem jMenuItem1;
-        private javax.swing.JMenuItem jMenuItem2;
-        private javax.swing.JMenuItem jMenuItem3;
-        private javax.swing.JMenuItem jMenuItem4;
-        private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JPanel labelsNavigationPanel;
-        private javax.swing.JMenuBar menuBar;
-        private javax.swing.JMenu menuEdit;
-        private javax.swing.JMenu menuFile;
-        private javax.swing.JMenu menuHelp;
-        private javax.swing.JMenu menuNavigate;
-        private javax.swing.JMenu menuSettings;
-        private javax.swing.JMenu menuView;
-        private javax.swing.JTextField pathString;
-        private javax.swing.JMenuItem settingsJsonMenuItem;
-        private javax.swing.JPanel typesPanel;
-        private javax.swing.JScrollPane typesScrollPanel;
-        private javax.swing.JMenu viewModeMenu;
-        // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Downloads;
+    private javax.swing.JButton Pictures;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel buttonsNavigationPanel;
+    private javax.swing.JButton dirUpButton2;
+    private javax.swing.JTabbedPane displayersTab;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel labelsNavigationPanel;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuEdit;
+    private javax.swing.JMenu menuFile;
+    private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenu menuNavigate;
+    private javax.swing.JMenu menuSettings;
+    private javax.swing.JMenu menuView;
+    private javax.swing.JTextField pathString;
+    private javax.swing.JMenuItem settingsJsonMenuItem;
+    private javax.swing.JPanel typesPanel;
+    private javax.swing.JScrollPane typesScrollPanel;
+    private javax.swing.JMenu viewModeMenu;
+    // End of variables declaration//GEN-END:variables
         // TODO: Suggestion: store most of the settings into one JSON or binary format
         // TODO: Add a class to manage histories, so the app opens in the same state as
         // when it was closed (Or add some settings for that)
