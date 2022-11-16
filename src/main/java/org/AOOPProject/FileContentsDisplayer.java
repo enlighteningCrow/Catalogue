@@ -69,7 +69,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	/**
 	 * The current path: eg. {home, Downloads, downloadedFile1.txt}
 	 */
-	File[] currentFilePath;
+	// File[] currentFilePath;
 
 	// return;: Make a class to handle a an array of JList that stores the files and
 	// update them and their models
@@ -83,6 +83,8 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 * lists / jLists)
 	 */
 	int maxColumnNumber;
+
+	// JTextField textField;
 
 	// private File[] getLeftCol() {
 	// // if (currentFilePath.length == 0) {
@@ -114,7 +116,8 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 * The file populator for the class
 	 */
 	// TODO: Remove this from the class, together with all the methods involved
-	public VirtualFileSystemPopulator populator = new VirtualFileSystemPopulator(this, "<Uncategorized>", "/usr/sbin");
+	public FileSystemPopulator populator = new RealFileSystemPopulator(this, "sbin",
+			"/usr/sbin");
 	// TODO: Make a setter function for the below variable; make it also update the
 	// GUI when called.
 	/**
@@ -144,8 +147,9 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 * @param fileSearchPathsGlob  the glob strings array
 	 */
 	public FileContentsDisplayer(String categoryName, String[] fileSearchPathsRegex, String[] fileSearchPathsGlob) {
-		populator = new VirtualFileSystemPopulator(this, categoryName, fileSearchPathsRegex, fileSearchPathsGlob);
-		currentFilePath = new File[0];
+		populator = new VirtualFileSystemPopulator(this, categoryName, fileSearchPathsRegex,
+				fileSearchPathsGlob);
+		// currentFilePath = new File[0];
 		initComponents();
 		update();
 	}
@@ -158,7 +162,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	public FileContentsDisplayer(String categoryName, String[] fileSearchPathsGlob) {
 		populator = new VirtualFileSystemPopulator(this, categoryName, GlobFileFilter.class,
 				fileSearchPathsGlob);
-		currentFilePath = new File[0];
+		// currentFilePath = new File[0];
 		initComponents();
 		update();
 	}

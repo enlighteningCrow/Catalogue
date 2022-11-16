@@ -11,8 +11,8 @@ import java.util.TreeSet;
 // public class FileSystemRootPopulator {
 //
 // }
-public abstract class FileSystemPopulator{
-    protected FileContentsDisplayer fileContentsDisplayer;
+public abstract class FileSystemPopulator {
+	protected FileContentsDisplayer fileContentsDisplayer;
 	// Note: path strings with '/' separator
 	// String[] searchPathsRegex;
 	// String[] searchPathsGlob;
@@ -51,9 +51,8 @@ public abstract class FileSystemPopulator{
 	abstract public <T extends FileFilter> void populate(int depth, String[] searchPath, File currentFile,
 			Class<T> filterType);
 
-
 	abstract public void update();
-	
+
 	public Comparator<File> comparator = new FileComparators.NameAscendingComparator();
 
 	public void setComparator(Comparator<File> comp) {
@@ -74,4 +73,6 @@ public abstract class FileSystemPopulator{
 	abstract public void setFilters(HashMap<Class<? extends FileFilter>, ArrayList<String>> map);
 
 	abstract public void addFilters(HashMap<Class<? extends FileFilter>, ArrayList<String>> map);
+
+	abstract public FileSystemPopulator clone();
 }

@@ -87,10 +87,10 @@ class Main {
                 // "Constructors of myClass: "
                 // + Arrays.toString(
                 // myClass.getConstructors()));
-                File file = new File("/");
-                System.out.println(file);
-                for (File f : file.listFiles())
-                        System.out.println(f);
+                File file = new File("/jaiodsfjoaidsf");
+                System.out.println(file.exists());
+                // for (File f : file.listFiles())
+                // System.out.println(f);
         }
 }
 

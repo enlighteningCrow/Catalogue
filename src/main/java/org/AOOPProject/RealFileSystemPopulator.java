@@ -7,59 +7,76 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.TreeSet;
 
-public class RealFileSystemPopulator extends FileSystemPopulator{
-	public RealFileSystemPopulator(FileContentsDisplayer fileContentsDisplayer, String categoryName,
-			String searchDirectory) {
-		this.fileContentsDisplayer = fileContentsDisplayer;
-		this.categoryName = categoryName;
-        file_temp = new File(searchDirectory);
-		update();
-	}
+public class RealFileSystemPopulator extends FileSystemPopulator {
+    public RealFileSystemPopulator(FileContentsDisplayer fileContentsDisplayer, String categoryName,
+            String searchDirectory) {
+        this.fileContentsDisplayer = fileContentsDisplayer;
+        this.categoryName = categoryName;
+        rootFile = new File(searchDirectory.replace("~", System.getProperty("user.home")));
+        update();
+    }
 
-    File file_temp;
+    File rootFile;
 
     @Override
-    public void update(){
+    public void update() {
+        // System.out.println(rootFile);
         contents.clear();
         contents = new TreeSet<File>(comparator);
-        for (File i : file_temp.listFiles()){
-            this.contents.add(i);
-        }
+        File[] files = rootFile.listFiles();
+        if (files != null)
+            for (File i : files) {
+                this.contents.add(i);
+            }
     }
 
     @Override
     public <T extends FileFilter> void populate(int depth, String[] searchPath, File currentFile, Class<T> filterType) {
         return;
-        
+
     }
 
     @Override
     public void addFilters(Class<? extends FileFilter> filter, String pattern) {
         return;
-        
+
     }
 
     @Override
     public void addFilters(Class<? extends FileFilter> filter, Collection<String> pattern) {
         return;
-        
+
     }
 
     @Override
     public void addFilters(Class<? extends FileFilter> filter, String[] pattern) {
         return;
-        
+
     }
 
     @Override
     public void setFilters(HashMap<Class<? extends FileFilter>, ArrayList<String>> map) {
         return;
-        
+
     }
 
     @Override
     public void addFilters(HashMap<Class<? extends FileFilter>, ArrayList<String>> map) {
         return;
 
+    }
+
+    public File getRootFile() {
+        return rootFile;
+    }
+
+    public void setRootFile(File rootFile) {
+        this.rootFile = rootFile;
+    }
+
+    @Override
+    public FileSystemPopulator clone() {
+        // TODO: Check if this is correct
+        return new RealFileSystemPopulator(fileContentsDisplayer, categoryName, categoryName);
     }
 }

@@ -19,7 +19,7 @@ import java.util.TreeSet;
 // and differentiate between the ones used for normal paths and the root one
 // public interface FileSystemPopulator;
 
-public class VirtualFileSystemPopulator extends FileSystemPopulator{
+public class VirtualFileSystemPopulator extends FileSystemPopulator {
 	/**
 	 *
 	 */
@@ -50,16 +50,18 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator{
 
 	// TODO: Use inheritance to differentiate the root (virtual) from the normal
 	// files (real)
-	public VirtualFileSystemPopulator(FileContentsDisplayer fileContentsDisplayer, String categoryName,
-			String searchDirectory) {
-		this.fileContentsDisplayer = fileContentsDisplayer;
-		this.categoryName = categoryName;
-		addFilters(GlobFileFilter.class, searchDirectory + "/*");
-
-		// this.searchPathsRegex = searchPathsRegex;
-		// this.searchPathsGlob = searchPathsGlob;
-		update();
-	}
+	// TODO: For each usage of this, use RealFileSystemPopulator instead.
+	// public VirtualFileSystemPopulator(FileContentsDisplayer
+	// fileContentsDisplayer, String categoryName,
+	// String searchDirectory) {
+	// this.fileContentsDisplayer = fileContentsDisplayer;
+	// this.categoryName = categoryName;
+	// addFilters(GlobFileFilter.class, searchDirectory + "/*");
+	//
+	// // this.searchPathsRegex = searchPathsRegex;
+	// // this.searchPathsGlob = searchPathsGlob;
+	// update();
+	// }
 
 	public VirtualFileSystemPopulator(FileContentsDisplayer fileContentsDisplayer, String categoryName,
 			Class<? extends FileFilter> filter, Collection<String> pattern) {
@@ -82,6 +84,18 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator{
 		// this.searchPathsRegex = searchPathsRegex;
 		// this.searchPathsGlob = searchPathsGlob;
 		addFilters(filter, pattern);
+		update();
+	}
+
+	public VirtualFileSystemPopulator(FileContentsDisplayer fileContentsDisplayer, String categoryName,
+			HashMap<Class<? extends FileFilter>, ArrayList<String>> map) {
+		this.fileContentsDisplayer = fileContentsDisplayer;
+		this.categoryName = categoryName;
+		// addFilters(GlobFileFilter.class, "/*");
+
+		// this.searchPathsRegex = searchPathsRegex;
+		// this.searchPathsGlob = searchPathsGlob;
+		setFilters(map);
 		update();
 	}
 
@@ -236,5 +250,11 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator{
 		// filters.addAll(list);
 		filters.putAll(map);
 		update();
+	}
+
+	@Override
+	public FileSystemPopulator clone() {
+		// TODO: Check if this is correct
+		return new VirtualFileSystemPopulator(fileContentsDisplayer, categoryName, filters);
 	}
 }

@@ -1,14 +1,19 @@
 package org.AOOPProject;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
 
 // import org.AOOPProject.FileContentsDisplayer.ListPane;
 import org.AOOPProject.FileContentsDisplayer;
+import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
 
 // Note: Class to handle communication between the lists in the interface and
 // the models (FileSystemModel)
@@ -50,6 +55,16 @@ class ListColumnsHandler {
 		// TODO: Change this list to something else,
 		JList<File> list;
 		JScrollPane pane;
+
+		PairFSModelDirectory pair = null;
+
+		public PairFSModelDirectory getPair() {
+			return pair;
+		}
+
+		public void setPair(PairFSModelDirectory pair) {
+			this.pair = pair;
+		}
 
 		public ListPane(JList<File> list, JScrollPane pane) {
 			this.list = list;
@@ -141,6 +156,40 @@ class ListColumnsHandler {
 
 				public void focusGained(java.awt.event.FocusEvent evt) {
 					currentActiveList = lp;
+					JTabbedPane tabbedPane = (JTabbedPane) SwingUtilities.getAncestorOfClass(
+							JTabbedPane.class,
+							fileContentsDisplayer);
+					if (tabbedPane == null)
+						return;
+					// tabbedPane.getSelectedIndex();
+					// System.out.println(lp.getPair().currentDirectory);
+					if (lp.getPair() != null) {
+						for (int i = 0; i < tabbedPane.getComponentCount(); ++i)
+							if (tabbedPane.getComponent(
+									i) == fileContentsDisplayer) {
+								tabbedPane.setTitleAt(i,
+										lp.getPair().currentDirectory);
+							}
+						// tabbedPane.setName(lp.getPair().currentDirectory);
+					}
+					MainWindow mainWin = (MainWindow) SwingUtilities.getAncestorOfClass(
+							MainWindow.class,
+							tabbedPane);
+					if (mainWin == null)
+						return;
+					// TODO: Add something in this class regarding current directory
+					// and make bridge update it
+					// mainWin.getPathString().setText(lp.getPair().currentDirectory);
+					// listPanes.size();
+					// for(int i = 0; i < listPanes.size(); ++i) {
+					// if(listPanes.)
+					// }
+					DirectoryShownFiles currentShownDirectory = fileContentsDisplayer.bridge.currentlyShownDirs
+							.get(listPanes.indexOf(lp));
+					mainWin.getLabelsNavigationPanel().removeAll();
+					// TODO: Check if this works
+					// currentShownDirectory.
+					// for()
 				}
 			});
 		}
@@ -150,6 +199,7 @@ class ListColumnsHandler {
 		}
 		for (int i = 0; i < listPanes.size(); ++i) {
 			listPanes.get(i).list.setModel(models.get(i + models.size() - listPanes.size()).model);
+			listPanes.get(i).setPair(models.get(i + models.size() - listPanes.size()));
 			// listPanes.get(i).pane.revalidate();
 			// listPanes.get(i).list.revalidate();
 			// lists.get(i).
