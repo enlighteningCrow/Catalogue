@@ -259,14 +259,6 @@
         <Property name="columns" type="int" value="0"/>
         <Property name="rows" type="int" value="1"/>
       </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JTextField" name="pathString">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-            <Property name="name" type="java.lang.String" value="pathString" noResource="true"/>
-          </Properties>
-        </Component>
-      </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="typesScrollPanel">
       <Properties>
@@ -349,9 +341,6 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
         <Container class="org.AOOPProject.FileContentsDisplayer" name="fileContentsDisplayer1">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="fileContentsDisplayer1" noResource="true"/>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.AOOPProject.FileContentsDisplayer(new File(&quot;~&quot;))"/>
           </AuxValues>

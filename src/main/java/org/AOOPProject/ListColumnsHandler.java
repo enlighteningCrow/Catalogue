@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -13,6 +15,7 @@ import javax.swing.SwingUtilities;
 
 // import org.AOOPProject.FileContentsDisplayer.ListPane;
 import org.AOOPProject.FileContentsDisplayer;
+import org.AOOPProject.NavigationButtons.ExactNavigationButton;
 import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
 
 // Note: Class to handle communication between the lists in the interface and
@@ -137,8 +140,8 @@ class ListColumnsHandler {
 		// modelsSize = Math.min(models.size(),
 		// this.fileContentsDisplayer.maxColumnNumber);
 		// TODO: Decide whether to remove the max column number
-		modelsSize = this.fileContentsDisplayer.maxColumnNumber;
-		while (listPanes.size() < modelsSize) {
+		// modelsSize = this.fileContentsDisplayer.maxColumnNumber;
+		while (listPanes.size() < models.size()) {
 			ListPane item;
 			// lists.add(item = this.fileContentsDisplayer.new ListPane(new JList<File>(),
 			// new JScrollPane()));
@@ -152,44 +155,9 @@ class ListColumnsHandler {
 			this.fileContentsDisplayer.add(item.pane, constraints);
 
 			item.list.addFocusListener(new java.awt.event.FocusAdapter() {
-				final ListPane lp = item;
-
 				public void focusGained(java.awt.event.FocusEvent evt) {
-					currentActiveList = lp;
-					JTabbedPane tabbedPane = (JTabbedPane) SwingUtilities.getAncestorOfClass(
-							JTabbedPane.class,
-							fileContentsDisplayer);
-					if (tabbedPane == null)
-						return;
-					// tabbedPane.getSelectedIndex();
-					// System.out.println(lp.getPair().currentDirectory);
-					if (lp.getPair() != null) {
-						for (int i = 0; i < tabbedPane.getComponentCount(); ++i)
-							if (tabbedPane.getComponent(
-									i) == fileContentsDisplayer) {
-								tabbedPane.setTitleAt(i,
-										lp.getPair().currentDirectory);
-							}
-						// tabbedPane.setName(lp.getPair().currentDirectory);
-					}
-					MainWindow mainWin = (MainWindow) SwingUtilities.getAncestorOfClass(
-							MainWindow.class,
-							tabbedPane);
-					if (mainWin == null)
-						return;
-					// TODO: Add something in this class regarding current directory
-					// and make bridge update it
-					// mainWin.getPathString().setText(lp.getPair().currentDirectory);
-					// listPanes.size();
-					// for(int i = 0; i < listPanes.size(); ++i) {
-					// if(listPanes.)
-					// }
-					DirectoryShownFiles currentShownDirectory = fileContentsDisplayer.bridge.currentlyShownDirs
-							.get(listPanes.indexOf(lp));
-					mainWin.getLabelsNavigationPanel().removeAll();
-					// TODO: Check if this works
-					// currentShownDirectory.
-					// for()
+					currentActiveList = item;
+					updateExternals();
 				}
 			});
 		}
@@ -204,5 +172,66 @@ class ListColumnsHandler {
 			// listPanes.get(i).list.revalidate();
 			// lists.get(i).
 		}
+		if (currentActiveList == null && listPanes.size() != 0)
+			currentActiveList = listPanes.get(0);
+		updateExternals();
+	}
+
+	// static ListPane lastActiveListPane = null;
+
+	void updateExternals() {
+		if (currentActiveList == null)
+			return;
+		final ListPane lp = currentActiveList;
+		// currentActiveList = lp;
+		JTabbedPane tabbedPane = (JTabbedPane) SwingUtilities.getAncestorOfClass(
+				JTabbedPane.class,
+				fileContentsDisplayer);
+		// System.out.println(currentActiveList.list);
+		// System.out.println(currentActiveList.list.getParent());
+		// System.out.println(currentActiveList.list.getParent().getParent());
+		if (tabbedPane == null)
+			return;
+		// tabbedPane.getSelectedIndex();
+		// System.out.println(lp.getPair().currentDirectory);
+		if (lp.getPair() != null) {
+			for (int i = 0; i < tabbedPane.getComponentCount(); ++i)
+				if (tabbedPane.getComponent(
+						i) == fileContentsDisplayer) {
+					tabbedPane.setTitleAt(i,
+							lp.getPair().currentDirectory);
+				}
+			// tabbedPane.setName(lp.getPair().currentDirectory);
+		}
+		MainWindow mainWin = (MainWindow) SwingUtilities.getAncestorOfClass(
+				MainWindow.class,
+				tabbedPane);
+		if (mainWin == null)
+			return;
+		// TODO: Add something in this class regarding current directory
+		// and make bridge update it
+		// mainWin.getPathString().setText(lp.getPair().currentDirectory);
+		// listPanes.size();
+		// for(int i = 0; i < listPanes.size(); ++i) {
+		// if(listPanes.)
+		// }
+		DirectoryShownFiles currentShownDirectory = fileContentsDisplayer.bridge.currentlyShownDirs
+				.get(listPanes.indexOf(lp));
+		mainWin.getLabelsNavigationPanel().removeAll();
+		// TODO: Check if this works
+		// currentShownDirectory.
+		// for()
+		mainWin.getLabelsNavigationPanel()
+				.add(new ExactNavigationButton(currentShownDirectory,
+						currentShownDirectory.getPopulator().categoryName, new ArrayList<>()));
+		ArrayList<String> arr = new ArrayList<>();
+		for (String s : currentShownDirectory.getPwd()) {
+			arr.add(s);
+			mainWin.getLabelsNavigationPanel()
+					.add(new JLabel(" / "));
+			mainWin.getLabelsNavigationPanel()
+					.add(new ExactNavigationButton(currentShownDirectory, s, new ArrayList<>(arr)));
+		}
+
 	}
 }
