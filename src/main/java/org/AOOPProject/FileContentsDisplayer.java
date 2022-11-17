@@ -116,7 +116,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 * The file populator for the class
 	 */
 	// TODO: Remove this from the class, together with all the methods involved
-	public FileSystemPopulator populator = new RealFileSystemPopulator(this, "sbin",
+	public FileSystemPopulator populator = new RealFileSystemPopulator("sbin",
 			"/usr/sbin");
 	// TODO: Make a setter function for the below variable; make it also update the
 	// GUI when called.
@@ -147,7 +147,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 * @param fileSearchPathsGlob  the glob strings array
 	 */
 	public FileContentsDisplayer(String categoryName, String[] fileSearchPathsRegex, String[] fileSearchPathsGlob) {
-		populator = new VirtualFileSystemPopulator(this, categoryName, fileSearchPathsRegex,
+		populator = new VirtualFileSystemPopulator(categoryName, fileSearchPathsRegex,
 				fileSearchPathsGlob);
 		// currentFilePath = new File[0];
 		initComponents();
@@ -160,7 +160,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 * @param fileSearchPathsGlob the glob strings array
 	 */
 	public FileContentsDisplayer(String categoryName, String[] fileSearchPathsGlob) {
-		populator = new VirtualFileSystemPopulator(this, categoryName, GlobFileFilter.class,
+		populator = new VirtualFileSystemPopulator(categoryName, GlobFileFilter.class,
 				fileSearchPathsGlob);
 		// currentFilePath = new File[0];
 		initComponents();
@@ -168,7 +168,7 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	}
 
 	/**
-	 * enum to pass to the function below; used to identify whehter aray of strings
+	 * enum to pass to the function below; used to identify whether array of strings
 	 * passed should be interpreted as glob or regex
 	 */
 	enum Mode {

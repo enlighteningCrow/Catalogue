@@ -156,7 +156,7 @@ class PopulatorColumnsBridge {
 
 	void addNewShownDirectory(File file) {
 		currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(),
-				new RealFileSystemPopulator(this.fileContentsDisplayer, file.getName(),
+				new RealFileSystemPopulator(file.getName(),
 						file.toString())));
 		update();
 	}
@@ -304,13 +304,15 @@ class PopulatorColumnsBridge {
 			// AKA: Make a class PWDInvalidException extends <whatever class exceptions
 			// extend from>
 			if (file == null) {
-				System.err.println("File with name " + dsf.getPopulator().categoryName + "/" + dsf.getPwd()
+				System.err.println("File with name " + dsf.getPopulator().categoryName + "/"
+						+ dsf.getPwd()
 						+ " does not exist in virtual root " + dsf.getPopulator().categoryName);
 				return new PairFSModelDirectory(new FileSystemModel(
 						dsf.getPopulator().contents), dsf.getPopulator().categoryName);
 			}
 			file = new File(
-					file.getAbsolutePath() + "/" + String.join("/", dsf.getPwd().subList(1, dsf.getPwd().size())));
+					file.getAbsolutePath() + "/" + String.join("/",
+							dsf.getPwd().subList(1, dsf.getPwd().size())));
 			if (!file.exists()) {
 				System.err.println("File with name " + file + " does not exist in virtual root "
 						+ dsf.getPopulator().categoryName);

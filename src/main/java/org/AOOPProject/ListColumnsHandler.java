@@ -15,7 +15,6 @@ import javax.swing.SwingUtilities;
 
 // import org.AOOPProject.FileContentsDisplayer.ListPane;
 import org.AOOPProject.FileContentsDisplayer;
-import org.AOOPProject.NavigationButtons.ExactNavigationButton;
 import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
 
 // Note: Class to handle communication between the lists in the interface and
@@ -228,10 +227,11 @@ class ListColumnsHandler {
 		for (String s : currentShownDirectory.getPwd()) {
 			arr.add(s);
 			mainWin.getLabelsNavigationPanel()
-					.add(new JLabel(" / "));
+					.add(new JLabel("/"));
 			mainWin.getLabelsNavigationPanel()
 					.add(new ExactNavigationButton(currentShownDirectory, s, new ArrayList<>(arr)));
 		}
-
+		NavigationButton.setDirectoryShownFiles(currentShownDirectory);
+		// NavigationButton.updateButtons();
 	}
 }

@@ -194,6 +194,9 @@
               <Dimension value="[30, 30]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new DirBackButton()"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="dirForwardButton1">
           <Properties>
@@ -255,10 +258,7 @@
         </Constraint>
       </Constraints>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="0"/>
-        <Property name="rows" type="int" value="1"/>
-      </Layout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
     </Container>
     <Container class="javax.swing.JScrollPane" name="typesScrollPanel">
       <Properties>
@@ -297,6 +297,10 @@
                 <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="DownloadsAncestorAdded"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DownloadsActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="null"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="//Component selectedComponent = displayersTab.getSelectedComponent();&#xa;//if (!(selectedComponent instanceof FileContentsDisplayer)) {&#xa;//&#x9;throw new RuntimeException(&quot;This tab does not contain an instance of FileContentsDisplayer&quot;);&#xa;//}&#xa;//FileContentsDisplayer disp = (FileContentsDisplayer) selectedComponent;&#xa;//disp.bridge.setFirstColumnDirectory(&#xa;//&#x9;&#x9;new VirtualFileSystemPopulator(disp, &quot;Downloads&quot;, GlobFileFilter.class,&#xa;//&#x9;&#x9;&#x9;&#x9;new String[] { &quot;~/Downloads/*&quot; }));&#xa;Downloads = new ExactNavigationButton(new RealFileSystemPopulator(&quot;Downloads&quot;, &quot;~/Downloads&quot;), new ArrayList&lt;String&gt;());"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="Pictures">
               <Properties>

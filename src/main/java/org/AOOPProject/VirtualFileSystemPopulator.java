@@ -35,10 +35,10 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 	 * @param searchPathsGlob       The array of glob patterns
 	 * @param fileContentsDisplayer TODO
 	 */
-	public VirtualFileSystemPopulator(FileContentsDisplayer fileContentsDisplayer, String categoryName,
+	public VirtualFileSystemPopulator(String categoryName,
 			String[] searchPathsRegex,
 			String[] searchPathsGlob) {
-		this.fileContentsDisplayer = fileContentsDisplayer;
+		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
 		addFilters(RegexFileFilter.class, searchPathsRegex);
 		addFilters(GlobFileFilter.class, searchPathsGlob);
@@ -63,9 +63,9 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 	// update();
 	// }
 
-	public VirtualFileSystemPopulator(FileContentsDisplayer fileContentsDisplayer, String categoryName,
-			Class<? extends FileFilter> filter, Collection<String> pattern) {
-		this.fileContentsDisplayer = fileContentsDisplayer;
+	public VirtualFileSystemPopulator(String categoryName, Class<? extends FileFilter> filter,
+			Collection<String> pattern) {
+		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
 		// addFilters(GlobFileFilter.class, "/*");
 
@@ -75,9 +75,9 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 		update();
 	}
 
-	public VirtualFileSystemPopulator(FileContentsDisplayer fileContentsDisplayer, String categoryName,
+	public VirtualFileSystemPopulator(String categoryName,
 			Class<? extends FileFilter> filter, String[] pattern) {
-		this.fileContentsDisplayer = fileContentsDisplayer;
+		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
 		// addFilters(GlobFileFilter.class, "/*");
 
@@ -87,9 +87,9 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 		update();
 	}
 
-	public VirtualFileSystemPopulator(FileContentsDisplayer fileContentsDisplayer, String categoryName,
+	public VirtualFileSystemPopulator(String categoryName,
 			HashMap<Class<? extends FileFilter>, ArrayList<String>> map) {
-		this.fileContentsDisplayer = fileContentsDisplayer;
+		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
 		// addFilters(GlobFileFilter.class, "/*");
 
@@ -255,6 +255,6 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 	@Override
 	public FileSystemPopulator clone() {
 		// TODO: Check if this is correct
-		return new VirtualFileSystemPopulator(fileContentsDisplayer, categoryName, filters);
+		return new VirtualFileSystemPopulator(categoryName, filters);
 	}
 }

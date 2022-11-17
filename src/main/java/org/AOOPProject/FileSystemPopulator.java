@@ -12,7 +12,7 @@ import java.util.TreeSet;
 //
 // }
 public abstract class FileSystemPopulator {
-	protected FileContentsDisplayer fileContentsDisplayer;
+	// protected FileContentsDisplayer fileContentsDisplayer;
 	// Note: path strings with '/' separator
 	// String[] searchPathsRegex;
 	// String[] searchPathsGlob;
