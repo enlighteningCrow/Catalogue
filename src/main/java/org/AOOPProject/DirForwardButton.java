@@ -3,17 +3,21 @@ package org.AOOPProject;
 import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
 
 public class DirForwardButton extends NavigationButton implements ConditionallyActiveButton {
-    public DirForwardButton(DirectoryShownFiles directoryShownFiles) {
-        super(directoryShownFiles);
-    }
+	public DirForwardButton(NavigationButtonsGroup group) {
+		super(group);
+	}
 
-    @Override
-    public void manipulateHistory() {
-        ++directoryShownFiles.histIndex;
-    }
+	public DirForwardButton(MainWindow mainWindow) {
+		super(NavigationButtonsGroup.getGroup(mainWindow));
+	}
 
-    @Override
-    public boolean condition() {
-        return directoryShownFiles.histIndex < directoryShownFiles.hist.size() - 1;
-    }
+	@Override
+	public void manipulateHistory() {
+		++group.dsf.histIndex;
+	}
+
+	@Override
+	public boolean condition() {
+		return group != null && group.dsf != null && group.dsf.histIndex < group.dsf.hist.size() - 1;
+	}
 }

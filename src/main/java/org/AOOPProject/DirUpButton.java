@@ -4,23 +4,27 @@ import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
 import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.PairPwdPopulator;
 
 public class DirUpButton extends NavigationButton implements ConditionallyActiveButton {
-    public DirUpButton(DirectoryShownFiles directoryShownFiles) {
-        super(directoryShownFiles);
-    }
+	public DirUpButton(NavigationButtonsGroup group) {
+		super(group);
+	}
 
-    @Override
-    public void manipulateHistory() {
-        if (directoryShownFiles.hist.size() - 1 > directoryShownFiles.histIndex)
-            directoryShownFiles.hist.subList(directoryShownFiles.histIndex + 1,
-                    directoryShownFiles.hist.size());
-        PairPwdPopulator pair = directoryShownFiles.hist.get(directoryShownFiles.histIndex).clone();
-        pair.pwd.remove(pair.pwd.size() - 1);
-        directoryShownFiles.hist.add(pair);
-        ++directoryShownFiles.histIndex;
-    }
+	public DirUpButton(MainWindow mainWindow) {
+		super(NavigationButtonsGroup.getGroup(mainWindow));
+	}
 
-    @Override
-    public boolean condition() {
-        return directoryShownFiles.getPwd().size() != 0;
-    }
+	@Override
+	public void manipulateHistory() {
+		if (group.dsf.hist.size() - 1 > group.dsf.histIndex)
+			group.dsf.hist.subList(group.dsf.histIndex + 1,
+					group.dsf.hist.size());
+		PairPwdPopulator pair = group.dsf.hist.get(group.dsf.histIndex).clone();
+		pair.pwd.remove(pair.pwd.size() - 1);
+		group.dsf.hist.add(pair);
+		++group.dsf.histIndex;
+	}
+
+	@Override
+	public boolean condition() {
+		return group != null && group.dsf != null && group.dsf.getPwd().size() != 0;
+	}
 }

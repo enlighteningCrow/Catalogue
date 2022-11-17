@@ -13,10 +13,16 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
 		rootFile = new File(searchDirectory.replace("~", System.getProperty("user.home")));
+		System.out.println(rootFile);
 		update();
 	}
 
 	public RealFileSystemPopulator(File searchDirectory) {
+		// this.fileContentsDisplayer = fileContentsDisplayer;
+		this(searchDirectory.getName(), searchDirectory.getPath());
+	}
+
+	public RealFileSystemPopulator(String categoryName, File searchDirectory) {
 		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this(searchDirectory.getName(), searchDirectory.getPath());
 	}
@@ -77,12 +83,17 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 	}
 
 	public void setRootFile(File rootFile) {
+		String name = rootFile.getName();
+		if (name.trim().length() != 0)
+			this.categoryName = name;
+		else
+			this.categoryName = rootFile.getPath();
 		this.rootFile = rootFile;
 	}
 
 	@Override
 	public FileSystemPopulator clone() {
 		// TODO: Check if this is correct
-		return new RealFileSystemPopulator(categoryName, categoryName);
+		return new RealFileSystemPopulator(categoryName, rootFile);
 	}
 }

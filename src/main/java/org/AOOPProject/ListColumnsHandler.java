@@ -221,7 +221,7 @@ class ListColumnsHandler {
 		// currentShownDirectory.
 		// for()
 		mainWin.getLabelsNavigationPanel()
-				.add(new ExactNavigationButton(currentShownDirectory,
+				.add(new ExactNavigationButton(mainWin, currentShownDirectory,
 						currentShownDirectory.getPopulator().categoryName, new ArrayList<>()));
 		ArrayList<String> arr = new ArrayList<>();
 		for (String s : currentShownDirectory.getPwd()) {
@@ -229,9 +229,11 @@ class ListColumnsHandler {
 			mainWin.getLabelsNavigationPanel()
 					.add(new JLabel("/"));
 			mainWin.getLabelsNavigationPanel()
-					.add(new ExactNavigationButton(currentShownDirectory, s, new ArrayList<>(arr)));
+					.add(new ExactNavigationButton(mainWin, currentShownDirectory, s,
+							new ArrayList<>(arr)));
 		}
-		NavigationButton.setDirectoryShownFiles(currentShownDirectory);
+		// NavigationButton.setDirectoryShownFiles(currentShownDirectory);
 		// NavigationButton.updateButtons();
+		NavigationButtonsGroup.getGroup(mainWin).setDirectoryShownFiles(currentShownDirectory);
 	}
 }

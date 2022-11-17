@@ -3,26 +3,21 @@ package org.AOOPProject;
 import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
 
 public class DirBackButton extends NavigationButton implements ConditionallyActiveButton {
-	public DirBackButton(DirectoryShownFiles directoryShownFiles) {
-		super(directoryShownFiles);
+	public DirBackButton(NavigationButtonsGroup group) {
+		super(group);
 	}
 
-	public DirBackButton() {
-		super();
+	public DirBackButton(MainWindow mainWindow) {
+		super(NavigationButtonsGroup.getGroup(mainWindow));
 	}
 
 	@Override
 	public void manipulateHistory() {
-		// if(directoryShownFiles.histIndex != 0)
-		// directoryShownFiles.hist.subList(directoryShownFiles.histIndex + 1,
-		// directoryShownFiles.hist.size());
-		--directoryShownFiles.histIndex;
+		--group.dsf.histIndex;
 	}
 
 	@Override
 	public boolean condition() {
-		if (directoryShownFiles == null)
-			return false;
-		return directoryShownFiles.histIndex != 0;
+		return group != null && group.dsf != null && group.dsf.histIndex != 0;
 	}
 }

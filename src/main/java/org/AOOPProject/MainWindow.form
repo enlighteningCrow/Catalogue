@@ -195,7 +195,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new DirBackButton()"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new DirBackButton(this)"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="dirForwardButton1">
@@ -212,6 +212,9 @@
               <Dimension value="[30, 30]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new DirForwardButton(this)"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="dirUpButton1">
           <Properties>
@@ -227,6 +230,9 @@
               <Dimension value="[30, 30]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new DirUpButton(this)"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="dirUpButton2">
           <Properties>
@@ -299,7 +305,7 @@
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="null"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="//Component selectedComponent = displayersTab.getSelectedComponent();&#xa;//if (!(selectedComponent instanceof FileContentsDisplayer)) {&#xa;//&#x9;throw new RuntimeException(&quot;This tab does not contain an instance of FileContentsDisplayer&quot;);&#xa;//}&#xa;//FileContentsDisplayer disp = (FileContentsDisplayer) selectedComponent;&#xa;//disp.bridge.setFirstColumnDirectory(&#xa;//&#x9;&#x9;new VirtualFileSystemPopulator(disp, &quot;Downloads&quot;, GlobFileFilter.class,&#xa;//&#x9;&#x9;&#x9;&#x9;new String[] { &quot;~/Downloads/*&quot; }));&#xa;Downloads = new ExactNavigationButton(new RealFileSystemPopulator(&quot;Downloads&quot;, &quot;~/Downloads&quot;), new ArrayList&lt;String&gt;());"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="//Component selectedComponent = displayersTab.getSelectedComponent();&#xa;//if (!(selectedComponent instanceof FileContentsDisplayer)) {&#xa;//&#x9;throw new RuntimeException(&quot;This tab does not contain an instance of FileContentsDisplayer&quot;);&#xa;//}&#xa;//FileContentsDisplayer disp = (FileContentsDisplayer) selectedComponent;&#xa;//disp.bridge.setFirstColumnDirectory(&#xa;//&#x9;&#x9;new VirtualFileSystemPopulator(disp, &quot;Downloads&quot;, GlobFileFilter.class,&#xa;//&#x9;&#x9;&#x9;&#x9;new String[] { &quot;~/Downloads/*&quot; }));&#xa;Downloads = new ExactNavigationButton(this, new RealFileSystemPopulator(&quot;Downloads&quot;, &quot;~/Downloads&quot;), new ArrayList&lt;String&gt;());"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="Pictures">

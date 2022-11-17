@@ -66,7 +66,7 @@ class PopulatorColumnsBridge {
 			hist.get(histIndex).repositionRealPopulator();
 		}
 
-		class PairPwdPopulator {
+		public static class PairPwdPopulator {
 			ArrayList<String> pwd;
 			FileSystemPopulator populator;
 
@@ -77,14 +77,18 @@ class PopulatorColumnsBridge {
 			}
 
 			private void reposition(RealFileSystemPopulator pop) {
-				String[] pathComps = pop.getRootFile().getPath().replace('\\', '/').split("/");
+				String[] pathComps = pop.getRootFile().getAbsolutePath().replace('\\', '/').split("/");
 				// System.out.println(Paths.get(pop.getRootFile().getPath()).getRoot().toFile());
-				pop.setRootFile(Paths.get(pop.getRootFile().getPath()).getRoot().toFile());
-				for (String s : pathComps) {
+				// System.out.println(Paths.get(pop.getRootFile().getAbsolutePath()));
+				// System.out.println(Paths.get(pop.getRootFile().getAbsolutePath()).getRoot());
+				pop.setRootFile(Paths.get(pop.getRootFile().getAbsolutePath()).getRoot().toFile());
+				for (int i = 1; i < pathComps.length; ++i) {
+					String s = pathComps[i];
 					// System.out.println(s);
 					if (s.trim().length() != 0)
 						this.pwd.add(s);
 				}
+				System.out.println(pwd);
 			}
 
 			private void repositionRealPopulator() {

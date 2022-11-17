@@ -43,6 +43,7 @@ public class MainWindow extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
@@ -52,9 +53,9 @@ public class MainWindow extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonsNavigationPanel = new javax.swing.JPanel();
-        dirBackButton = new DirBackButton();
-        dirForwardButton1 = new javax.swing.JButton();
-        dirUpButton1 = new javax.swing.JButton();
+        dirBackButton = new DirBackButton(this);
+        dirForwardButton1 = new DirForwardButton(this);
+        dirUpButton1 = new DirUpButton(this);
         dirUpButton2 = new javax.swing.JButton();
         labelsNavigationPanel = new javax.swing.JPanel();
         typesScrollPanel = new javax.swing.JScrollPane();
@@ -161,7 +162,7 @@ public class MainWindow extends javax.swing.JFrame {
         //disp.bridge.setFirstColumnDirectory(
             //		new VirtualFileSystemPopulator(disp, "Downloads", GlobFileFilter.class,
                 //				new String[] { "~/Downloads/*" }));
-        Downloads = new ExactNavigationButton(new RealFileSystemPopulator("Downloads", "~/Downloads"), new ArrayList<String>());
+        Downloads = new ExactNavigationButton(this, new RealFileSystemPopulator("Downloads", "~/Downloads"), new ArrayList<String>());
         Downloads.setText("Downloads");
         Downloads.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Downloads.setMaximumSize(new java.awt.Dimension(10000, 31));
