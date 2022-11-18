@@ -377,19 +377,21 @@ public class MainWindow extends javax.swing.JFrame {
         JButton button = (JButton) evt.getSource();
         String name = button.getName();
         System.out.println("Path: " + path);
-        Component selectedComponent = displayersTab.getSelectedComponent();
-        if (!(selectedComponent instanceof FileContentsDisplayer)) {
+        button = new ExactNavigationButton(MainWindow.this, new RealFileSystemPopulator(new File(path)), new ArrayList<>());
+        
+         Component selectedComponent = displayersTab.getSelectedComponent();
+         if (!(selectedComponent instanceof FileContentsDisplayer)) {
             throw new RuntimeException("This tab does not contain an instance of FileContentsDisplayer");
-        }
-        FileContentsDisplayer disp = (FileContentsDisplayer) selectedComponent;
-        // TODO: Continue this
-        // disp.handler.notify();
-        // TODO: Try and catch out of bounds exception : (when active column is null or
-        // is not in listPanes)
+         }
+         FileContentsDisplayer disp = (FileContentsDisplayer) selectedComponent;
+        // // TODO: Continue this
+        // // disp.handler.notify();
+        // // TODO: Try and catch out of bounds exception : (when active column is null or
+        // // is not in listPanes)
 
-        disp.bridge.setFirstColumnDirectory(
-                new VirtualFileSystemPopulator(name, GlobFileFilter.class,
-                        new String[] { path }));
+        // disp.bridge.setFirstColumnDirectory(
+        //         new VirtualFileSystemPopulator(name, GlobFileFilter.class,
+        //                 new String[] { path }));
 
     }// GEN-LAST:event_typeButtonActionPerformed
 
