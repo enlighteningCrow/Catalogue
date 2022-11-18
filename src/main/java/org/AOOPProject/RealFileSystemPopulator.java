@@ -19,7 +19,10 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 
 	public RealFileSystemPopulator(File searchDirectory) {
 		// this.fileContentsDisplayer = fileContentsDisplayer;
-		this(searchDirectory.getName(), searchDirectory.getPath());
+		// this(searchDirectory.getName(), searchDirectory.getPath());
+		setRootFile(searchDirectory);
+		System.out.println(rootFile);
+		update();
 	}
 
 	public RealFileSystemPopulator(String categoryName, File searchDirectory) {
