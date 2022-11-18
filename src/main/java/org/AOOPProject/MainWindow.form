@@ -267,6 +267,9 @@
     </Container>
     <Container class="javax.swing.JPanel" name="labelsNavigationPanel">
       <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+            <PropertyBean type="com.formdev.flatlaf.ui.FlatMenuBarBorder"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="labelsNavigationPanel" noResource="true"/>
       </Properties>
       <Constraints>

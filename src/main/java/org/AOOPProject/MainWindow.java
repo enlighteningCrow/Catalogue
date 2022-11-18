@@ -60,16 +60,11 @@ public class MainWindow extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonsNavigationPanel = new javax.swing.JPanel();
-
-        dirBackButton = new javax.swing.JButton();
-        dirForwardButton1 = new javax.swing.JButton();
-
         dirBackButton = new DirBackButton(this);
         dirForwardButton1 = new DirForwardButton(this);
-
+        dirUpButton1 = new DirUpButton(this);
         dirUpButton2 = new javax.swing.JButton();
         labelsNavigationPanel = new javax.swing.JPanel();
-        JTextField pathString = new javax.swing.JTextField();
         typesScrollPanel = new javax.swing.JScrollPane();
         typesPanel = new javax.swing.JPanel();
         Downloads = null;
@@ -90,10 +85,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        pathString.setBackground(new java.awt.Color(240, 240, 240));
-        pathString.setText("jTextField1");
-        pathString.setName("pathString"); // NOI18N
-        labelsNavigationPanel.add(pathString);
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -113,44 +104,28 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsNavigationPanel.setBorder(new com.formdev.flatlaf.ui.FlatBorder());
         buttonsNavigationPanel.setName("buttonsNavigationPanel"); // NOI18N
 
-
-        dirBackButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         dirBackButton.setText("<");
-        dirBackButton.setBorder(null);
-        dirBackButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        dirBackButton.setText("<");
-
         dirBackButton.setMaximumSize(new java.awt.Dimension(30, 30));
         dirBackButton.setMinimumSize(new java.awt.Dimension(30, 30));
         dirBackButton.setName("dirBackButton"); // NOI18N
         dirBackButton.setPreferredSize(new java.awt.Dimension(30, 30));
-        dirBackButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dirBackButtonActionPerformed(evt);
-            }
-        });
         buttonsNavigationPanel.add(dirBackButton);
 
-
-        dirForwardButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         dirForwardButton1.setText(">");
-        dirForwardButton1.setBorder(null);
-
-        dirForwardButton1.setText(">");
-
         dirForwardButton1.setMaximumSize(new java.awt.Dimension(30, 30));
         dirForwardButton1.setMinimumSize(new java.awt.Dimension(30, 30));
         dirForwardButton1.setName("dirForwardButton1"); // NOI18N
         dirForwardButton1.setPreferredSize(new java.awt.Dimension(30, 30));
         buttonsNavigationPanel.add(dirForwardButton1);
 
+        dirUpButton1.setText("^");
+        dirUpButton1.setMaximumSize(new java.awt.Dimension(30, 30));
+        dirUpButton1.setMinimumSize(new java.awt.Dimension(30, 30));
+        dirUpButton1.setName("dirUpButton1"); // NOI18N
+        dirUpButton1.setPreferredSize(new java.awt.Dimension(30, 30));
+        buttonsNavigationPanel.add(dirUpButton1);
 
         dirUpButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-
-
-
         dirUpButton2.setText("+");
         dirUpButton2.setBorder(null);
         dirUpButton2.setMaximumSize(new java.awt.Dimension(30, 30));
@@ -170,10 +145,8 @@ public class MainWindow extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         getContentPane().add(buttonsNavigationPanel, gridBagConstraints);
 
+        labelsNavigationPanel.setBorder(new com.formdev.flatlaf.ui.FlatMenuBarBorder());
         labelsNavigationPanel.setName("labelsNavigationPanel"); // NOI18N
-
-        labelsNavigationPanel.setLayout(new java.awt.GridLayout(1, 0));
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -252,11 +225,6 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().add(typesScrollPanel, gridBagConstraints);
 
         displayersTab.setName("displayersTab"); // NOI18N
-
-
-        fileContentsDisplayer1.setBorder(new com.formdev.flatlaf.ui.FlatMenuBarBorder());
-        fileContentsDisplayer1.setName("fileContentsDisplayer1"); // NOI18N
-
         displayersTab.addTab("tab1", fileContentsDisplayer1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -530,6 +498,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel buttonsNavigationPanel;
     private javax.swing.JButton dirBackButton;
     private javax.swing.JButton dirForwardButton1;
+    private javax.swing.JButton dirUpButton1;
     private javax.swing.JButton dirUpButton2;
     private javax.swing.JTabbedPane displayersTab;
     private org.AOOPProject.FileContentsDisplayer fileContentsDisplayer1;
@@ -550,7 +519,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane typesScrollPanel;
     private javax.swing.JMenu viewModeMenu;
     private javax.swing.JMenu viewModeMenu1;
-    private javax.swing.JTextField pathString;
     // End of variables declaration//GEN-END:variables
 
     // TODO: Suggestion: store most of the settings into one JSON or binary format
