@@ -75,4 +75,10 @@ public abstract class FileSystemPopulator {
 	abstract public void addFilters(HashMap<Class<? extends FileFilter>, ArrayList<String>> map);
 
 	abstract public FileSystemPopulator clone();
+
+	ArrayList<String> pwd = new ArrayList<>();
+
+	static public FileSystemPopulator getDefault() {
+		return new RealFileSystemPopulator("Home", "~");
+	}
 }

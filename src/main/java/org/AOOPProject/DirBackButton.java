@@ -13,11 +13,11 @@ public class DirBackButton extends NavigationButton implements ConditionallyActi
 
 	@Override
 	public void manipulateHistory() {
-		--group.dsf.histIndex;
+		--group.dsf.hist.currentIndex;
 	}
 
 	@Override
 	public boolean condition() {
-		return group != null && group.dsf != null && group.dsf.histIndex != 0;
+		return group != null && group.dsf != null && group.dsf.hist.currentIndex != 0;
 	}
 }

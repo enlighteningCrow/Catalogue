@@ -1,3 +1,7 @@
+package org.AOOPProject;
+
+import java.util.ArrayList;
+
 // package org.AOOPProject;
 
 // import java.util.ArrayList;
@@ -22,3 +26,54 @@
 // bridge.update();
 // }
 // }
+
+public class NavigationHistory extends ArrayList<FileSystemPopulator> {
+    int currentIndex;
+
+    public NavigationHistory(FileSystemPopulator populator) {
+        super();
+        add(populator);
+        this.currentIndex = 0;
+    }
+
+    public int getCurrentIndex() {
+        return currentIndex;
+    }
+
+    public void setCurrentIndex(int currentIndex) {
+        this.currentIndex = currentIndex;
+    }
+
+    // void goBack() {
+    // if (currentIndex > 0)
+    // --currentIndex;
+    // else
+    // System.err.println("Cannot go back");
+    // }
+    // void goForward() {
+    // if (currentIndex < this.size() - 1)
+    // ++currentIndex;
+    // else
+    // System.err.println("Cannot go forward");
+    // }
+    // void goTo() {
+    // }
+    void clearRest() {
+        if (currentIndex < size() - 1)
+            removeRange(currentIndex + 1, size());
+    }
+
+    FileSystemPopulator getCurrent() {
+        return get(currentIndex);
+    }
+
+    FileSystemPopulator setCurrent(FileSystemPopulator pop) {
+        return set(currentIndex, pop);
+    }
+
+    void push(FileSystemPopulator pop) {
+        clearRest();
+        add(pop);
+        ++currentIndex;
+    }
+}

@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.AOOPProject.ListColumnsHandler.PairFSModelDirectory;
-import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.PairPwdPopulator;
+// import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.FileSystemPopulator;
 
 // TODO: Make methods to navigate the tree (eg. go to parent directory, go to
 // first child directory, etc.)
@@ -49,76 +49,56 @@ class PopulatorColumnsBridge {
 		// FileSystemPopulator populator;
 
 		public ArrayList<String> getPwd() {
-			return hist.get(histIndex).pwd;
+			return hist.getCurrent().pwd;
 		}
 
 		public void setPwd(ArrayList<String> pwd) {
-			hist.get(histIndex).pwd = pwd;
-			hist.get(histIndex).repositionRealPopulator();
+			hist.getCurrent().pwd = pwd;
+			// hist.getCurrent().repositionRealPopulator();
 		}
 
 		public FileSystemPopulator getPopulator() {
-			return hist.get(histIndex).populator;
+			return hist.getCurrent();
 		}
 
 		public void setPopulator(FileSystemPopulator populator) {
-			hist.get(histIndex).populator = populator;
-			hist.get(histIndex).repositionRealPopulator();
+			hist.setCurrent(populator);
+			// hist.getCurrent().repositionRealPopulator();
 		}
 
-		public static class PairPwdPopulator {
-			ArrayList<String> pwd;
-			FileSystemPopulator populator;
+		// public static class FileSystemPopulator {
+		// // ArrayList<String> pwd;
+		// FileSystemPopulator populator;
+		//
+		// public FileSystemPopulator(FileSystemPopulator populator) {
+		// this.populator = populator;
+		// }
+		//
+		// public FileSystemPopulator clone() {
+		// return new FileSystemPopulator(new ArrayList<>(pwd),
+		// populator.clone());
+		// }
+		// }
 
-			public PairPwdPopulator(ArrayList<String> pwd, FileSystemPopulator populator) {
-				this.pwd = pwd;
-				this.populator = populator;
-				repositionRealPopulator();
-			}
+		// ArrayList<FileSystemPopulator> hist = new ArrayList<>();
+		// int histIndex = -1;
 
-			private void reposition(RealFileSystemPopulator pop) {
-				String[] pathComps = pop.getRootFile().getAbsolutePath().replace('\\', '/').split("/");
-				// System.out.println(Paths.get(pop.getRootFile().getPath()).getRoot().toFile());
-				// System.out.println(Paths.get(pop.getRootFile().getAbsolutePath()));
-				// System.out.println(Paths.get(pop.getRootFile().getAbsolutePath()).getRoot());
-				pop.setRootFile(Paths.get(pop.getRootFile().getAbsolutePath()).getRoot().toFile());
-				for (int i = 1; i < pathComps.length; ++i) {
-					String s = pathComps[i];
-					// System.out.println(s);
-					if (s.trim().length() != 0)
-						this.pwd.add(s);
-				}
-				System.out.println(pwd);
-			}
-
-			private void repositionRealPopulator() {
-				if (this.populator instanceof RealFileSystemPopulator) {
-					if (this.pwd.size() != 0) {
-						ArrayList<String> tmp = new ArrayList<>(pwd);
-						pwd.clear();
-						reposition((RealFileSystemPopulator) populator);
-						pwd.addAll(tmp);
-					} else {
-						reposition((RealFileSystemPopulator) populator);
-					}
-				}
-			}
-
-			public PairPwdPopulator clone() {
-				return new PairPwdPopulator(new ArrayList<>(pwd), populator.clone());
-			}
-		}
-
-		ArrayList<PairPwdPopulator> hist = new ArrayList<>();
-		int histIndex = -1;
+		NavigationHistory hist = null;
 
 		void initHistory() {
-			if (histIndex != -1) {
+			if (hist != null) {
 				System.err.println("This object has already been init");
 				return;
 			}
-			hist.add(new PairPwdPopulator(null, null));
-			histIndex = 0;
+			hist = new NavigationHistory(FileSystemPopulator.getDefault());
+		}
+
+		void initHistory(FileSystemPopulator populator) {
+			if (hist != null) {
+				System.err.println("This object has already been init");
+				return;
+			}
+			hist = new NavigationHistory(populator.clone());
 		}
 
 		DirectoryShownFiles(Collection<String> pwd, FileSystemPopulator populator) {
@@ -129,7 +109,7 @@ class PopulatorColumnsBridge {
 		}
 
 		DirectoryShownFiles(Collection<String> pwd, FileSystemPopulator populator,
-				Collection<PairPwdPopulator> hist) {
+				Collection<FileSystemPopulator> hist) {
 			initHistory();
 			this.setPwd(new ArrayList<>(pwd));
 			this.setPopulator(populator);
@@ -247,15 +227,17 @@ class PopulatorColumnsBridge {
 
 	void updatePopulators() {
 		for (DirectoryShownFiles i : currentlyShownDirs)
-			if (i.histIndex >= 0)
+			if (i.hist != null) {
+				// i.setPopulator();
 				i.getPopulator().update();
+			}
 	}
 
 	void update() {
 		updatePopulators();
-		for (DirectoryShownFiles i : currentlyShownDirs)
-			if (i.histIndex >= 0)
-				i.hist.get(i.histIndex).repositionRealPopulator();
+		// for (DirectoryShownFiles i : currentlyShownDirs)
+		// if (i.histIndex >= 0)
+		// i.hist.get(i.histIndex).repositionRealPopulator();
 		handler.models.clear();
 		// handler.models.subList(1, handler.models.size()).clear();
 		// this.fileContentsDisplayer.handler.models.add(new PairFSModelDirectory(

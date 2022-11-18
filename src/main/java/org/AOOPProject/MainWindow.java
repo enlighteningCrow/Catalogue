@@ -53,7 +53,10 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
@@ -64,13 +67,13 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsNavigationPanel = new javax.swing.JPanel();
         dirBackButton = new DirBackButton(this);
         dirForwardButton1 = new DirForwardButton(this);
-        dirUpButton1 = new DirUpButton(this);
-        dirUpButton2 = new javax.swing.JButton();
+        dirUpButton = new DirUpButton(this);
+        typeAddButton = new javax.swing.JButton();
         labelsNavigationPanel = new javax.swing.JPanel();
         typesScrollPanel = new javax.swing.JScrollPane();
         typesPanel = new javax.swing.JPanel();
         Downloads = null;
-        Pictures = new javax.swing.JButton();
+        Pictures = null;
         displayersTab = new javax.swing.JTabbedPane();
         fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer(new File("~"));
         menuBar = new javax.swing.JMenuBar();
@@ -89,14 +92,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         jList1.setName("jList1"); // NOI18N
         jScrollPane1.setViewportView(jList1);
@@ -126,26 +123,26 @@ public class MainWindow extends javax.swing.JFrame {
         dirForwardButton1.setPreferredSize(new java.awt.Dimension(30, 30));
         buttonsNavigationPanel.add(dirForwardButton1);
 
-        dirUpButton1.setText("^");
-        dirUpButton1.setMaximumSize(new java.awt.Dimension(30, 30));
-        dirUpButton1.setMinimumSize(new java.awt.Dimension(30, 30));
-        dirUpButton1.setName("dirUpButton1"); // NOI18N
-        dirUpButton1.setPreferredSize(new java.awt.Dimension(30, 30));
-        buttonsNavigationPanel.add(dirUpButton1);
+        dirUpButton.setText("^");
+        dirUpButton.setMaximumSize(new java.awt.Dimension(30, 30));
+        dirUpButton.setMinimumSize(new java.awt.Dimension(30, 30));
+        dirUpButton.setName("dirUpButton"); // NOI18N
+        dirUpButton.setPreferredSize(new java.awt.Dimension(30, 30));
+        buttonsNavigationPanel.add(dirUpButton);
 
-        dirUpButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        dirUpButton2.setText("+");
-        dirUpButton2.setBorder(null);
-        dirUpButton2.setMaximumSize(new java.awt.Dimension(30, 30));
-        dirUpButton2.setMinimumSize(new java.awt.Dimension(30, 30));
-        dirUpButton2.setName("dirUpButton2"); // NOI18N
-        dirUpButton2.setPreferredSize(new java.awt.Dimension(30, 30));
-        dirUpButton2.addActionListener(new java.awt.event.ActionListener() {
+        typeAddButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        typeAddButton.setText("+");
+        typeAddButton.setBorder(null);
+        typeAddButton.setMaximumSize(new java.awt.Dimension(30, 30));
+        typeAddButton.setMinimumSize(new java.awt.Dimension(30, 30));
+        typeAddButton.setName("typeAddButton"); // NOI18N
+        typeAddButton.setPreferredSize(new java.awt.Dimension(30, 30));
+        typeAddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dirUpButton2ActionPerformed(evt);
+                typeAddButtonActionPerformed(evt);
             }
         });
-        buttonsNavigationPanel.add(dirUpButton2);
+        buttonsNavigationPanel.add(typeAddButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -169,39 +166,20 @@ public class MainWindow extends javax.swing.JFrame {
         typesPanel.setName("typesPanel"); // NOI18N
         typesPanel.setLayout(new javax.swing.BoxLayout(typesPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        // Component selectedComponent = displayersTab.getSelectedComponent();
-        // if (!(selectedComponent instanceof FileContentsDisplayer)) {
-        // throw new RuntimeException("This tab does not contain an instance of
-        // FileContentsDisplayer");
-        // }
-        // FileContentsDisplayer disp = (FileContentsDisplayer) selectedComponent;
-        // disp.bridge.setFirstColumnDirectory(
-        // new VirtualFileSystemPopulator(disp, "Downloads", GlobFileFilter.class,
-        // new String[] { "~/Downloads/*" }));
-        Downloads = new ExactNavigationButton(this, new RealFileSystemPopulator("Downloads", "~/Downloads"),
-                new ArrayList<String>());
+        Downloads = new ExactNavigationButton(this, new RealFileSystemPopulator("Downloads", "~/Downloads"));
         Downloads.setText("Downloads");
         Downloads.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Downloads.setMaximumSize(new java.awt.Dimension(10000, 31));
         Downloads.setMinimumSize(new java.awt.Dimension(10000, 31));
         Downloads.setName("Downloads"); // NOI18N
-        Downloads.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DownloadsActionPerformed(evt);
-            }
-        });
         typesPanel.add(Downloads);
 
+        Pictures = new ExactNavigationButton(this, new VirtualFileSystemPopulator("Pictures", GlobFileFilter.class, new String[]{"~/Downloads/*.jpeg", "~/Downloads/*.png", "~/Pictures/*.jpeg", "~/Pictures/*.png", "~/Downloads/*image*", "~/Pictures/*image*"}));
         Pictures.setText("Pictures");
         Pictures.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Pictures.setMaximumSize(new java.awt.Dimension(10000, 31));
         Pictures.setMinimumSize(new java.awt.Dimension(10000, 31));
         Pictures.setName("Pictures"); // NOI18N
-        Pictures.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PicturesActionPerformed(evt);
-            }
-        });
         typesPanel.add(Pictures);
 
         typesScrollPanel.setViewportView(typesPanel);
@@ -321,7 +299,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }// GEN-LAST:event_dirBackButtonActionPerformed
 
-    private void dirUpButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_dirUpButton2ActionPerformed
+    private void typeAddButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_dirUpButton2ActionPerformed
         // TODO add your handling code here:
         // add a directory to typesPanel
         JFileChooser chooser = new JFileChooser();
@@ -339,8 +317,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void addType(File file) {
         String name = file.getName();
         String path = file.getAbsolutePath();
-        JButton button = new ExactNavigationButton(MainWindow.this, new RealFileSystemPopulator(new File(path)), name,
-                new ArrayList<>());
+        JButton button = new ExactNavigationButton(MainWindow.this, new RealFileSystemPopulator(new File(path)), name);
         button.setHorizontalAlignment(SwingConstants.LEFT);
         button.setMaximumSize(new Dimension(10000, 31));
         button.setMinimumSize(new Dimension(10000, 31));
@@ -395,18 +372,6 @@ public class MainWindow extends javax.swing.JFrame {
      * AND written in the JSON by the user (Edit->Edit Paths JSON in the menubar)
      */
 
-    private void PicturesActionPerformed(java.awt.event.ActionEvent evt) {
-        Component selectedComponent = displayersTab.getSelectedComponent();
-        if (!(selectedComponent instanceof FileContentsDisplayer)) {
-            throw new RuntimeException("This tab does not contain an instance of FileContentsDisplayer");
-        }
-        FileContentsDisplayer disp = (FileContentsDisplayer) selectedComponent;
-
-        disp.bridge.setFirstColumnDirectory(
-                new VirtualFileSystemPopulator("Documents", GlobFileFilter.class,
-                        new String[] { "~/Documents/*" }));
-    }// GEN-LAST:event_PicturesActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -448,24 +413,6 @@ public class MainWindow extends javax.swing.JFrame {
      * "D:", "E:", "<whatever is detected>"))
      * AND written in the JSON by the user (Edit->Edit Paths JSON in the menubar)
      */
-    private void DownloadsActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO: Change this to conform to the history
-        // -TODO: (Urgent) Whenever the history is changed, update the textbox (soon to
-        // be changed to buttons) and tab name
-        Component selectedComponent = displayersTab.getSelectedComponent();
-        if (!(selectedComponent instanceof FileContentsDisplayer)) {
-            throw new RuntimeException("This tab does not contain an instance of FileContentsDisplayer");
-        }
-        FileContentsDisplayer disp = (FileContentsDisplayer) selectedComponent;
-        // TODO: Continue this
-        // disp.handler.notify();
-        // TODO: Try and catch out of bounds exception : (when active column is null or
-        // is not in listPanes)
-        disp.bridge.setFirstColumnDirectory(
-                new VirtualFileSystemPopulator("Downloads", GlobFileFilter.class,
-                        new String[] { "~/Downloads/*" }));
-    }// GEN-LAST:event_DownloadsActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -477,8 +424,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel buttonsNavigationPanel;
     private javax.swing.JButton dirBackButton;
     private javax.swing.JButton dirForwardButton1;
-    private javax.swing.JButton dirUpButton1;
-    private javax.swing.JButton dirUpButton2;
+    private javax.swing.JButton dirUpButton;
     private javax.swing.JTabbedPane displayersTab;
     private org.AOOPProject.FileContentsDisplayer fileContentsDisplayer1;
     private javax.swing.JButton jButton3;
@@ -494,6 +440,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu menuEdit;
     private javax.swing.JMenu menuView;
     private javax.swing.JMenuItem settingsJsonMenuItem;
+    private javax.swing.JButton typeAddButton;
     private javax.swing.JPanel typesPanel;
     private javax.swing.JScrollPane typesScrollPanel;
     private javax.swing.JMenu viewModeMenu;

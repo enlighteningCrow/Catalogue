@@ -220,17 +220,19 @@ class ListColumnsHandler {
 		// TODO: Check if this works
 		// currentShownDirectory.
 		// for()
+		FileSystemPopulator pop = currentShownDirectory.getPopulator().clone();
+		pop.pwd.clear();
 		mainWin.getLabelsNavigationPanel()
-				.add(new ExactNavigationButton(mainWin, currentShownDirectory,
-						currentShownDirectory.getPopulator().categoryName, new ArrayList<>()));
+				.add(new ExactNavigationButton(mainWin, pop,
+						currentShownDirectory.getPopulator().categoryName));
 		ArrayList<String> arr = new ArrayList<>();
 		for (String s : currentShownDirectory.getPwd()) {
 			arr.add(s);
 			mainWin.getLabelsNavigationPanel()
 					.add(new JLabel("/"));
+			pop.pwd.add(s);
 			mainWin.getLabelsNavigationPanel()
-					.add(new ExactNavigationButton(mainWin, currentShownDirectory, s,
-							new ArrayList<>(arr)));
+					.add(new ExactNavigationButton(mainWin, pop.clone(), s));
 		}
 		// NavigationButton.setDirectoryShownFiles(currentShownDirectory);
 		// NavigationButton.updateButtons();

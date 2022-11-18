@@ -257,4 +257,24 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 		// TODO: Check if this is correct
 		return new VirtualFileSystemPopulator(categoryName, filters);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder("VirtualFileSystemPopulator [{");
+		boolean first = true;
+		for (Entry<Class<? extends FileFilter>, ArrayList<String>> i : filters.entrySet()) {
+			if (first)
+				first = false;
+			else
+				builder.append(", ");
+			builder.append(i);
+		}
+		builder.append("}");
+
+		for (String i : pwd) {
+			builder.append('/');
+			builder.append(i);
+		}
+		return builder + "]";
+	}
 }

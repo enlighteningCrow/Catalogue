@@ -4,66 +4,53 @@ import java.util.ArrayList;
 
 import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
 // import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.PairPwdPopulator;
-import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.PairPwdPopulator;
+// import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.FileSystemPopulator;
 
 // TODO: (Urgent): Make it not expand somehow
 public class ExactNavigationButton extends NavigationButton implements ConditionallyActiveButton {
 	FileSystemPopulator populator;
-	ArrayList<String> pwd;
 
-	public ExactNavigationButton(NavigationButtonsGroup group, FileSystemPopulator populator,
-			ArrayList<String> pwd) {
+	public ExactNavigationButton(NavigationButtonsGroup group, FileSystemPopulator populator) {
 		super(group);
-		this.populator = populator;
-		this.pwd = pwd;
+		this.populator = populator.clone();
 	}
 
-	public ExactNavigationButton(NavigationButtonsGroup group, DirectoryShownFiles dsf, ArrayList<String> pwd) {
-		this(group, dsf.getPopulator(), pwd);
+	public ExactNavigationButton(NavigationButtonsGroup group, DirectoryShownFiles dsf) {
+		this(group, dsf.getPopulator());
 	}
 
-	public ExactNavigationButton(NavigationButtonsGroup group, FileSystemPopulator populator, String str,
-			ArrayList<String> pwd) {
-		this(group, populator, pwd);
+	public ExactNavigationButton(NavigationButtonsGroup group, FileSystemPopulator populator, String str) {
+		this(group, populator);
 		this.setText(str);
 	}
 
-	public ExactNavigationButton(NavigationButtonsGroup group, DirectoryShownFiles dsf, String str,
-			ArrayList<String> pwd) {
-		this(group, dsf.getPopulator(), pwd);
+	public ExactNavigationButton(NavigationButtonsGroup group, DirectoryShownFiles dsf, String str) {
+		this(group, dsf.getPopulator());
 		this.setText(str);
 	}
 
-	public ExactNavigationButton(MainWindow mainWindow, FileSystemPopulator populator,
-			ArrayList<String> pwd) {
+	public ExactNavigationButton(MainWindow mainWindow, FileSystemPopulator populator) {
 		super(NavigationButtonsGroup.getGroup(mainWindow));
 		this.populator = populator;
-		this.pwd = pwd;
 	}
 
-	public ExactNavigationButton(MainWindow mainWindow, DirectoryShownFiles dsf, ArrayList<String> pwd) {
-		this(NavigationButtonsGroup.getGroup(mainWindow), dsf.getPopulator(), pwd);
+	public ExactNavigationButton(MainWindow mainWindow, DirectoryShownFiles dsf) {
+		this(NavigationButtonsGroup.getGroup(mainWindow), dsf.getPopulator());
 	}
 
-	public ExactNavigationButton(MainWindow mainWindow, FileSystemPopulator populator, String str,
-			ArrayList<String> pwd) {
-		this(NavigationButtonsGroup.getGroup(mainWindow), populator, pwd);
+	public ExactNavigationButton(MainWindow mainWindow, FileSystemPopulator populator, String str) {
+		this(NavigationButtonsGroup.getGroup(mainWindow), populator);
 		this.setText(str);
 	}
 
-	public ExactNavigationButton(MainWindow mainWindow, DirectoryShownFiles dsf, String str,
-			ArrayList<String> pwd) {
-		this(NavigationButtonsGroup.getGroup(mainWindow), dsf.getPopulator(), pwd);
+	public ExactNavigationButton(MainWindow mainWindow, DirectoryShownFiles dsf, String str) {
+		this(NavigationButtonsGroup.getGroup(mainWindow), dsf.getPopulator());
 		this.setText(str);
 	}
 
 	@Override
 	public void manipulateHistory() {
-		if (group.dsf.hist.size() - 1 > group.dsf.histIndex)
-			group.dsf.hist.subList(group.dsf.histIndex + 1,
-					group.dsf.hist.size()).clear();
-		group.dsf.hist.add(new PairPwdPopulator(new ArrayList<String>(pwd), populator.clone()));
-		++group.dsf.histIndex;
+		group.dsf.hist.push(populator.clone());
 	}
 
 	@Override

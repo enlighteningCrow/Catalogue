@@ -13,11 +13,11 @@ public class DirForwardButton extends NavigationButton implements ConditionallyA
 
 	@Override
 	public void manipulateHistory() {
-		++group.dsf.histIndex;
+		++group.dsf.hist.currentIndex;
 	}
 
 	@Override
 	public boolean condition() {
-		return group != null && group.dsf != null && group.dsf.histIndex < group.dsf.hist.size() - 1;
+		return group != null && group.dsf != null && group.dsf.hist.currentIndex < group.dsf.hist.size() - 1;
 	}
 }

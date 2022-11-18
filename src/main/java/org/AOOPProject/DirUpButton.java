@@ -1,7 +1,7 @@
 package org.AOOPProject;
 
 import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
-import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.PairPwdPopulator;
+// import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.FileSystemPopulator;
 
 public class DirUpButton extends NavigationButton implements ConditionallyActiveButton {
 	public DirUpButton(NavigationButtonsGroup group) {
@@ -14,13 +14,9 @@ public class DirUpButton extends NavigationButton implements ConditionallyActive
 
 	@Override
 	public void manipulateHistory() {
-		if (group.dsf.hist.size() - 1 > group.dsf.histIndex)
-			group.dsf.hist.subList(group.dsf.histIndex + 1,
-					group.dsf.hist.size());
-		PairPwdPopulator pair = group.dsf.hist.get(group.dsf.histIndex).clone();
+		FileSystemPopulator pair = group.dsf.hist.get(group.dsf.hist.currentIndex).clone();
 		pair.pwd.remove(pair.pwd.size() - 1);
-		group.dsf.hist.add(pair);
-		++group.dsf.histIndex;
+		group.dsf.hist.push(pair);
 	}
 
 	@Override
