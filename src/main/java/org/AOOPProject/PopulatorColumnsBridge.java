@@ -4,8 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.AOOPProject.ListColumnsHandler.PairFSModelDirectory;
+import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.PairPwdPopulator;
 
 // TODO: Make methods to navigate the tree (eg. go to parent directory, go to
 // first child directory, etc.)
@@ -41,13 +44,100 @@ class PopulatorColumnsBridge {
 		handler = this.fileContentsDisplayer.handler;
 	}
 
-	static class DirectoryShownFiles {
-		ArrayList<String> pwd;
-		VirtualFileSystemPopulator populator;
+	class DirectoryShownFiles {
+		// ArrayList<String> pwd;
+		// FileSystemPopulator populator;
 
-		DirectoryShownFiles(Collection<String> pwd, VirtualFileSystemPopulator populator) {
-			this.pwd = new ArrayList<>(pwd);
-			this.populator = populator;
+		public ArrayList<String> getPwd() {
+			return hist.get(histIndex).pwd;
+		}
+
+		public void setPwd(ArrayList<String> pwd) {
+			hist.get(histIndex).pwd = pwd;
+			hist.get(histIndex).repositionRealPopulator();
+		}
+
+		public FileSystemPopulator getPopulator() {
+			return hist.get(histIndex).populator;
+		}
+
+		public void setPopulator(FileSystemPopulator populator) {
+			hist.get(histIndex).populator = populator;
+			hist.get(histIndex).repositionRealPopulator();
+		}
+
+		public static class PairPwdPopulator {
+			ArrayList<String> pwd;
+			FileSystemPopulator populator;
+
+			public PairPwdPopulator(ArrayList<String> pwd, FileSystemPopulator populator) {
+				this.pwd = pwd;
+				this.populator = populator;
+				repositionRealPopulator();
+			}
+
+			private void reposition(RealFileSystemPopulator pop) {
+				String[] pathComps = pop.getRootFile().getAbsolutePath().replace('\\', '/').split("/");
+				// System.out.println(Paths.get(pop.getRootFile().getPath()).getRoot().toFile());
+				// System.out.println(Paths.get(pop.getRootFile().getAbsolutePath()));
+				// System.out.println(Paths.get(pop.getRootFile().getAbsolutePath()).getRoot());
+				pop.setRootFile(Paths.get(pop.getRootFile().getAbsolutePath()).getRoot().toFile());
+				for (int i = 1; i < pathComps.length; ++i) {
+					String s = pathComps[i];
+					// System.out.println(s);
+					if (s.trim().length() != 0)
+						this.pwd.add(s);
+				}
+				System.out.println(pwd);
+			}
+
+			private void repositionRealPopulator() {
+				if (this.populator instanceof RealFileSystemPopulator) {
+					if (this.pwd.size() != 0) {
+						ArrayList<String> tmp = new ArrayList<>(pwd);
+						pwd.clear();
+						reposition((RealFileSystemPopulator) populator);
+						pwd.addAll(tmp);
+					} else {
+						reposition((RealFileSystemPopulator) populator);
+					}
+				}
+			}
+
+			public PairPwdPopulator clone() {
+				return new PairPwdPopulator(new ArrayList<>(pwd), populator.clone());
+			}
+		}
+
+		ArrayList<PairPwdPopulator> hist = new ArrayList<>();
+		int histIndex = -1;
+
+		void initHistory() {
+			if (histIndex != -1) {
+				System.err.println("This object has already been init");
+				return;
+			}
+			hist.add(new PairPwdPopulator(null, null));
+			histIndex = 0;
+		}
+
+		DirectoryShownFiles(Collection<String> pwd, FileSystemPopulator populator) {
+			initHistory();
+			this.setPwd(new ArrayList<>(pwd));
+			this.setPopulator(populator);
+			// this.hist = new ArrayList<>();
+		}
+
+		DirectoryShownFiles(Collection<String> pwd, FileSystemPopulator populator,
+				Collection<PairPwdPopulator> hist) {
+			initHistory();
+			this.setPwd(new ArrayList<>(pwd));
+			this.setPopulator(populator);
+			// this.hist = new ArrayList<>(hist);
+		}
+
+		PopulatorColumnsBridge getBridge() {
+			return PopulatorColumnsBridge.this;
 		}
 	}
 
@@ -70,26 +160,26 @@ class PopulatorColumnsBridge {
 
 	void addNewShownDirectory(File file) {
 		currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(),
-				new VirtualFileSystemPopulator(this.fileContentsDisplayer, file.getName(),
+				new RealFileSystemPopulator(file.getName(),
 						file.toString())));
 		update();
 	}
 
-	void addNewShownDirectory(Collection<String> pathFromCategory, VirtualFileSystemPopulator populator) {
+	void addNewShownDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator and pathFromCategory instead of themselves
 		currentlyShownDirs.add(new DirectoryShownFiles(pathFromCategory, populator));
 		update();
 	}
 
-	void addNewShownDirectory(VirtualFileSystemPopulator populator) {
+	void addNewShownDirectory(FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator instead of itself
 		currentlyShownDirs.add(new DirectoryShownFiles(new ArrayList<String>(), populator));
 		update();
 	}
 
-	void setActiveColumnDirectory(Collection<String> pathFromCategory, VirtualFileSystemPopulator populator) {
+	void setActiveColumnDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator and pathFromCategory instead of themselves
 		int currentActiveListIndex;
@@ -101,7 +191,7 @@ class PopulatorColumnsBridge {
 		update();
 	}
 
-	void setActiveColumnDirectory(VirtualFileSystemPopulator populator) {
+	void setActiveColumnDirectory(FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator instead of itself
 		int currentActiveListIndex;
@@ -113,7 +203,7 @@ class PopulatorColumnsBridge {
 		update();
 	}
 
-	void setFirstColumnDirectory(Collection<String> pathFromCategory, VirtualFileSystemPopulator populator) {
+	void setFirstColumnDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator and pathFromCategory instead of themselves
 		if (currentlyShownDirs.size() == 0)
@@ -123,7 +213,7 @@ class PopulatorColumnsBridge {
 		update();
 	}
 
-	void setFirstColumnDirectory(VirtualFileSystemPopulator populator) {
+	void setFirstColumnDirectory(FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator instead of itself
 		if (currentlyShownDirs.size() == 0)
@@ -133,17 +223,18 @@ class PopulatorColumnsBridge {
 		update();
 	}
 
-	void setLastColumnDirectory(Collection<String> pathFromCategory, VirtualFileSystemPopulator populator) {
+	void setLastColumnDirectory(Collection<String> pathFromCategory, FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator and pathFromCategory instead of themselves
 		if (currentlyShownDirs.size() == 0)
 			currentlyShownDirs.add(new DirectoryShownFiles(pathFromCategory, populator));
 		else
-			currentlyShownDirs.set(currentlyShownDirs.size() - 1, new DirectoryShownFiles(pathFromCategory, populator));
+			currentlyShownDirs.set(currentlyShownDirs.size() - 1,
+					new DirectoryShownFiles(pathFromCategory, populator));
 		update();
 	}
 
-	void setLastColumnDirectory(VirtualFileSystemPopulator populator) {
+	void setLastColumnDirectory(FileSystemPopulator populator) {
 		// TODO: (Not sure if necessary but check here if bug occurs): send a deep copy
 		// of populator instead of itself
 		if (currentlyShownDirs.size() == 0)
@@ -155,13 +246,16 @@ class PopulatorColumnsBridge {
 	}
 
 	void updatePopulators() {
-		for (DirectoryShownFiles i : currentlyShownDirs) {
-			i.populator.update();
-		}
+		for (DirectoryShownFiles i : currentlyShownDirs)
+			if (i.histIndex >= 0)
+				i.getPopulator().update();
 	}
 
 	void update() {
 		updatePopulators();
+		for (DirectoryShownFiles i : currentlyShownDirs)
+			if (i.histIndex >= 0)
+				i.hist.get(i.histIndex).repositionRealPopulator();
 		handler.models.clear();
 		// handler.models.subList(1, handler.models.size()).clear();
 		// this.fileContentsDisplayer.handler.models.add(new PairFSModelDirectory(
@@ -173,15 +267,20 @@ class PopulatorColumnsBridge {
 			// var j = handler.models.add();
 			// new FileSystemPopulator(this, , null)
 			// return;: Make a populator for each of the things in the currentlyShownDirs
-			if (i.pwd.size() != 0)
+			if (i.getPwd().size() != 0)
 				handler.models
-						.add(new PairFSModelDirectory(
-								new FileSystemModel(
-										i.populator.contents),
-								i.pwd.get(i.pwd.size() - 1)));
+						.add(
+								// new FileSystemModel(
+								// i.getPopulator().contents),
+								// i.getPwd().get(i.getPwd().size() - 1)
+								// newPairFSModelDirectory(i.getPopulator(),
+								// i.getPwd())
+								newPairFSModelDirectory(i) //
+						);
 			else
 				handler.models
-						.add(newPairFSModelDirectory(i.populator, i.populator.categoryName));
+						.add(newPairFSModelDirectory(i.getPopulator(),
+								i.getPopulator().categoryName));
 			// handler.models.add();
 			// handler.models;
 		}
@@ -194,6 +293,56 @@ class PopulatorColumnsBridge {
 		return new PairFSModelDirectory(model, categoryName);
 	}
 
+	PairFSModelDirectory newPairFSModelDirectory(DirectoryShownFiles dsf) {
+		// populator.contents.indexOf();
+		if (dsf.getPwd().size() != 0) {
+			File file = null;
+			for (File i : dsf.getPopulator().contents) {
+				if (i.getName().equals(dsf.getPwd().get(0))) {
+					file = i;
+					break;
+				}
+			}
+			// TODO: (Urgent?) change this from printing an error message and resuming to
+			// throwing an exception instead. Also change other places to support this.
+			// AKA: Make a class PWDInvalidException extends <whatever class exceptions
+			// extend from>
+			if (file == null) {
+				System.err.println("File with name " + dsf.getPopulator().categoryName + "/"
+						+ dsf.getPwd()
+						+ " does not exist in virtual root " + dsf.getPopulator().categoryName);
+				return new PairFSModelDirectory(new FileSystemModel(
+						dsf.getPopulator().contents), dsf.getPopulator().categoryName);
+			}
+			file = new File(
+					file.getAbsolutePath() + "/" + String.join("/",
+							dsf.getPwd().subList(1, dsf.getPwd().size())));
+			if (!file.exists()) {
+				System.err.println("File with name " + file + " does not exist in virtual root "
+						+ dsf.getPopulator().categoryName);
+				return new PairFSModelDirectory(new FileSystemModel(
+						dsf.getPopulator().contents), dsf.getPopulator().categoryName);
+			}
+			// return new PairFSModelDirectory(new FileSystemModel(
+			// populator.contents.toArray(new File[populator.contents.size()])),
+			// categoryName);
+			File[] files = file.listFiles();
+			if (files == null) {
+				System.err.println("File with name " + file + " does not exist in virtual root "
+						+ dsf.getPopulator().categoryName);
+				return new PairFSModelDirectory(new FileSystemModel(
+						dsf.getPopulator().contents), dsf.getPopulator().categoryName);
+			}
+			return new PairFSModelDirectory(new FileSystemModel(
+					files), dsf.getPwd().get(dsf.getPwd().size() - 1));
+		} else
+			return new PairFSModelDirectory(new FileSystemModel(
+					dsf.getPopulator().contents), dsf.getPopulator().categoryName);
+
+		// return new PairFSModelDirectory(new FileSystemModel(
+		// populator.contents), categoryName);
+	}
+
 	PairFSModelDirectory newPairFSModelDirectory(File[] model, String categoryName) {
 		return new PairFSModelDirectory(new FileSystemModel(
 				model), categoryName);
@@ -204,8 +353,9 @@ class PopulatorColumnsBridge {
 				model), categoryName);
 	}
 
-	PairFSModelDirectory newPairFSModelDirectory(VirtualFileSystemPopulator populator, String categoryName) {
+	PairFSModelDirectory newPairFSModelDirectory(FileSystemPopulator populator, String categoryName) {
 		return new PairFSModelDirectory(new FileSystemModel(
-				populator.contents.toArray(new File[populator.contents.size()])), categoryName);
+				populator.contents), categoryName);
+		// populator.contents.toArray(new File[populator.contents.size()])
 	}
 }
