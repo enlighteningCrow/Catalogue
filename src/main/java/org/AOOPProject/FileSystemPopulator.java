@@ -10,16 +10,7 @@ import java.util.TreeSet;
 
 import org.AOOPProject.ListColumnsHandler.PairFSModelDirectory;
 
-// public class FileSystemRootPopulator {
-//
-// }
 public abstract class FileSystemPopulator {
-	// protected FileContentsDisplayer fileContentsDisplayer;
-	// Note: path strings with '/' separator
-	// String[] searchPathsRegex;
-	// String[] searchPathsGlob;
-	// HashMap searchPaths
-	// ArrayList<File> contents = new ArrayList<File>();
 	TreeSet<File> contents = new TreeSet<File>();
 
 	String categoryName = "";
@@ -29,9 +20,6 @@ public abstract class FileSystemPopulator {
 	 * 
 	 * @return contents
 	 */
-	// public ArrayList<File> getContents() {
-	// return contents;
-	// }
 	public TreeSet<File> getContents() {
 		return contents;
 	}
@@ -62,8 +50,6 @@ public abstract class FileSystemPopulator {
 		update();
 	}
 
-	// public ArrayList<Class<? extends FileFilter>> filters = new ArrayList<>(
-	// Arrays.asList(RegexFileFilter.class, GlobFileFilter.class));
 	public HashMap<Class<? extends FileFilter>, ArrayList<String>> filters = new HashMap<>();
 
 	abstract public void addFilters(Class<? extends FileFilter> filter, String pattern);

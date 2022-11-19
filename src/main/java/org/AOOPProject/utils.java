@@ -6,7 +6,7 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 
 public class utils {
-    static private String convertGlobToRegEx(String line) {
+    static private String convertGlobToRegex(String line) {
         String trimmedLine = line.trim();
         int strLen = trimmedLine.length();
         StringBuilder builder = new StringBuilder(strLen);

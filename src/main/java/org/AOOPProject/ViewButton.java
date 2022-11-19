@@ -9,13 +9,6 @@ public class ViewButton extends JButton {
 	ViewButtonsMenuItemsGroup group;
 	FileDisplayerView view;
 
-	// VoidFunction func;
-
-	// @Override
-	// public void manipulateHistory() {
-	// func.op();
-	// }
-
 	public ViewButton(MainWindow mainWindow, FileDisplayerView view) {
 		super();
 		this.group = ViewButtonsMenuItemsGroup.getGroup(mainWindow);
@@ -31,8 +24,4 @@ public class ViewButton extends JButton {
 		if (!group.allButtons.contains(this))
 			group.allButtons.add(this);
 	}
-
-	// public ViewButton() {
-	// this(null);
-	// }
 }

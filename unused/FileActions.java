@@ -13,7 +13,6 @@ public class FileActions {
 
     }
 
-    // TODO: Metadata stuff
     static class Properties {
 
     }

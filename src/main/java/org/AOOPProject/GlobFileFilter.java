@@ -16,18 +16,12 @@ public class GlobFileFilter implements FileFilter {
     }
 
     public GlobFileFilter() {
-        // TODO: Fix this
         matcher = FileSystems.getDefault().getPathMatcher("glob:");
     }
 
     public GlobFileFilter(String glob) {
-        // TODO: Fix this
         matcher = FileSystems.getDefault().getPathMatcher("glob:" + glob);
     }
-
-    // public GlobFileFilter(PathMatcher matcher) {
-    // this.matcher = matcher;
-    // }
 
     @Override
     public boolean accept(File pathname) {

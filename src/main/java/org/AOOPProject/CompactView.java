@@ -3,18 +3,13 @@ package org.AOOPProject;
 import java.awt.Component;
 import java.io.File;
 
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 
-//TODO: Continue from this; make other views and connect them to the ViewButton buttons
 public class CompactView extends SurroundListCellRenderer<JLabel> implements FileDisplayerView {
 
     public CompactView() {
         super(new JLabel());
-        // TODO Auto-generated constructor stub
     }
 
     @Override
@@ -28,7 +23,7 @@ public class CompactView extends SurroundListCellRenderer<JLabel> implements Fil
     }
 
     @Override
-    public void setView(JList list) {
+    public void setView(FileDisplayerList list) {
         list.setLayoutOrientation(JList.VERTICAL);
     }
 

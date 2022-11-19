@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileFilter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -14,11 +13,9 @@ import org.AOOPProject.ListColumnsHandler.PairFSModelDirectory;
 public class RealFileSystemPopulator extends FileSystemPopulator {
 	public RealFileSystemPopulator(String categoryName,
 			File searchDirectory, Collection<String> pwd) {
-		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
 		this.pwd = new ArrayList<>(pwd);
 		rootFile = searchDirectory;
-		// System.out.println(rootFile);
 		reposition();
 		update();
 	}
@@ -33,17 +30,10 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 	}
 
 	public RealFileSystemPopulator(File searchDirectory) {
-		// this.fileContentsDisplayer = fileContentsDisplayer;
-		// this(searchDirectory.getName(), searchDirectory.getPath());
-		// setRootFile(searchDirectory);
-		// // System.out.println(rootFile);
-		// update();
-
 		this(utils.getName(searchDirectory), searchDirectory, new ArrayList<>());
 	}
 
 	public RealFileSystemPopulator(String categoryName, File searchDirectory) {
-		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this(searchDirectory.getName(), searchDirectory.getPath());
 	}
 
@@ -51,7 +41,6 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 
 	@Override
 	public void update() {
-		// System.out.println(rootFile);
 		contents.clear();
 		contents = new TreeSet<File>(comparator);
 		File[] files = new File(rootFile.getAbsolutePath() + String.join("/", pwd)).listFiles();
@@ -109,28 +98,21 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 
 	@Override
 	public FileSystemPopulator clone() {
-		// TODO: Check if this is correct
 		return new RealFileSystemPopulator(categoryName, rootFile, pwd);
 	}
 
 	private static void repositionR(RealFileSystemPopulator pop) {
 		String[] pathComps = pop.getRootFile().getAbsolutePath().replace('\\', '/').split("/");
-		// System.out.println(Paths.get(pop.getRootFile().getPath()).getRoot().toFile());
-		// System.out.println(Paths.get(pop.getRootFile().getAbsolutePath()));
-		// System.out.println(Paths.get(pop.getRootFile().getAbsolutePath()).getRoot());
 		pop.rootFile = Paths.get(pop.getRootFile().getAbsolutePath()).getRoot().toFile();
 		for (int i = 1; i < pathComps.length; ++i) {
 			String s = pathComps[i];
-			// System.out.println(s);
 			if (s.trim().length() != 0)
 				pop.pwd.add(s);
 		}
-		// System.out.println(pop.pwd);
 	}
 
 	private static void reposition(RealFileSystemPopulator pop) {
 		if (pop.pwd.size() != 0) {
-			// System.err.println("Populator pwd not empty");
 			ArrayList<String> prev = new ArrayList<>(pop.pwd);
 			pop.pwd.clear();
 			repositionR(pop);

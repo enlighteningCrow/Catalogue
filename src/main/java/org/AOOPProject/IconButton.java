@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public abstract class IconButton extends JButton {
-    // TODO: Test if necessary to overload active for icons
     Icon icon;
 
     public Icon getIcon() {

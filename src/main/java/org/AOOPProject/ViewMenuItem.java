@@ -9,13 +9,6 @@ public class ViewMenuItem extends JMenuItem {
     ViewButtonsMenuItemsGroup group;
     FileDisplayerView view;
 
-    // VoidFunction func;
-
-    // @Override
-    // public void manipulateHistory() {
-    // func.op();
-    // }
-
     public ViewMenuItem(MainWindow mainWindow, FileDisplayerView view) {
         super();
         this.group = ViewButtonsMenuItemsGroup.getGroup(mainWindow);
@@ -31,8 +24,4 @@ public class ViewMenuItem extends JMenuItem {
         if (!group.allMenuItems.contains(this))
             group.allMenuItems.add(this);
     }
-
-    // public ViewMenuItem() {
-    // this(null);
-    // }
 }

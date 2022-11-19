@@ -23,7 +23,6 @@ public class RegexFileFilter implements FileFilter {
         this.pattern = Pattern.compile(pattern);
     }
 
-    // return;: check the regex part, something wrong
     public RegexFileFilter() {
         this.pattern = Pattern.compile("");
     }

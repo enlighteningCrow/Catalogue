@@ -1,20 +1,15 @@
 package org.AOOPProject;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.io.File;
 
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 
-//TODO: Continue from this; make other views and connect them to the ViewButton buttons
 public class DetailsView extends SurroundListCellRenderer<JLabel> implements FileDisplayerView {
 
     public DetailsView() {
         super(new JLabel());
-        // super(new DetailCell());
     }
 
     @Override
@@ -28,7 +23,7 @@ public class DetailsView extends SurroundListCellRenderer<JLabel> implements Fil
     }
 
     @Override
-    public void setView(JList list) {
+    public void setView(FileDisplayerList list) {
         list.setLayoutOrientation(JList.VERTICAL);
     }
 }

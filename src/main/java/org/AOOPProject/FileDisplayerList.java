@@ -52,7 +52,6 @@ public class FileDisplayerList extends JList<File> {
 							if (selectedFile.isDirectory()) {
 								RealFileSystemPopulator pop = new RealFileSystemPopulator(
 										selectedFile);
-								// NavigationButtonsGroup.getGroup(mainWindow);
 								dsf.hist.push(pop);
 								dsf.getBridge().update();
 							} else {
@@ -60,37 +59,21 @@ public class FileDisplayerList extends JList<File> {
 								try {
 									Desktop.getDesktop().open(selectedFile);
 								} catch (Exception e) {
-									// TODO: (Maybe) Make this show a popup dialog
-									// that tells the user an error occurred
 									System.err.println("Error opening the file "
 											+ selectedFile.getAbsolutePath()
 											+ "\nError message: "
 											+ e.getMessage());
 								}
-								// TODO:
-								// https://stackoverflow.com/questions/550329/how-to-open-a-file-with-the-default-associated-program
-								// Use the link above to open files (that are not
-								// directories)
 							}
 						}
 						break;
 					case MouseEvent.BUTTON2:
 					case MouseEvent.BUTTON3:
-						// TODO: (Urgent) this; make it show a dialog or something (like what
-						// most file explorers do when right clicking) (Search stackoverflow for
-						// popups)
-
-						// default:
-						// System.out.println(evt.getButton());
 				}
-				// else if (evt.getClickCount() == 3) {
-				// int index = list.locationToIndex(evt.getPoint());
-				// }
 			}
 		});
 		revalidate();
 		repaint();
-		// updateUI();
 	}
 
 	void setView(FileDisplayerView view) {

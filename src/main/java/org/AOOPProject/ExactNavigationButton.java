@@ -1,12 +1,7 @@
 package org.AOOPProject;
 
-import java.util.ArrayList;
-
 import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
-// import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.PairPwdPopulator;
-// import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.FileSystemPopulator;
 
-// TODO: (Urgent): Make it not expand somehow
 public class ExactNavigationButton extends NavigationButton implements ConditionallyActiveButton {
 	FileSystemPopulator populator;
 

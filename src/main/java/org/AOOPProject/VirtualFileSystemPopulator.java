@@ -13,23 +13,10 @@ import java.util.TreeSet;
 
 import org.AOOPProject.ListColumnsHandler.PairFSModelDirectory;
 
-// TODO: (Maybe?) Change this to private/public
 /**
  * Class used to create an array of Files found from the specified paths
  */
-// TODO: Use inheritance to make a RootFileSystemPopulator; Create the interface
-// and differentiate between the ones used for normal paths and the root one
-// public interface FileSystemPopulator;
-
 public class VirtualFileSystemPopulator extends FileSystemPopulator {
-	/**
-	 *
-	 */
-	// Note: path strings with '/' separator
-	// String[] searchPathsRegex;
-	// String[] searchPathsGlob;
-	// HashMap searchPaths
-	// ArrayList<File> contents = new ArrayList<File>();
 	/**
 	 * Consturctor from regex and glob patterns
 	 * 
@@ -40,63 +27,29 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 	public VirtualFileSystemPopulator(String categoryName,
 			String[] searchPathsRegex,
 			String[] searchPathsGlob) {
-		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
 		addFilters(RegexFileFilter.class, searchPathsRegex);
 		addFilters(GlobFileFilter.class, searchPathsGlob);
-
-		// this.searchPathsRegex = searchPathsRegex;
-		// this.searchPathsGlob = searchPathsGlob;
 		update();
 	}
 
-	// TODO: Use inheritance to differentiate the root (virtual) from the normal
-	// files (real)
-	// TODO: For each usage of this, use RealFileSystemPopulator instead.
-	// public VirtualFileSystemPopulator(FileContentsDisplayer
-	// fileContentsDisplayer, String categoryName,
-	// String searchDirectory) {
-	// this.fileContentsDisplayer = fileContentsDisplayer;
-	// this.categoryName = categoryName;
-	// addFilters(GlobFileFilter.class, searchDirectory + "/*");
-	//
-	// // this.searchPathsRegex = searchPathsRegex;
-	// // this.searchPathsGlob = searchPathsGlob;
-	// update();
-	// }
-
 	public VirtualFileSystemPopulator(String categoryName, Class<? extends FileFilter> filter,
 			Collection<String> pattern) {
-		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
-		// addFilters(GlobFileFilter.class, "/*");
-
-		// this.searchPathsRegex = searchPathsRegex;
-		// this.searchPathsGlob = searchPathsGlob;
 		addFilters(filter, pattern);
 		update();
 	}
 
 	public VirtualFileSystemPopulator(String categoryName,
 			Class<? extends FileFilter> filter, String[] pattern) {
-		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
-		// addFilters(GlobFileFilter.class, "/*");
-
-		// this.searchPathsRegex = searchPathsRegex;
-		// this.searchPathsGlob = searchPathsGlob;
 		addFilters(filter, pattern);
 		update();
 	}
 
 	public VirtualFileSystemPopulator(String categoryName,
 			HashMap<Class<? extends FileFilter>, ArrayList<String>> map) {
-		// this.fileContentsDisplayer = fileContentsDisplayer;
 		this.categoryName = categoryName;
-		// addFilters(GlobFileFilter.class, "/*");
-
-		// this.searchPathsRegex = searchPathsRegex;
-		// this.searchPathsGlob = searchPathsGlob;
 		setFilters(map);
 		update();
 	}
@@ -120,29 +73,15 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 		Constructor<T> constructor;
 		File[] files;
 		try {
-			// filterType.getConstructor();
-			// Class<T>.getConstructor();
-			// Class<Integer>.
-			// System.out.println(filterType.getConstructor(Void.class.getClasses()));
-			// Class
-			// Constructor<RegexFileFilter> cnstrctr =
-			// RegexFileFilter.class.getConstructor(String.class.getClasses()); // get
-			// // the
-			// // constructor
-			// System.out.println(cnstrctr);
 			constructor = filterType.getConstructor(new Class[] { String.class });
-			// System.out.println(constructor);
 			T inst = constructor.newInstance(searchPath[depth]);
 			files = currentFile.listFiles(inst);
-			// for (File file : files)
-			// System.out.println(file);
 		} catch (Exception e) {
 			System.out.println(e);
 			return;
 		}
 		if (depth == searchPath.length - 1) {
 			try {
-				// Class[] classes = new Class[] { String.class };
 				for (File i : files)
 					contents.add(i);
 			} catch (Exception e) {
@@ -152,11 +91,9 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 
 		else if (depth < searchPath.length) {
 			try {
-				// return;: (URGENT) Debug what is wrong with the line below
 				for (File file : files)
 					populate(depth + 1, searchPath, file, filterType);
 			} catch (Exception e) {
-				// System.err.println(e);
 				e.printStackTrace();
 				System.err.println(e.getCause());
 			}
@@ -179,16 +116,11 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 			String[] pathComps = searchPath.split("/");
 			if (pathComps.length == 0)
 				throw new InvalidPathException(searchPath, "search path is empty");
-			// TODO: Check if there needs to be more hardcoded path expansions (like ~ into
-			// the home directory)
 			if (pathComps[0].equals("~")) {
-				// TODO: Check if this is right
 				populate(1, pathComps, new File(System.getProperty("user.home")),
 						filterType);
 			} else {
 				if (pathComps[0].length() == 0)
-					// TODO: Check if this works in Windows OS
-					// pathComps[0] = "/";
 					populate(1, pathComps, new File("/"), filterType);
 				else
 					populate(0, pathComps, new File(System.getProperty("user.dir")), filterType);
@@ -204,20 +136,10 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 		contents.clear();
 		contents = new TreeSet<File>(comparator);
 		for (Entry<Class<? extends FileFilter>, ArrayList<String>> i : filters.entrySet()) {
-			// TODO: Continue this; make paths for each of the filters.
-			// updateS(searchPaths, i);
 			updateS(Arrays.copyOf(i.getValue().toArray(), i.getValue().size(), String[].class), i.getKey());
 		}
-		// updateS(searchPathsRegex, RegexFileFilter.class);
-		// updateS(searchPathsGlob, GlobFileFilter.class);
-		// contents.sort(this.fileContentsDisplayer.fileSortComparator);
-		// Collection.sort(contents, this.fileContentsDisplayer.fileSortComparator);
-		// var i = GlobFileFilter.class;
-		// Collection.sort(contents, this.fileContentsDisplayer.fileSortComparator);
 	}
 
-	// public ArrayList<Class<? extends FileFilter>> filters = new ArrayList<>(
-	// Arrays.asList(RegexFileFilter.class, GlobFileFilter.class));
 	public HashMap<Class<? extends FileFilter>, ArrayList<String>> filters = new HashMap<>();
 
 	public void addFilters(Class<? extends FileFilter> filter, String pattern) {
@@ -249,14 +171,12 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 
 	public void addFilters(HashMap<Class<? extends FileFilter>, ArrayList<String>> map) {
 		filters.clear();
-		// filters.addAll(list);
 		filters.putAll(map);
 		update();
 	}
 
 	@Override
 	public FileSystemPopulator clone() {
-		// TODO: Check if this is correct
 		return new VirtualFileSystemPopulator(categoryName, filters);
 	}
 
