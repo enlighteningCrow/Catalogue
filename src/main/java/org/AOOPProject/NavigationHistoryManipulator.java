@@ -1,5 +1,5 @@
 package org.AOOPProject;
 
-public interface NavigationHistoryAcessor {
+public interface NavigationHistoryManipulator {
     void manipulateHistory();
 }

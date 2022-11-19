@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 public abstract class NavigationButton extends JButton
-		implements NavigationHistoryAcessor {
+		implements NavigationHistoryManipulator {
 	NavigationButtonsGroup group;
 
 	public NavigationButton(NavigationButtonsGroup group) {
