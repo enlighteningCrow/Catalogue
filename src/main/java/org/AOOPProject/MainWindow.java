@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import com.formdev.flatlaf.*;
 
@@ -63,254 +64,265 @@ public class MainWindow extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
+		java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonsNavigationPanel = new javax.swing.JPanel();
-        dirBackButton = new DirBackButton(this);
-        dirForwardButton1 = new DirForwardButton(this);
-        dirUpButton = new DirUpButton(this);
-        typeAddButton = new javax.swing.JButton();
-        pathNavigationPanel = new javax.swing.JPanel();
-        pathScrollPane = new javax.swing.JScrollPane();
-        pathPanel = new javax.swing.JPanel();
-        typesScrollPanel = new javax.swing.JScrollPane();
-        typesPanel = new javax.swing.JPanel();
-        Downloads = null;
-        Pictures = null;
-        displayersTab = new javax.swing.JTabbedPane();
-        fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer(new File[]{new File("~"), new File("~/Downloads"), new File("~/Pictures")});
-        menuBar = new javax.swing.JMenuBar();
-        menuEdit = new javax.swing.JMenu();
-        settingsJsonMenuItem = new javax.swing.JMenuItem();
-        menuView = new javax.swing.JMenu();
-        viewModeMenu = new javax.swing.JMenu();
-        jMenuItem1 = new ViewMenuItem(this, new IconsOnlyView());
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new ViewMenuItem(this, new DetailsView());
-        viewModeMenu1 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+		jScrollPane1 = new javax.swing.JScrollPane();
+		jList1 = new javax.swing.JList<>();
+		jButton3 = new javax.swing.JButton();
+		buttonGroup1 = new javax.swing.ButtonGroup();
+		buttonsNavigationPanel = new javax.swing.JPanel();
+		dirBackButton = new DirBackButton(this);
+		dirForwardButton1 = new DirForwardButton(this);
+		dirUpButton = new DirUpButton(this);
+		typeAddButton = new javax.swing.JButton();
+		pathNavigationPanel = new javax.swing.JPanel();
+		pathScrollPane = new javax.swing.JScrollPane();
+		pathPanel = new javax.swing.JPanel();
+		typesScrollPanel = new javax.swing.JScrollPane();
+		typesPanel = new javax.swing.JPanel();
+		Downloads = null;
+		Pictures = null;
+		displayersTab = new javax.swing.JTabbedPane();
+		fileContentsDisplayer1 = new org.AOOPProject.FileContentsDisplayer(
+				new File[] { new File("~"), new File("~/Downloads"), new File("~/Pictures") });
+		menuBar = new javax.swing.JMenuBar();
+		menuEdit = new javax.swing.JMenu();
+		settingsJsonMenuItem = new javax.swing.JMenuItem();
+		menuView = new javax.swing.JMenu();
+		viewModeMenu = new javax.swing.JMenu();
+		jMenuItem1 = new ViewMenuItem(this, new IconsOnlyView());
+		jMenuItem2 = new javax.swing.JMenuItem();
+		jMenuItem3 = new ViewMenuItem(this, new DetailsView());
+		viewModeMenu1 = new javax.swing.JMenu();
+		LightThemeItem = new javax.swing.JMenuItem();
+		DarkThemeItem = new javax.swing.JMenuItem();
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
+		jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jList1.setName("jList1"); // NOI18N
-        jScrollPane1.setViewportView(jList1);
+		jList1.setModel(new javax.swing.AbstractListModel<String>() {
+			String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
 
-        jButton3.setText("jButton3");
-        jButton3.setName("jButton3"); // NOI18N
+			public int getSize() {
+				return strings.length;
+			}
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setName("Form"); // NOI18N
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+			public String getElementAt(int i) {
+				return strings[i];
+			}
+		});
+		jList1.setName("jList1"); // NOI18N
+		jScrollPane1.setViewportView(jList1);
 
-        buttonsNavigationPanel.setBorder(new com.formdev.flatlaf.ui.FlatBorder());
-        buttonsNavigationPanel.setName("buttonsNavigationPanel"); // NOI18N
+		jButton3.setText("jButton3");
+		jButton3.setName("jButton3"); // NOI18N
 
-        dirBackButton.setText("<");
-        dirBackButton.setMaximumSize(new java.awt.Dimension(30, 30));
-        dirBackButton.setMinimumSize(new java.awt.Dimension(30, 30));
-        dirBackButton.setName("dirBackButton"); // NOI18N
-        dirBackButton.setPreferredSize(new java.awt.Dimension(30, 30));
-        buttonsNavigationPanel.add(dirBackButton);
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+		setName("Form"); // NOI18N
+		getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        dirForwardButton1.setText(">");
-        dirForwardButton1.setMaximumSize(new java.awt.Dimension(30, 30));
-        dirForwardButton1.setMinimumSize(new java.awt.Dimension(30, 30));
-        dirForwardButton1.setName("dirForwardButton1"); // NOI18N
-        dirForwardButton1.setPreferredSize(new java.awt.Dimension(30, 30));
-        buttonsNavigationPanel.add(dirForwardButton1);
+		buttonsNavigationPanel.setBorder(new com.formdev.flatlaf.ui.FlatBorder());
+		buttonsNavigationPanel.setName("buttonsNavigationPanel"); // NOI18N
 
-        dirUpButton.setText("^");
-        dirUpButton.setMaximumSize(new java.awt.Dimension(30, 30));
-        dirUpButton.setMinimumSize(new java.awt.Dimension(30, 30));
-        dirUpButton.setName("dirUpButton"); // NOI18N
-        dirUpButton.setPreferredSize(new java.awt.Dimension(30, 30));
-        buttonsNavigationPanel.add(dirUpButton);
+		dirBackButton.setText("<");
+		dirBackButton.setMaximumSize(new java.awt.Dimension(30, 30));
+		dirBackButton.setMinimumSize(new java.awt.Dimension(30, 30));
+		dirBackButton.setName("dirBackButton"); // NOI18N
+		dirBackButton.setPreferredSize(new java.awt.Dimension(30, 30));
+		buttonsNavigationPanel.add(dirBackButton);
 
-        typeAddButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        typeAddButton.setText("+");
-        typeAddButton.setBorder(null);
-        typeAddButton.setMaximumSize(new java.awt.Dimension(30, 30));
-        typeAddButton.setMinimumSize(new java.awt.Dimension(30, 30));
-        typeAddButton.setName("typeAddButton"); // NOI18N
-        typeAddButton.setPreferredSize(new java.awt.Dimension(30, 30));
-        typeAddButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeAddButtonActionPerformed(evt);
-            }
-        });
-        buttonsNavigationPanel.add(typeAddButton);
+		dirForwardButton1.setText(">");
+		dirForwardButton1.setMaximumSize(new java.awt.Dimension(30, 30));
+		dirForwardButton1.setMinimumSize(new java.awt.Dimension(30, 30));
+		dirForwardButton1.setName("dirForwardButton1"); // NOI18N
+		dirForwardButton1.setPreferredSize(new java.awt.Dimension(30, 30));
+		buttonsNavigationPanel.add(dirForwardButton1);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        getContentPane().add(buttonsNavigationPanel, gridBagConstraints);
+		dirUpButton.setText("^");
+		dirUpButton.setMaximumSize(new java.awt.Dimension(30, 30));
+		dirUpButton.setMinimumSize(new java.awt.Dimension(30, 30));
+		dirUpButton.setName("dirUpButton"); // NOI18N
+		dirUpButton.setPreferredSize(new java.awt.Dimension(30, 30));
+		buttonsNavigationPanel.add(dirUpButton);
 
-        pathNavigationPanel.setBorder(new com.formdev.flatlaf.ui.FlatMenuBarBorder());
-        pathNavigationPanel.setName("pathNavigationPanel"); // NOI18N
-        pathNavigationPanel.setLayout(new java.awt.GridLayout(1, 0));
+		typeAddButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+		typeAddButton.setText("+");
+		typeAddButton.setBorder(null);
+		typeAddButton.setMaximumSize(new java.awt.Dimension(30, 30));
+		typeAddButton.setMinimumSize(new java.awt.Dimension(30, 30));
+		typeAddButton.setName("typeAddButton"); // NOI18N
+		typeAddButton.setPreferredSize(new java.awt.Dimension(30, 30));
+		typeAddButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				typeAddButtonActionPerformed(evt);
+			}
+		});
+		buttonsNavigationPanel.add(typeAddButton);
 
-        pathScrollPane.setName("pathScrollPane"); // NOI18N
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		getContentPane().add(buttonsNavigationPanel, gridBagConstraints);
 
-        pathPanel.setName("pathPanel"); // NOI18N
-        pathScrollPane.setViewportView(pathPanel);
+		pathNavigationPanel.setBorder(new com.formdev.flatlaf.ui.FlatMenuBarBorder());
+		pathNavigationPanel.setName("pathNavigationPanel"); // NOI18N
+		pathNavigationPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-        pathNavigationPanel.add(pathScrollPane);
+		pathScrollPane.setName("pathScrollPane"); // NOI18N
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
-        gridBagConstraints.weightx = 1.0;
-        getContentPane().add(pathNavigationPanel, gridBagConstraints);
+		pathPanel.setName("pathPanel"); // NOI18N
+		pathScrollPane.setViewportView(pathPanel);
 
-        typesScrollPanel.setName("typesScrollPanel"); // NOI18N
+		pathNavigationPanel.add(pathScrollPane);
 
-        typesPanel.setBorder(new com.formdev.flatlaf.ui.FlatBorder());
-        typesPanel.setName("typesPanel"); // NOI18N
-        typesPanel.setLayout(new javax.swing.BoxLayout(typesPanel, javax.swing.BoxLayout.Y_AXIS));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+		gridBagConstraints.weightx = 1.0;
+		getContentPane().add(pathNavigationPanel, gridBagConstraints);
 
-        Downloads = new ExactNavigationButton(this, new RealFileSystemPopulator("Downloads", "~/Downloads"));
-        Downloads.setText("Downloads");
-        Downloads.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        Downloads.setMaximumSize(new java.awt.Dimension(10000, 31));
-        Downloads.setMinimumSize(new java.awt.Dimension(10000, 31));
-        Downloads.setName("Downloads"); // NOI18N
-        typesPanel.add(Downloads);
+		typesScrollPanel.setName("typesScrollPanel"); // NOI18N
 
-        Pictures = new ExactNavigationButton(this, new VirtualFileSystemPopulator("Pictures", GlobFileFilter.class, new String[]{"~/Downloads/*.jpeg", "~/Downloads/*.png", "~/Pictures/*.jpeg", "~/Pictures/*.png", "~/Downloads/*image*", "~/Pictures/*image*"}));
-        Pictures.setText("Pictures");
-        Pictures.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        Pictures.setMaximumSize(new java.awt.Dimension(10000, 31));
-        Pictures.setMinimumSize(new java.awt.Dimension(10000, 31));
-        Pictures.setName("Pictures"); // NOI18N
-        typesPanel.add(Pictures);
+		typesPanel.setBorder(new com.formdev.flatlaf.ui.FlatBorder());
+		typesPanel.setName("typesPanel"); // NOI18N
+		typesPanel.setLayout(new javax.swing.BoxLayout(typesPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        typesScrollPanel.setViewportView(typesPanel);
+		Downloads = new ExactNavigationButton(this, new RealFileSystemPopulator("Downloads", "~/Downloads"));
+		Downloads.setText("Downloads");
+		Downloads.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		Downloads.setMaximumSize(new java.awt.Dimension(10000, 31));
+		Downloads.setMinimumSize(new java.awt.Dimension(10000, 31));
+		Downloads.setName("Downloads"); // NOI18N
+		typesPanel.add(Downloads);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-        gridBagConstraints.weighty = 1.0;
-        getContentPane().add(typesScrollPanel, gridBagConstraints);
+		Pictures = new ExactNavigationButton(this,
+				new VirtualFileSystemPopulator("Pictures", GlobFileFilter.class,
+						new String[] { "~/Downloads/*.jpeg", "~/Downloads/*.png", "~/Pictures/*.jpeg",
+								"~/Pictures/*.png", "~/Downloads/*image*", "~/Pictures/*image*" }));
+		Pictures.setText("Pictures");
+		Pictures.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		Pictures.setMaximumSize(new java.awt.Dimension(10000, 31));
+		Pictures.setMinimumSize(new java.awt.Dimension(10000, 31));
+		Pictures.setName("Pictures"); // NOI18N
+		typesPanel.add(Pictures);
 
-        displayersTab.setName("displayersTab"); // NOI18N
-        displayersTab.addTab("tab1", fileContentsDisplayer1);
+		typesScrollPanel.setViewportView(typesPanel);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        getContentPane().add(displayersTab, gridBagConstraints);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+		gridBagConstraints.weighty = 1.0;
+		getContentPane().add(typesScrollPanel, gridBagConstraints);
 
-        menuBar.setBackground(new java.awt.Color(39, 43, 51));
-        menuBar.setBorder(null);
-        menuBar.setForeground(new java.awt.Color(39, 43, 51));
-        menuBar.setToolTipText("");
-        menuBar.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        menuBar.setName("menuBar"); // NOI18N
+		displayersTab.setName("displayersTab"); // NOI18N
+		displayersTab.addTab("tab1", fileContentsDisplayer1);
 
-        menuEdit.setBackground(new java.awt.Color(39, 43, 51));
-        menuEdit.setText("Edit");
-        menuEdit.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        menuEdit.setName("menuEdit"); // NOI18N
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		getContentPane().add(displayersTab, gridBagConstraints);
 
-        settingsJsonMenuItem.setText("Edit Paths JSON");
-        settingsJsonMenuItem.setName("settingsJsonMenuItem"); // NOI18N
-        menuEdit.add(settingsJsonMenuItem);
+		menuBar.setBackground(new java.awt.Color(39, 43, 51));
+		menuBar.setBorder(null);
+		menuBar.setForeground(new java.awt.Color(39, 43, 51));
+		menuBar.setToolTipText("");
+		menuBar.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
+		menuBar.setName("menuBar"); // NOI18N
 
-        menuBar.add(menuEdit);
+		menuEdit.setBackground(new java.awt.Color(39, 43, 51));
+		menuEdit.setText("Edit");
+		menuEdit.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
+		menuEdit.setName("menuEdit"); // NOI18N
 
-        menuView.setBackground(new java.awt.Color(39, 43, 51));
-        menuView.setText("View");
-        menuView.setName("menuView"); // NOI18N
+		settingsJsonMenuItem.setText("Edit Paths JSON");
+		settingsJsonMenuItem.setName("settingsJsonMenuItem"); // NOI18N
+		menuEdit.add(settingsJsonMenuItem);
 
-        viewModeMenu.setText("View mode");
-        viewModeMenu.setName("viewModeMenu"); // NOI18N
+		menuBar.add(menuEdit);
 
-        jMenuItem1.setText("Icons only");
-        jMenuItem1.setName("jMenuItem1"); // NOI18N
-        viewModeMenu.add(jMenuItem1);
+		menuView.setBackground(new java.awt.Color(39, 43, 51));
+		menuView.setText("View");
+		menuView.setName("menuView"); // NOI18N
 
-        jMenuItem2.setText("Compact");
-        jMenuItem2.setName("jMenuItem2"); // NOI18N
-        viewModeMenu.add(jMenuItem2);
+		viewModeMenu.setText("View mode");
+		viewModeMenu.setName("viewModeMenu"); // NOI18N
 
-        jMenuItem3.setText("Details");
-        jMenuItem3.setName("jMenuItem3"); // NOI18N
-        viewModeMenu.add(jMenuItem3);
+		jMenuItem1.setText("Icons only");
+		jMenuItem1.setName("jMenuItem1"); // NOI18N
+		viewModeMenu.add(jMenuItem1);
 
-        menuView.add(viewModeMenu);
+		jMenuItem2.setText("Compact");
+		jMenuItem2.setName("jMenuItem2"); // NOI18N
+		viewModeMenu.add(jMenuItem2);
 
-        viewModeMenu1.setText("Theme");
-        viewModeMenu1.setName("viewModeMenu1"); // NOI18N
+		jMenuItem3.setText("Details");
+		jMenuItem3.setName("jMenuItem3"); // NOI18N
+		viewModeMenu.add(jMenuItem3);
 
-        jMenuItem6.setText("Light");
-        jMenuItem6.setName("LightTheme"); // NOI18N
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        viewModeMenu1.add(jMenuItem6);
+		menuView.add(viewModeMenu);
 
-        jMenuItem7.setText("Dark");
-        jMenuItem7.setName("DarkTheme"); // NOI18N
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        viewModeMenu1.add(jMenuItem7);
+		viewModeMenu1.setText("Theme");
+		viewModeMenu1.setName("viewModeMenu1"); // NOI18N
 
-        menuView.add(viewModeMenu1);
+		LightThemeItem.setText("Light");
+		LightThemeItem.setName("LightThemeItem"); // NOI18N
+		LightThemeItem.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				LightThemeItemActionPerformed(evt);
+			}
+		});
+		viewModeMenu1.add(LightThemeItem);
 
-        menuBar.add(menuView);
+		DarkThemeItem.setText("Dark");
+		DarkThemeItem.setName("DarkTheme"); // NOI18N
+		DarkThemeItem.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				DarkThemeItemActionPerformed(evt);
+			}
+		});
+		viewModeMenu1.add(DarkThemeItem);
 
-        setJMenuBar(menuBar);
+		menuView.add(viewModeMenu1);
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+		menuBar.add(menuView);
+
+		setJMenuBar(menuBar);
+
+		pack();
+	}// </editor-fold>//GEN-END:initComponents
 
 	// dark theme
-	private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem7ActionPerformed
-		// TODO add your handling code here:
-		typesPanel.setBackground(new java.awt.Color(39, 43, 51));
-		typesScrollPanel.setBackground(new java.awt.Color(39, 43, 51));
-		displayersTab.setBackground(new java.awt.Color(39, 43, 51));
-		fileContentsDisplayer1.setBackground(new java.awt.Color(39, 43, 51));
-		buttonsNavigationPanel.setBackground(new java.awt.Color(39, 43, 51));
-		menuBar.setBackground(new java.awt.Color(39, 43, 51));
-		menuEdit.setBackground(new java.awt.Color(39, 43, 51));
+	private void LightThemeItemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem7ActionPerformed
+		try {
+			UIManager.setLookAndFeel(new FlatLightLaf());
+			revalidate();
+			repaint();
+		} catch (UnsupportedLookAndFeelException e) {
+			System.err.println(e.getMessage());
+		}
 	}// GEN-LAST:event_jMenuItem7ActionPerformed
 
 	// light theme
-	private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem6ActionPerformed
-		typesPanel.setBackground(new java.awt.Color(240, 240, 240));
-		typesScrollPanel.setBackground(new java.awt.Color(240, 240, 240));
-		displayersTab.setBackground(new java.awt.Color(240, 240, 240));
-		fileContentsDisplayer1.setBackground(new java.awt.Color(240, 240, 240));
-		buttonsNavigationPanel.setBackground(new java.awt.Color(240, 240, 240));
-		menuBar.setBackground(new java.awt.Color(240, 240, 240));
-		menuEdit.setBackground(new java.awt.Color(240, 240, 240));
+	private void DarkThemeItemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem6ActionPerformed
+		try {
+			UIManager.setLookAndFeel(new FlatDarkLaf());
+			revalidate();
+			repaint();
+		} catch (UnsupportedLookAndFeelException e) {
+			System.err.println(e.getMessage());
+		}
 	}// GEN-LAST:event_jMenuItem6ActionPerformed
 
 	private void dirBackButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_dirBackButtonActionPerformed
@@ -437,37 +449,37 @@ public class MainWindow extends javax.swing.JFrame {
 	 * @param args the command line arguments
 	 */
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Downloads;
-    private javax.swing.JButton Pictures;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JPanel buttonsNavigationPanel;
-    private javax.swing.JButton dirBackButton;
-    private javax.swing.JButton dirForwardButton1;
-    private javax.swing.JButton dirUpButton;
-    private javax.swing.JTabbedPane displayersTab;
-    private org.AOOPProject.FileContentsDisplayer fileContentsDisplayer1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenu menuEdit;
-    private javax.swing.JMenu menuView;
-    private javax.swing.JPanel pathNavigationPanel;
-    private javax.swing.JPanel pathPanel;
-    private javax.swing.JScrollPane pathScrollPane;
-    private javax.swing.JMenuItem settingsJsonMenuItem;
-    private javax.swing.JButton typeAddButton;
-    private javax.swing.JPanel typesPanel;
-    private javax.swing.JScrollPane typesScrollPanel;
-    private javax.swing.JMenu viewModeMenu;
-    private javax.swing.JMenu viewModeMenu1;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JMenuItem DarkThemeItem;
+	private javax.swing.JButton Downloads;
+	private javax.swing.JMenuItem LightThemeItem;
+	private javax.swing.JButton Pictures;
+	private javax.swing.ButtonGroup buttonGroup1;
+	private javax.swing.JPanel buttonsNavigationPanel;
+	private javax.swing.JButton dirBackButton;
+	private javax.swing.JButton dirForwardButton1;
+	private javax.swing.JButton dirUpButton;
+	private javax.swing.JTabbedPane displayersTab;
+	private org.AOOPProject.FileContentsDisplayer fileContentsDisplayer1;
+	private javax.swing.JButton jButton3;
+	private javax.swing.JList<String> jList1;
+	private javax.swing.JMenuItem jMenuItem1;
+	private javax.swing.JMenuItem jMenuItem2;
+	private javax.swing.JMenuItem jMenuItem3;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JMenuBar menuBar;
+	private javax.swing.JMenu menuEdit;
+	private javax.swing.JMenu menuView;
+	private javax.swing.JPanel pathNavigationPanel;
+	private javax.swing.JPanel pathPanel;
+	private javax.swing.JScrollPane pathScrollPane;
+	private javax.swing.JMenuItem settingsJsonMenuItem;
+	private javax.swing.JButton typeAddButton;
+	private javax.swing.JPanel typesPanel;
+	private javax.swing.JScrollPane typesScrollPanel;
+	private javax.swing.JMenu viewModeMenu;
+	private javax.swing.JMenu viewModeMenu1;
+	// End of variables declaration//GEN-END:variables
 
 	// TODO: Suggestion: store most of the settings into one JSON or binary format
 	// TODO: Add a class to manage histories, so the app opens in the same state as

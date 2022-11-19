@@ -124,22 +124,22 @@
                 <Property name="name" type="java.lang.String" value="viewModeMenu1" noResource="true"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+                <MenuItem class="javax.swing.JMenuItem" name="LightThemeItem">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Light"/>
-                    <Property name="name" type="java.lang.String" value="LightTheme" noResource="true"/>
+                    <Property name="name" type="java.lang.String" value="LightThemeItem" noResource="true"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LightThemeItemActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+                <MenuItem class="javax.swing.JMenuItem" name="DarkThemeItem">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Dark"/>
                     <Property name="name" type="java.lang.String" value="DarkTheme" noResource="true"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DarkThemeItemActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
