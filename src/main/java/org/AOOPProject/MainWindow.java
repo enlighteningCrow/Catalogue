@@ -58,6 +58,7 @@ public class MainWindow extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 		java.awt.GridBagConstraints gridBagConstraints;
@@ -200,6 +201,19 @@ public class MainWindow extends javax.swing.JFrame {
 		Pictures.setMinimumSize(new java.awt.Dimension(10000, 31));
 		Pictures.setName("Pictures"); // NOI18N
 		typesPanel.add(Pictures);
+		for (File i : java.io.File.listRoots()) {
+			ExactNavigationButton button = new ExactNavigationButton(this, new RealFileSystemPopulator(i));
+			button.setText(i.getPath());
+
+			button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+			button.setMaximumSize(new java.awt.Dimension(10000, 31));
+
+			button.setMinimumSize(new java.awt.Dimension(10000, 31));
+
+			button.setName(i.getPath()); // NOI18N
+			typesPanel.add(button);
+		}
 
 		typesScrollPanel.setViewportView(typesPanel);
 

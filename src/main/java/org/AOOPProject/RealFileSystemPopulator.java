@@ -139,11 +139,13 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 
 	@Override
 	PairFSModelDirectory getPairFSModelDirectory() {
-		String currentPath = null;
+		String currentPath = "";
 		int i = pwd.size();
-		do {
+		while (currentPath.trim().length() == 0 && i > 0) {
 			currentPath = pwd.get(--i);
-		} while (currentPath.trim().length() == 0 && i >= 0);
+		}
+		if (currentPath.trim().length() == 0)
+			currentPath = categoryName;
 		return new PairFSModelDirectory(new FileSystemModel(contents), currentPath);
 	}
 }
