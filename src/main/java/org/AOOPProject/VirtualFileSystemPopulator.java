@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 
+import org.AOOPProject.ListColumnsHandler.PairFSModelDirectory;
+
 // TODO: (Maybe?) Change this to private/public
 /**
  * Class used to create an array of Files found from the specified paths
@@ -276,5 +278,45 @@ public class VirtualFileSystemPopulator extends FileSystemPopulator {
 			builder.append(i);
 		}
 		return builder + "]";
+	}
+
+	@Override
+	PairFSModelDirectory getPairFSModelDirectory() {
+		if (pwd.size() != 0) {
+			File file = null;
+			for (File i : this.contents) {
+				if (i.getName().equals(pwd.get(0))) {
+					file = i;
+					break;
+				}
+			}
+			if (file == null) {
+				System.err.println("File with name " + this.categoryName + "/"
+						+ pwd
+						+ " does not exist in virtual root " + this.categoryName);
+				return new PairFSModelDirectory(new FileSystemModel(
+						this.contents), this.categoryName);
+			}
+			file = new File(
+					file.getAbsolutePath() + "/" + String.join("/",
+							pwd.subList(1, pwd.size())));
+			if (!file.exists()) {
+				System.err.println("File with name " + file + " does not exist in virtual root "
+						+ this.categoryName);
+				return new PairFSModelDirectory(new FileSystemModel(
+						this.contents), this.categoryName);
+			}
+			File[] files = file.listFiles();
+			if (files == null) {
+				System.err.println("File with name " + file + " does not exist in virtual root "
+						+ this.categoryName);
+				return new PairFSModelDirectory(new FileSystemModel(
+						this.contents), this.categoryName);
+			}
+			return new PairFSModelDirectory(new FileSystemModel(
+					files), pwd.get(pwd.size() - 1));
+		} else
+			return new PairFSModelDirectory(new FileSystemModel(
+					this.contents), this.categoryName);
 	}
 }

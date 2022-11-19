@@ -249,95 +249,104 @@ class PopulatorColumnsBridge {
 			// var j = handler.models.add();
 			// new FileSystemPopulator(this, , null)
 			// return;: Make a populator for each of the things in the currentlyShownDirs
-			if (i.getPwd().size() != 0)
-				handler.models
-						.add(
-								// new FileSystemModel(
-								// i.getPopulator().contents),
-								// i.getPwd().get(i.getPwd().size() - 1)
-								// newPairFSModelDirectory(i.getPopulator(),
-								// i.getPwd())
-								newPairFSModelDirectory(i) //
-						);
-			else
-				handler.models
-						.add(newPairFSModelDirectory(i.getPopulator(),
-								i.getPopulator().categoryName));
+			//
+			// if (i.getPwd().size() != 0)
+			// handler.models
+			// .add(
+			// // new FileSystemModel(
+			// // i.getPopulator().contents),
+			// // i.getPwd().get(i.getPwd().size() - 1)
+			// // newPairFSModelDirectory(i.getPopulator(),
+			// // i.getPwd())
+			// newPairFSModelDirectory(i) //
+			// );
+			// else
+			// handler.models
+			// .add(newPairFSModelDirectory(i.getPopulator(),
+			// i.getPopulator().categoryName));
+			//
 			// handler.models.add();
 			// handler.models;
+			handler.models.add(i.getPopulator().getPairFSModelDirectory());
 		}
 		handler.update();
 		fileContentsDisplayer.revalidate();
 		fileContentsDisplayer.repaint();
 	}
 
-	PairFSModelDirectory newPairFSModelDirectory(FileSystemModel model, String categoryName) {
-		return new PairFSModelDirectory(model, categoryName);
-	}
-
-	PairFSModelDirectory newPairFSModelDirectory(DirectoryShownFiles dsf) {
-		// populator.contents.indexOf();
-		if (dsf.getPwd().size() != 0) {
-			File file = null;
-			for (File i : dsf.getPopulator().contents) {
-				if (i.getName().equals(dsf.getPwd().get(0))) {
-					file = i;
-					break;
-				}
-			}
-			// TODO: (Urgent?) change this from printing an error message and resuming to
-			// throwing an exception instead. Also change other places to support this.
-			// AKA: Make a class PWDInvalidException extends <whatever class exceptions
-			// extend from>
-			if (file == null) {
-				System.err.println("File with name " + dsf.getPopulator().categoryName + "/"
-						+ dsf.getPwd()
-						+ " does not exist in virtual root " + dsf.getPopulator().categoryName);
-				return new PairFSModelDirectory(new FileSystemModel(
-						dsf.getPopulator().contents), dsf.getPopulator().categoryName);
-			}
-			file = new File(
-					file.getAbsolutePath() + "/" + String.join("/",
-							dsf.getPwd().subList(1, dsf.getPwd().size())));
-			if (!file.exists()) {
-				System.err.println("File with name " + file + " does not exist in virtual root "
-						+ dsf.getPopulator().categoryName);
-				return new PairFSModelDirectory(new FileSystemModel(
-						dsf.getPopulator().contents), dsf.getPopulator().categoryName);
-			}
-			// return new PairFSModelDirectory(new FileSystemModel(
-			// populator.contents.toArray(new File[populator.contents.size()])),
-			// categoryName);
-			File[] files = file.listFiles();
-			if (files == null) {
-				System.err.println("File with name " + file + " does not exist in virtual root "
-						+ dsf.getPopulator().categoryName);
-				return new PairFSModelDirectory(new FileSystemModel(
-						dsf.getPopulator().contents), dsf.getPopulator().categoryName);
-			}
-			return new PairFSModelDirectory(new FileSystemModel(
-					files), dsf.getPwd().get(dsf.getPwd().size() - 1));
-		} else
-			return new PairFSModelDirectory(new FileSystemModel(
-					dsf.getPopulator().contents), dsf.getPopulator().categoryName);
-
-		// return new PairFSModelDirectory(new FileSystemModel(
-		// populator.contents), categoryName);
-	}
-
-	PairFSModelDirectory newPairFSModelDirectory(File[] model, String categoryName) {
-		return new PairFSModelDirectory(new FileSystemModel(
-				model), categoryName);
-	}
-
-	PairFSModelDirectory newPairFSModelDirectory(Collection<File> model, String categoryName) {
-		return new PairFSModelDirectory(new FileSystemModel(
-				model), categoryName);
-	}
-
-	PairFSModelDirectory newPairFSModelDirectory(FileSystemPopulator populator, String categoryName) {
-		return new PairFSModelDirectory(new FileSystemModel(
-				populator.contents), categoryName);
-		// populator.contents.toArray(new File[populator.contents.size()])
-	}
+	// PairFSModelDirectory newPairFSModelDirectory(FileSystemModel model, String
+	// categoryName) {
+	// return new PairFSModelDirectory(model, categoryName);
+	// }
+	//
+	// PairFSModelDirectory newPairFSModelDirectory(DirectoryShownFiles dsf) {
+	// // populator.contents.indexOf();
+	// if (dsf.getPwd().size() != 0) {
+	// File file = null;
+	// for (File i : dsf.getPopulator().contents) {
+	// if (i.getName().equals(dsf.getPwd().get(0))) {
+	// file = i;
+	// break;
+	// }
+	// }
+	// // TODO: (Urgent?) change this from printing an error message and resuming to
+	// // throwing an exception instead. Also change other places to support this.
+	// // AKA: Make a class PWDInvalidException extends <whatever class exceptions
+	// // extend from>
+	// if (file == null) {
+	// System.err.println("File with name " + dsf.getPopulator().categoryName + "/"
+	// + dsf.getPwd()
+	// + " does not exist in virtual root " + dsf.getPopulator().categoryName);
+	// return new PairFSModelDirectory(new FileSystemModel(
+	// dsf.getPopulator().contents), dsf.getPopulator().categoryName);
+	// }
+	// file = new File(
+	// file.getAbsolutePath() + "/" + String.join("/",
+	// dsf.getPwd().subList(1, dsf.getPwd().size())));
+	// if (!file.exists()) {
+	// System.err.println("File with name " + file + " does not exist in virtual
+	// root "
+	// + dsf.getPopulator().categoryName);
+	// return new PairFSModelDirectory(new FileSystemModel(
+	// dsf.getPopulator().contents), dsf.getPopulator().categoryName);
+	// }
+	// // return new PairFSModelDirectory(new FileSystemModel(
+	// // populator.contents.toArray(new File[populator.contents.size()])),
+	// // categoryName);
+	// File[] files = file.listFiles();
+	// if (files == null) {
+	// System.err.println("File with name " + file + " does not exist in virtual
+	// root "
+	// + dsf.getPopulator().categoryName);
+	// return new PairFSModelDirectory(new FileSystemModel(
+	// dsf.getPopulator().contents), dsf.getPopulator().categoryName);
+	// }
+	// return new PairFSModelDirectory(new FileSystemModel(
+	// files), dsf.getPwd().get(dsf.getPwd().size() - 1));
+	// } else
+	// return new PairFSModelDirectory(new FileSystemModel(
+	// dsf.getPopulator().contents), dsf.getPopulator().categoryName);
+	//
+	// // return new PairFSModelDirectory(new FileSystemModel(
+	// // populator.contents), categoryName);
+	// }
+	//
+	// PairFSModelDirectory newPairFSModelDirectory(File[] model, String
+	// categoryName) {
+	// return new PairFSModelDirectory(new FileSystemModel(
+	// model), categoryName);
+	// }
+	//
+	// PairFSModelDirectory newPairFSModelDirectory(Collection<File> model, String
+	// categoryName) {
+	// return new PairFSModelDirectory(new FileSystemModel(
+	// model), categoryName);
+	// }
+	//
+	// PairFSModelDirectory newPairFSModelDirectory(FileSystemPopulator populator,
+	// String categoryName) {
+	// return new PairFSModelDirectory(new FileSystemModel(
+	// populator.contents), categoryName);
+	// // populator.contents.toArray(new File[populator.contents.size()])
+	// }
 }

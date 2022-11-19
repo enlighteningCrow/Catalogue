@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.TreeSet;
 
+import org.AOOPProject.ListColumnsHandler.PairFSModelDirectory;
+
 // public class FileSystemRootPopulator {
 //
 // }
@@ -81,4 +83,6 @@ public abstract class FileSystemPopulator {
 	static public FileSystemPopulator getDefault() {
 		return new RealFileSystemPopulator("Home", "~");
 	}
+
+	abstract PairFSModelDirectory getPairFSModelDirectory();
 }

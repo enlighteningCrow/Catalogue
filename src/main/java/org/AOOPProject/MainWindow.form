@@ -97,6 +97,9 @@
                     <Property name="text" type="java.lang.String" value="Icons only"/>
                     <Property name="name" type="java.lang.String" value="jMenuItem1" noResource="true"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new ViewMenuItem(this, new IconsOnlyView())"/>
+                  </AuxValues>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
                   <Properties>
@@ -109,6 +112,9 @@
                     <Property name="text" type="java.lang.String" value="Details"/>
                     <Property name="name" type="java.lang.String" value="jMenuItem3" noResource="true"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new ViewMenuItem(this, new DetailsView())"/>
+                  </AuxValues>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -265,12 +271,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="labelsNavigationPanel">
+    <Container class="javax.swing.JPanel" name="pathNavigationPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
             <PropertyBean type="com.formdev.flatlaf.ui.FlatMenuBarBorder"/>
         </Property>
-        <Property name="name" type="java.lang.String" value="labelsNavigationPanel" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="pathNavigationPanel" noResource="true"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -278,7 +284,28 @@
         </Constraint>
       </Constraints>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+        <Property name="columns" type="int" value="0"/>
+        <Property name="rows" type="int" value="1"/>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="pathScrollPane">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="pathScrollPane" noResource="true"/>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="pathPanel">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="pathPanel" noResource="true"/>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="typesScrollPanel">
       <Properties>
@@ -356,7 +383,7 @@
       <SubComponents>
         <Container class="org.AOOPProject.FileContentsDisplayer" name="fileContentsDisplayer1">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.AOOPProject.FileContentsDisplayer(new File(&quot;~&quot;))"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.AOOPProject.FileContentsDisplayer(new File[]{new File(&quot;~&quot;), new File(&quot;~/Downloads&quot;), new File(&quot;~/Pictures&quot;)})"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">

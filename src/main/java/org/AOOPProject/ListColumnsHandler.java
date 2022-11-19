@@ -13,6 +13,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
+import java.io.File;
+import java.util.Vector;
+
+import javax.swing.JList;
+import javax.swing.ListModel;
+import javax.xml.transform.Source;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 // import org.AOOPProject.FileContentsDisplayer.ListPane;
 import org.AOOPProject.FileContentsDisplayer;
 import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
@@ -55,7 +65,7 @@ class ListColumnsHandler {
 	 */
 	public class ListPane {
 		// TODO: Change this list to something else,
-		JList<File> list;
+		FileDisplayerList list;
 		JScrollPane pane;
 
 		PairFSModelDirectory pair = null;
@@ -68,7 +78,7 @@ class ListColumnsHandler {
 			this.pair = pair;
 		}
 
-		public ListPane(JList<File> list, JScrollPane pane) {
+		public ListPane(FileDisplayerList list, JScrollPane pane) {
 			this.list = list;
 			this.pane = pane;
 		}
@@ -142,9 +152,10 @@ class ListColumnsHandler {
 		// modelsSize = this.fileContentsDisplayer.maxColumnNumber;
 		while (listPanes.size() < models.size()) {
 			ListPane item;
-			// lists.add(item = this.fileContentsDisplayer.new ListPane(new JList<File>(),
+			// lists.add(item = this.fileContentsDisplayer.new ListPane(new
+			// FileDisplayerList(),
 			// new JScrollPane()));
-			listPanes.add(item = new ListPane(new JList<File>(), new JScrollPane()));
+			listPanes.add(item = new ListPane(new FileDisplayerList(), new JScrollPane()));
 			item.pane.setViewportView(item.list);
 			constraints = new java.awt.GridBagConstraints();
 			constraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -195,10 +206,8 @@ class ListColumnsHandler {
 		// System.out.println(lp.getPair().currentDirectory);
 		if (lp.getPair() != null) {
 			for (int i = 0; i < tabbedPane.getComponentCount(); ++i)
-				if (tabbedPane.getComponent(
-						i) == fileContentsDisplayer) {
-					tabbedPane.setTitleAt(i,
-							lp.getPair().currentDirectory);
+				if (tabbedPane.getComponent(i) == fileContentsDisplayer) {
+					tabbedPane.setTitleAt(i, lp.getPair().currentDirectory);
 				}
 			// tabbedPane.setName(lp.getPair().currentDirectory);
 		}
@@ -207,6 +216,7 @@ class ListColumnsHandler {
 				tabbedPane);
 		if (mainWin == null)
 			return;
+		mainWin.setTitle("Catalogue -> " + lp.getPair().currentDirectory);
 		// TODO: Add something in this class regarding current directory
 		// and make bridge update it
 		// mainWin.getPathString().setText(lp.getPair().currentDirectory);
@@ -216,26 +226,31 @@ class ListColumnsHandler {
 		// }
 		DirectoryShownFiles currentShownDirectory = fileContentsDisplayer.bridge.currentlyShownDirs
 				.get(listPanes.indexOf(lp));
-		mainWin.getLabelsNavigationPanel().removeAll();
+		// FileDisplayerList
+		lp.list.setDsf(currentShownDirectory);
+		lp.list.setMainWindow(mainWin);
+		// /FileDisplayerList
+		mainWin.getPathPanel().removeAll();
 		// TODO: Check if this works
 		// currentShownDirectory.
 		// for()
 		FileSystemPopulator pop = currentShownDirectory.getPopulator().clone();
 		pop.pwd.clear();
-		mainWin.getLabelsNavigationPanel()
+		mainWin.getPathPanel()
 				.add(new ExactNavigationButton(mainWin, pop,
 						currentShownDirectory.getPopulator().categoryName));
 		ArrayList<String> arr = new ArrayList<>();
 		for (String s : currentShownDirectory.getPwd()) {
 			arr.add(s);
-			mainWin.getLabelsNavigationPanel()
+			mainWin.getPathPanel()
 					.add(new JLabel("/"));
 			pop.pwd.add(s);
-			mainWin.getLabelsNavigationPanel()
+			mainWin.getPathPanel()
 					.add(new ExactNavigationButton(mainWin, pop.clone(), s));
 		}
 		// NavigationButton.setDirectoryShownFiles(currentShownDirectory);
 		// NavigationButton.updateButtons();
 		NavigationButtonsGroup.getGroup(mainWin).setDirectoryShownFiles(currentShownDirectory);
+		ViewButtonsMenuItemsGroup.getGroup(mainWin).setListPanes(lp);
 	}
 }

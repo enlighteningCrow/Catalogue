@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileFilter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.TreeSet;
+
+import org.AOOPProject.ListColumnsHandler.PairFSModelDirectory;
 
 public class RealFileSystemPopulator extends FileSystemPopulator {
 	public RealFileSystemPopulator(String categoryName,
@@ -29,13 +32,6 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 		this(categoryName, searchDirectory, new ArrayList<>());
 	}
 
-	static String getName(File file) {
-		String name = file.getName();
-		if (name.trim().length() == 0)
-			name = file.getPath();
-		return name;
-	}
-
 	public RealFileSystemPopulator(File searchDirectory) {
 		// this.fileContentsDisplayer = fileContentsDisplayer;
 		// this(searchDirectory.getName(), searchDirectory.getPath());
@@ -43,7 +39,7 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 		// // System.out.println(rootFile);
 		// update();
 
-		this(getName(searchDirectory), searchDirectory, new ArrayList<>());
+		this(utils.getName(searchDirectory), searchDirectory, new ArrayList<>());
 	}
 
 	public RealFileSystemPopulator(String categoryName, File searchDirectory) {
@@ -58,11 +54,10 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 		// System.out.println(rootFile);
 		contents.clear();
 		contents = new TreeSet<File>(comparator);
-		File[] files = rootFile.listFiles();
+		File[] files = new File(rootFile.getAbsolutePath() + String.join("/", pwd)).listFiles();
 		if (files != null)
 			for (File i : files)
 				this.contents.add(i);
-
 	}
 
 	@Override
@@ -107,7 +102,7 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 	}
 
 	public void setRootFile(File rootFile) {
-		this.categoryName = getName(rootFile);
+		this.categoryName = utils.getName(rootFile);
 		this.rootFile = rootFile;
 		reposition();
 	}
@@ -142,7 +137,7 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 			pop.pwd.addAll(prev);
 		} else
 			repositionR(pop);
-		pop.categoryName = getName(pop.rootFile);
+		pop.categoryName = utils.getName(pop.rootFile);
 	}
 
 	public void reposition() {
@@ -160,4 +155,13 @@ public class RealFileSystemPopulator extends FileSystemPopulator {
 		return builder + "]";
 	}
 
+	@Override
+	PairFSModelDirectory getPairFSModelDirectory() {
+		String currentPath = null;
+		int i = pwd.size();
+		do {
+			currentPath = pwd.get(--i);
+		} while (currentPath.trim().length() == 0 && i >= 0);
+		return new PairFSModelDirectory(new FileSystemModel(contents), currentPath);
+	}
 }

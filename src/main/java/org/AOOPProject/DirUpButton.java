@@ -4,9 +4,9 @@ import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles;
 // import org.AOOPProject.PopulatorColumnsBridge.DirectoryShownFiles.FileSystemPopulator;
 
 public class DirUpButton extends NavigationButton implements ConditionallyActiveButton {
-	public DirUpButton(NavigationButtonsGroup group) {
-		super(group);
-	}
+	// public DirUpButton(NavigationButtonsGroup group) {
+	// super(group);
+	// }
 
 	public DirUpButton(MainWindow mainWindow) {
 		super(NavigationButtonsGroup.getGroup(mainWindow));
