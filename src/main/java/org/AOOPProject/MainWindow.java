@@ -9,8 +9,10 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -294,6 +296,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private void LightThemeItemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem7ActionPerformed
 		try {
 			UIManager.setLookAndFeel(new FlatLightLaf());
+			SwingUtilities.updateComponentTreeUI(this);
 			revalidate();
 			repaint();
 		} catch (UnsupportedLookAndFeelException e) {
@@ -303,13 +306,16 @@ public class MainWindow extends javax.swing.JFrame {
 
 	// dark theme
 	private void DarkThemeItemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem6ActionPerformed
+		// change theme to dark
 		try {
 			UIManager.setLookAndFeel(new FlatDarkLaf());
+			SwingUtilities.updateComponentTreeUI(this);
 			revalidate();
 			repaint();
 		} catch (UnsupportedLookAndFeelException e) {
 			System.err.println(e.getMessage());
 		}
+
 	}// GEN-LAST:event_jMenuItem6ActionPerformed
 
 	private void typeAddButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_dirUpButton2ActionPerformed
