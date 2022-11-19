@@ -30,19 +30,25 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
-	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
+		addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusGained(java.awt.event.FocusEvent evt) {
+				formFocusGained(evt);
+			}
+		});
 		setLayout(new java.awt.GridBagLayout());
 	}// </editor-fold>//GEN-END:initComponents
+
+	private void formFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_formFocusGained
+	}// GEN-LAST:event_formFocusGained
 
 	/**
 	 * the maximum number of columns to show on the screen at any moment (drop down
 	 * lists / jLists)
 	 */
 	int maxColumnNumber;
-
 	/**
 	 * The file populator for the class
 	 */
@@ -52,6 +58,9 @@ public class FileContentsDisplayer extends javax.swing.JPanel {
 	 * The comparator used to sort the files;
 	 */
 	public Comparator<File> fileSortComparator = new FileComparators.NameAscendingComparator();
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	// End of variables declaration//GEN-END:variables
 
 	public Comparator<File> getFileSortComparator() {
 		return fileSortComparator;

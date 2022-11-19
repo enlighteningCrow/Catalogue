@@ -295,6 +295,7 @@ public class MainWindow extends javax.swing.JFrame {
 		try {
 			UIManager.setLookAndFeel(new FlatLightLaf());
 			revalidate();
+			validate();
 			repaint();
 		} catch (UnsupportedLookAndFeelException e) {
 			System.err.println(e.getMessage());
@@ -306,6 +307,8 @@ public class MainWindow extends javax.swing.JFrame {
 		try {
 			UIManager.setLookAndFeel(new FlatDarkLaf());
 			revalidate();
+			validate();
+			// for(var i : )
 			repaint();
 		} catch (UnsupportedLookAndFeelException e) {
 			System.err.println(e.getMessage());
