@@ -383,7 +383,7 @@
       <SubComponents>
         <Container class="org.AOOPProject.FileContentsDisplayer" name="fileContentsDisplayer1">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.AOOPProject.FileContentsDisplayer(new File[]{new File(&quot;~&quot;), new File(&quot;~/Downloads&quot;), new File(&quot;~/Pictures&quot;)})"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.AOOPProject.FileContentsDisplayer(new File(&quot;~&quot;))"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
