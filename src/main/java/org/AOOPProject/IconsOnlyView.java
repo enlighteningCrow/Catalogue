@@ -14,7 +14,7 @@ public class IconsOnlyView extends SurroundListCellRenderer<JLabel> implements F
 
 	@Override
 	public void setView(FileDisplayerList list) {
-		list.setLayoutOrientation(JList.VERTICAL_WRAP);
+		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 	}
 
 	@Override

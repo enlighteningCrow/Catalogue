@@ -290,12 +290,69 @@
             </Property>
             <Property name="name" type="java.lang.String" value="typesPanel" noResource="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="for (File i : java.io.File.listRoots()) {&#xa;&#x9;&#x9;&#x9;ExactNavigationButton button = new ExactNavigationButton(this, new RealFileSystemPopulator(i), i.getPath() + &quot; &quot;);&#xa;&#xa;button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);&#xa;&#xa;button.setMaximumSize(new java.awt.Dimension(10000, 31));&#xa;&#xa;button.setMinimumSize(new java.awt.Dimension(10000, 31));&#xa;&#xa;button.setName(i.getPath()); // NOI18N&#xa;&#x9;&#x9;&#x9;typesPanel.add(button);&#xa;&#x9;&#x9;}"/>
+          </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
             <Property name="axis" type="int" value="1"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="Downloads">
+            <Component class="javax.swing.JButton" name="HomeButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Home"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[10000, 31]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[10000, 31]"/>
+                </Property>
+                <Property name="name" type="java.lang.String" value="HomeButton" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="null"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="HomeButton = new ExactNavigationButton(this, new RealFileSystemPopulator(&quot;DownloadsButton&quot;, &quot;~&quot;));"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="DesktopButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Desktop"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[10000, 31]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[10000, 31]"/>
+                </Property>
+                <Property name="name" type="java.lang.String" value="DesktopButton" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DesktopButtonActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="null"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DesktopButton = new ExactNavigationButton(this, new RealFileSystemPopulator(&quot;DownloadsButton&quot;, &quot;~/Desktop&quot;));"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="DocumentsButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Documents"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[10000, 31]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[10000, 31]"/>
+                </Property>
+                <Property name="name" type="java.lang.String" value="DocumentsButton" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="null"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DocumentsButton = new ExactNavigationButton(this, new VirtualFileSystemPopulator(&quot;Documents&quot;, GlobFileFilter.class, new String[]{&quot;~/Downloads/*.doc*&quot;, &quot;~/Downloads/*.ppt*&quot;, &quot;~/Downloads/*.xls*&quot;, &quot;~/Downloads/*.pdf&quot;, &quot;~/Downloads/*document*&quot;, &quot;~/Documents/*&quot;}));"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="DownloadsButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Downloads"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
@@ -305,14 +362,14 @@
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[10000, 31]"/>
                 </Property>
-                <Property name="name" type="java.lang.String" value="Downloads" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="DownloadsButton" noResource="true"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="null"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Downloads = new ExactNavigationButton(this, new RealFileSystemPopulator(&quot;Downloads&quot;, &quot;~/Downloads&quot;));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DownloadsButton = new ExactNavigationButton(this, new RealFileSystemPopulator(&quot;DownloadsButton&quot;, &quot;~/Downloads&quot;));"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="Pictures">
+            <Component class="javax.swing.JButton" name="PicturesButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pictures"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
@@ -322,12 +379,11 @@
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[10000, 31]"/>
                 </Property>
-                <Property name="name" type="java.lang.String" value="Pictures" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="PicturesButton" noResource="true"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="for (File i : java.io.File.listRoots()) {&#xa;&#x9;&#x9;&#x9;ExactNavigationButton button = new ExactNavigationButton(this, new RealFileSystemPopulator(i));&#xa;button.setText(i.getName());&#xa;&#xa;button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);&#xa;&#xa;button.setMaximumSize(new java.awt.Dimension(10000, 31));&#xa;&#xa;button.setMinimumSize(new java.awt.Dimension(10000, 31));&#xa;&#xa;button.setName(i.getName()); // NOI18N&#xa;&#x9;&#x9;&#x9;typesPanel.add(button);&#xa;&#x9;&#x9;}"/>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="null"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Pictures = new ExactNavigationButton(this, new VirtualFileSystemPopulator(&quot;Pictures&quot;, GlobFileFilter.class, new String[]{&quot;~/Downloads/*.jpeg&quot;, &quot;~/Downloads/*.png&quot;, &quot;~/Pictures/*.jpeg&quot;, &quot;~/Pictures/*.png&quot;, &quot;~/Downloads/*image*&quot;, &quot;~/Pictures/*image*&quot;}));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="PicturesButton = new ExactNavigationButton(this, new VirtualFileSystemPopulator(&quot;Pictures&quot;, GlobFileFilter.class, new String[]{&quot;~/Downloads/*.jpeg&quot;, &quot;~/Downloads/*.jpg&quot;, &quot;~/Downloads/*.png&quot;, &quot;~/Downloads/*image*&quot;, &quot;~/Pictures/*&quot;}));"/>
               </AuxValues>
             </Component>
           </SubComponents>
